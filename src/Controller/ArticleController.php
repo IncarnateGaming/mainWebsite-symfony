@@ -25,6 +25,7 @@ class ArticleController extends AbstractController
     {
         return $this->render('article/show.html.twig',[
             'title' => ucwords(str_replace('-',' ', $slug)),
+            'nav' => $navJson
         ]);
     }
 }
