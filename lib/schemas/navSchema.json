@@ -15,6 +15,10 @@
 			"pagePath": {
 				"type": "string"
 			},
+			"pageName": {
+				"type": "string",
+				"pattern": "[a-zA-Z0-9]+"
+			},
 			"pageDescription": {
 				"type": "string"
 			},
@@ -29,13 +33,18 @@
 						"pagePath": {
 							"type": "string"
 						},
+						"pageName": {
+							"type": "string",
+							"pattern": "[a-zA-Z0-9]+"
+						},
 						"pageDescription": {
 							"type": "string"
 						}
 					},
 					"required": [
 						"pageTitle",
-						"pagePath"
+						"pagePath",
+						"pageName"
 					],
 					"additionalProperties": false
 				}
@@ -43,7 +52,8 @@
 		},
 		"required": [
 			"pageTitle",
-			"pagePath"
+			"pagePath",
+			"pageName"
 		],
 		"additionalProperties": false
 	}

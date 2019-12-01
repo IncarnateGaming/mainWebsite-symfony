@@ -1,0 +1,44 @@
+[
+	{
+		"pagePath": "/",
+		"pageTitle": "Home",
+		"pageName": "home"
+	},
+	{
+		"pagePath": "/demo/",
+		"pageTitle": "Demo",
+		"pageName": "demo"
+	},
+	{
+		"pagePath": "/about/",
+		"pageTitle": "About",
+		"pageName": "about"
+	},
+	{
+		"pagePath": "/join/",
+		"pageTitle": "Join",
+		"pageName": "join"
+	},
+	{
+		"pagePath": "/policy/",
+		"pageTitle": "Policy",
+		"pageName": "policy",
+		"subpages": [
+			{
+				"pagePath": "/policy/igl/",
+				"pageTitle": "General License",
+				"pageName": "igl"
+			},
+			{
+				"pagePath": "/policy/isam/",
+				"pageTitle": "Stand Alone Module",
+				"pageName": "isam"
+			},
+			{
+				"pagePath": "/policy/iec/",
+				"pageTitle": "Embedded Content",
+				"pageName": "iec"
+			}
+		]
+	}
+]

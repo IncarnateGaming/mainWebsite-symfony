@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class ArticleController extends AbstractController
 {
     /**
@@ -15,7 +16,88 @@ class ArticleController extends AbstractController
      */
     public function homepage()
     {
-        return new Response('My first page already');
+        require '../lib/php/functions.php';
+        $genericParts = genericParts();
+        return $this->render('home.html.twig',[
+            'genericParts' => $genericParts,
+        ]);
+    }
+    /**
+     * @Route("/demo/")
+     */
+    public function demo_page()
+    {
+        require '../lib/php/functions.php';
+        $genericParts = genericParts();
+        return $this->render('demo.html.twig',[
+            'genericParts' => $genericParts,
+        ]);
+    }
+    /**
+     * @Route("/about/")
+     */
+    public function about_page()
+    {
+        require '../lib/php/functions.php';
+        $genericParts = genericParts();
+        return $this->render('about.html.twig',[
+            'genericParts' => $genericParts,
+        ]);
+    }
+    /**
+     * @Route("/join/")
+     */
+    public function join_page()
+    {
+        require '../lib/php/functions.php';
+        $genericParts = genericParts();
+        return $this->render('join.html.twig',[
+            'genericParts' => $genericParts,
+        ]);
+    }
+    /**
+     * @Route("/policy/")
+     */
+    public function policy_page()
+    {
+        require '../lib/php/functions.php';
+        $genericParts = genericParts();
+        return $this->render('policy.html.twig',[
+            'genericParts' => $genericParts,
+        ]);
+    }
+    /**
+     * @Route("/policy/igl/")
+     */
+    public function policy_igl_page()
+    {
+        require '../lib/php/functions.php';
+        $genericParts = genericParts();
+        return $this->render('policy/igl.html.twig',[
+            'genericParts' => $genericParts,
+        ]);
+    }
+    /**
+     * @Route("/policy/isam/")
+     */
+    public function policy_isam_page()
+    {
+        require '../lib/php/functions.php';
+        $genericParts = genericParts();
+        return $this->render('policy/isam.html.twig',[
+            'genericParts' => $genericParts,
+        ]);
+    }
+    /**
+     * @Route("/policy/iec/")
+     */
+    public function policy_iec_page()
+    {
+        require '../lib/php/functions.php';
+        $genericParts = genericParts();
+        return $this->render('policy/iec.html.twig',[
+            'genericParts' => $genericParts,
+        ]);
     }
 
     /**
@@ -23,9 +105,11 @@ class ArticleController extends AbstractController
      */
     public function show($slug)
     {
+        require '../lib/php/functions.php';
+        $genericParts = genericParts();
         return $this->render('article/show.html.twig',[
             'title' => ucwords(str_replace('-',' ', $slug)),
-            'nav' => $navJson
+            'genericParts' => $genericParts,
         ]);
     }
 }

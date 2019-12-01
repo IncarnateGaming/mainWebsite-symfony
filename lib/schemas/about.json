@@ -1,0 +1,61 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"description": "Comment describing your JSON Schema",
+	"type": "object",
+	"properties": {
+		"general": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"slogan": {
+					"description": "advertising line",
+					"type": "string"
+				},
+				"motto": {
+					"description": "belief",
+					"type": "string"
+				},
+				"intro": {
+					"description": "paragraph about why",
+					"type": "string"
+				}
+			},
+			"required": [
+				"name",
+				"slogan",
+				"intro"
+			],
+			"additionalProperties": false
+		},
+		"people": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"callsign": {
+						"type": "string"
+					},
+					"bio": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"callsign",
+					"bio"
+				],
+				"additionalProperties": false
+			}
+		}
+	},
+	"required": [
+		"general",
+		"people"
+	],
+	"additionalProperties": false
+}
