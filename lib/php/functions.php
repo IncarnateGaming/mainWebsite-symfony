@@ -22,6 +22,12 @@ function loadAbout(){
     return $aboutArray;
 }
 function genericParts(){
+    $mode = 'mobile';
+    if (isset($_SERVER['OS'])){
+        if ('Windows_NT' == $_SERVER['OS']){
+            $mode = 'pc';
+        }
+    }
     $publicFolder = publicFolder();
     $navArray = loadNav();
     $aboutArray = loadAbout();
@@ -29,5 +35,6 @@ function genericParts(){
         'publicFolder' => $publicFolder,
         'nav' => $navArray,
         'about' => $aboutArray,
+        'mode' => $mode,
     );
 }
