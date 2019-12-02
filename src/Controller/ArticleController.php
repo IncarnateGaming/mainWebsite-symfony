@@ -56,18 +56,19 @@ class ArticleController extends AbstractController
         ]);
     }
     /**
-     * @Route("/policy/")
+     * @Route("/policy/website/")
      */
-    public function policy_page()
+    public function policy_website_page()
     {
         require '../lib/php/functions.php';
         $genericParts = genericParts();
-        return $this->render('policy.html.twig',[
+        return $this->render('policy/website.html.twig',[
             'genericParts' => $genericParts,
         ]);
     }
     /**
      * @Route("/policy/igl/")
+     * @Route("/incarnategenerallicense/")
      */
     public function policy_igl_page()
     {

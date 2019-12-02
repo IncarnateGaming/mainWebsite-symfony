@@ -6,26 +6,31 @@
 		"general": {
 			"type": "object",
 			"properties": {
+				"intro": {
+					"description": "paragraph about why",
+					"type": "string"
+				},
 				"name": {
 					"type": "string"
 				},
-				"slogan": {
-					"description": "advertising line",
+				"mission": {
+					"description": "html paragraphs of mission",
 					"type": "string"
 				},
 				"motto": {
 					"description": "belief",
 					"type": "string"
 				},
-				"intro": {
-					"description": "paragraph about why",
+				"slogan": {
+					"description": "advertising line",
 					"type": "string"
 				}
 			},
 			"required": [
+				"intro",
 				"name",
-				"slogan",
-				"intro"
+				"mission",
+				"slogan"
 			],
 			"additionalProperties": false
 		},
@@ -42,12 +47,73 @@
 					},
 					"bio": {
 						"type": "string"
+					},
+					"contact": {
+						"type": "object",
+						"properties": {
+							"email": {
+								"type": "string"
+							},
+							"discord": {
+								"type": "object",
+								"properties": {
+									"name": {
+										"type": "string"
+									},
+									"server": {
+										"type": "object",
+										"properties": {
+											"name": {
+												"type": "string"
+											},
+											"invite": {
+												"type": "string"
+											}
+										},
+										"required": [
+											"name",
+											"invite"
+										],
+										"additionalProperties": false
+									}
+								},
+								"required": [
+									"name",
+									"server"
+								],
+								"additionalProperties": false
+							}
+						},
+						"required": [
+							"email"
+						],
+						"additionalProperties": false
 					}
 				},
 				"required": [
 					"name",
 					"callsign",
-					"bio"
+					"bio",
+					"contact"
+				],
+				"additionalProperties": false
+			}
+		},
+		"videos": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"url": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"url"
 				],
 				"additionalProperties": false
 			}

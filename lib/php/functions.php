@@ -21,20 +21,28 @@ function loadAbout(){
     $aboutArray = json_decode($aboutJson);
     return $aboutArray;
 }
+function findMobile(){
+    $public = publicFolder();
+    $mobilePath = str_replace("/public","",$public) . "vendor/mobiledetect/mobiledetectlib/Mobile_Detect.php";
+    require_once $mobilePath;
+    $detect = new Mobile_Detect;
+    $isMobile = $detect->isMobile();
+    $isTablet = $detect->isTablet();
+    $mobileArray = array(
+        'mobile' => $isMobile,
+        'tablet' => $isTablet,
+    );
+    return $mobileArray;
+}
 function genericParts(){
-    $mode = 'mobile';
-    if (isset($_SERVER['OS'])){
-        if ('Windows_NT' == $_SERVER['OS']){
-            $mode = 'pc';
-        }
-    }
     $publicFolder = publicFolder();
     $navArray = loadNav();
     $aboutArray = loadAbout();
+    $mobileArray = findMobile();
     return array(
         'publicFolder' => $publicFolder,
         'nav' => $navArray,
         'about' => $aboutArray,
-        'mode' => $mode,
+        'mobileArray' => $mobileArray,
     );
 }

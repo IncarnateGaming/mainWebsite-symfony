@@ -3,13 +3,50 @@
 		"name": "Incarnate Gaming LLC",
 		"slogan": "Through the Forgers Fire",
 		"motto": "Our Imagination is Our Only Limitation",
+		"mission": "<p>Table top games have a potential that goes beyond any other type of game. When we sit around a table, the only limitation we face is that of our own imagination. We struggle together and triumph over great foes. We are trying to just have fun, but we also learn the people skills (like how to listen and encourage others) that big organizations look for in their managers (<a href=\"https://rework.withgoogle.com/blog/the-evolution-of-project-oxygen/\">Project Oxygen</a>).</p><p>It may be a game, but it is a forging ground. Our goal is to make this game available not only to the rich, but also to the poor. Not only to the 1% living in United States, but to the entire world. There are two main obstacles we are trying to overcome 1) price 2) ease of use. If we can bring the price low enough that anyone can afford it, and have enough hyperlinks on terms and tools to help the GM respond to players going off script, we believe that not only will the table top market explode, but we will also be teaching critical skills that our school systems are failing to teach. Simply, our goal is to change the world for the better, and our tool looks like a game.</p>",
 		"intro": "We have long sought a game where we are limited only by our imagination; a place where we can outsmart the game. Yet that game evolves and continues to challenge us. A place where we can play with friends and meet new ones. Where we learn each others tactics and form teams that can take on heights previously unimagined... And now that game is a reality."
 	},
 	"people": [
 		{
 			"name": "Philip Lawrence",
 			"callsign": "ProNobis",
-			"bio": "Philip grew up as an introvert. It was not until college that he encountered Table Top Role Playing games. When he did, he discovered a forger's fire that teaches social skills at a higher level than any of the workshops or conferences he had attended. He decided to develop a system to allow anyone to become an excellent Game Master to allow anyone to perfect the social skills that our society needs to function well."
+			"bio": "Philip grew up as an introvert. It was not until college that he encountered Table Top Role Playing games. When he did, he discovered a forger's fire that teaches social skills at a higher level than any of the workshops or conferences he had attended. He decided to develop a system to allow anyone to become an excellent Game Master to allow anyone to perfect the social skills that our society needs to function well.",
+			"contact": {
+				"email": "incarnategamingllc@gmail.com",
+				"discord": {
+					"name": "ProNobis#7047",
+					"server": {
+						"invite": "https://discord.gg/pqkeFYc",
+						"name": "Incarnate Gaming LLC"
+					}
+				}
+			}
+		}
+	],
+	"videos": [
+		{
+			"name": "Our Imagination is Our Only Limitation",
+			"url": "https://www.youtube.com/embed/QWkwKu_7YAE"
+		},
+		{
+			"name": "Random Maps",
+			"url": "https://www.youtube.com/embed/gLFPZWzFSnU"
+		},
+		{
+			"name": "Custom Dungeon",
+			"url": "https://www.youtube.com/embed/NtStFEBmJSw"
+		},
+		{
+			"name": "Loot Distribution",
+			"url": "https://www.youtube.com/embed/e2UENR7pj0o"
+		},
+		{
+			"name": "NPC Generator",
+			"url": "https://www.youtube.com/embed/yQAI4n4fAFE"
+		},
+		{
+			"name": "Random Encounters",
+			"url": "https://www.youtube.com/embed/vS0cX9UUDNI"
 		}
 	]
 }

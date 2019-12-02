@@ -31,13 +31,18 @@
 			},
 			{
 				"pagePath": "/policy/isam/",
-				"pageTitle": "Stand Alone Module",
+				"pageTitle": "Stand Alone Content",
 				"pageName": "isam"
 			},
 			{
 				"pagePath": "/policy/iec/",
 				"pageTitle": "Embedded Content",
 				"pageName": "iec"
+			},
+			{
+				"pagePath": "/policy/website/",
+				"pageTitle": "Website Policy",
+				"pageName": "website"
 			}
 		]
 	}

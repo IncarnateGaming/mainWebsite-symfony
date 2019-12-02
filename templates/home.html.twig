@@ -2,22 +2,17 @@
 {% block body %}
     <h2 class="text-center">{{ genericParts.about.general.motto }}</h2>
     <p class="text-center">{{ genericParts.about.general.intro }}</p>
-    <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/QWkwKu_7YAE"></iframe>
-    </div>
-    <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/gLFPZWzFSnU"></iframe>
-    </div>
-    <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/NtStFEBmJSw"></iframe>
-    </div>
-    <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/e2UENR7pj0o"></iframe>
-    </div>
-    <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/yQAI4n4fAFE"></iframe>
-    </div>
-    <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/vS0cX9UUDNI"></iframe>
-    </div>
+    {% if genericParts.mobileArray.mobile %}
+        {% for video in genericParts.about.videos %}
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item border border-white" src="{{ video.url }}"  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="d-flex flex-row flex-wrap justify-content-center">
+        {% for video in genericParts.about.videos %}
+            <iframe class="embed-responsive-item border border-white" src="{{video.url}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        {% endfor %}
+        </div>
+    {% endif %}
 {% endblock %}
