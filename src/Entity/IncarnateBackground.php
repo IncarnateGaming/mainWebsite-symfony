@@ -10,13 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 class IncarnateBackground extends IncarnateItem
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $featureFid;
@@ -107,12 +100,12 @@ class IncarnateBackground extends IncarnateItem
         return $this;
     }
 
-    public function getSkillProficiencies(): ?string
+    public function getSkillProficiencies(): ?array
     {
         return $this->skillProficiencies;
     }
 
-    public function setSkillProficiencies(string $skillProficiencies): self
+    public function setSkillProficiencies(array $skillProficiencies): self
     {
         $this->skillProficiencies = $skillProficiencies;
 
@@ -136,7 +129,7 @@ class IncarnateBackground extends IncarnateItem
         return $this->toolProficiencies;
     }
 
-    public function setToolProficiencies(?string $toolProficiencies): self
+    public function setToolProficiencies(?array $toolProficiencies): self
     {
         $this->toolProficiencies = $toolProficiencies;
 
