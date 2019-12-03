@@ -8,18 +8,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-class ArticleController extends AbstractController
+class JoinController extends AbstractController
 {
-
     /**
-     * @Route("/content/{slug}")
+     * @Route("/join/")
      */
-    public function show($slug)
+    public function join_page()
     {
         require '../lib/php/functions.php';
         $genericParts = genericParts();
-        return $this->render('article/show.html.twig',[
-            'title' => ucwords(str_replace('-',' ', $slug)),
+        return $this->render('join.html.twig',[
             'genericParts' => $genericParts,
         ]);
     }

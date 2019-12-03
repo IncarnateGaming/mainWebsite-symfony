@@ -8,18 +8,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-class ArticleController extends AbstractController
+class AboutController extends AbstractController
 {
-
     /**
-     * @Route("/content/{slug}")
+     * @Route("/about/")
      */
-    public function show($slug)
+    public function about_page()
     {
         require '../lib/php/functions.php';
         $genericParts = genericParts();
-        return $this->render('article/show.html.twig',[
-            'title' => ucwords(str_replace('-',' ', $slug)),
+        return $this->render('about.html.twig',[
             'genericParts' => $genericParts,
         ]);
     }
