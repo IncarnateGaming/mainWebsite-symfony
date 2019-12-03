@@ -22,7 +22,7 @@ class IncarnateBackground extends IncarnateItem
     private $featureFid;
 
     /**
-     * @ORM\Column(type="integer", length==16)
+     * @ORM\Column(type="integer", length=16)
      */
     private $gp;
 
@@ -32,9 +32,9 @@ class IncarnateBackground extends IncarnateItem
     private $languages = [];
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="array")
      */
-    private $skillProficiencies;
+    private $skillProficiencies = [];
 
     /**
      * @ORM\Column(type="array")
@@ -42,9 +42,9 @@ class IncarnateBackground extends IncarnateItem
     private $startingEquipment = [];
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="array", nullable=true)
      */
-    private $toolProficiencies;
+    private $toolProficiencies = [];
 
     /**
      * @ORM\Column(type="string", length=16)
