@@ -1,7 +1,9 @@
 {%  extends 'base.html.twig' %}
 {% block body %}
-    <h2 class="text-center">{{ genericParts.about.general.motto }}</h2>
-    <p class="text-center">{{ genericParts.about.general.intro }}</p>
+    <div class="container">
+        <h2 class="text-center">{{ genericParts.about.general.motto }}</h2>
+        <p class="text-center">{{ genericParts.about.general.intro }}</p>
+    </div>
     {% if genericParts.mobileArray.mobile %}
         {% for video in genericParts.about.videos %}
             <div class="embed-responsive embed-responsive-16by9">

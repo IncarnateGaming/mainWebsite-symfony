@@ -48,6 +48,9 @@
 					"bio": {
 						"type": "string"
 					},
+					"title": {
+						"type": "string"
+					},
 					"contact": {
 						"type": "object",
 						"properties": {
@@ -94,6 +97,7 @@
 					"name",
 					"callsign",
 					"bio",
+					"title",
 					"contact"
 				],
 				"additionalProperties": false

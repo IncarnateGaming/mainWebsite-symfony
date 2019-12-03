@@ -17,8 +17,9 @@
         "symfony/framework-bundle": "4.3.*",
         "symfony/http-client": "4.3.*",
         "symfony/intl": "4.3.*",
+        "symfony/maker-bundle": "^1.14",
         "symfony/monolog-bundle": "^3.1",
-        "symfony/orm-pack": "*",
+        "symfony/orm-pack": "^1.0",
         "symfony/process": "4.3.*",
         "symfony/security-bundle": "4.3.*",
         "symfony/serializer-pack": "*",
@@ -33,7 +34,6 @@
     },
     "require-dev": {
         "symfony/debug-pack": "^1.0",
-        "symfony/maker-bundle": "^1.0",
         "symfony/profiler-pack": "^1.0",
         "symfony/test-pack": "*"
     },

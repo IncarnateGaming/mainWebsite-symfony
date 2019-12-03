@@ -57,6 +57,7 @@ class ArticleController extends AbstractController
     }
     /**
      * @Route("/policy/website/")
+     * @Route("/policy/")
      */
     public function policy_website_page()
     {

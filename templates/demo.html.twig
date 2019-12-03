@@ -1,1 +1,249 @@
 {%  extends 'base.html.twig' %}
+{% block body %}
+    <script>
+        var tempID = 1;
+        var tables = {};
+        var templates = {};
+        const tablesResponse =  fetch('{{ genericParts.publicFolder }}packs/incarnateTables.json');
+        const templatesResponse =  fetch('{{ genericParts.publicFolder }}packs/incarnateTables.json');
+        Promise.all(tablesResponse,templateInsert()).then((tableRes,tempRes) =>{
+            tables = tableRes.json();
+            templates = tempRes.json();
+            console.log(tables,templates);
+        });
+        var rollCount = 0;
+        function rollTable(tableID){
+            var random = Math.random(); //random number from 0-1
+            rollCount++;
+            try {
+                var lastRow = tables[tableID].row.length - 2;
+//					console.log("last row " + lastRow);
+                var highrow = tables[tableID].row[lastRow].to; //finds to field of last row
+//					console.log("high row " + highrow);
+                var tableRow =  Math.floor(random*highrow); // use random number to find row in table
+//					console.log("table row " + tableRow);
+                for (i=0;i<lastRow+1;i++){
+//						console.log(tables[tableID].row[i].to);
+                    if (tables[tableID].row[i].to>=tableRow){
+//							console.log("found " + tables[tableID].row[i].to);
+                        var result = tables[tableID].row[i].column[0].description
+//							console.log(result);
+                        return result ;
+                    }
+                    else{
+//						console.log("not found");
+                    }
+                }
+            }
+            catch {
+                console.log("Missing Table " + tableID);//missing table to console
+                return "";
+            }
+        };
+        function generate(){
+            var data = document.getElementsByClassName("template");
+            var found;
+            var dataLength=data.length;
+            var regex = /<p>/g;
+            var regexStart = /^<p>/;
+            var regexEnd = /<\/p>/;
+            for (a=0;a<dataLength;a++){
+                do {
+                    found = false;
+                    var generateNodes = data[a].getElementsByTagName("generate");//var pattern = /[a-zA-Z]{6}/gmi;
+                    //var recal = pattern.exec(data[a]);
+                    var genNodeLen = generateNodes.length;
+//						console.log(generateNodes);
+                    for (b=0;b<genNodeLen;b++){
+//						console.log(generateNodes[b]);
+                        if (generateNodes[b].hasAttribute("date")){
+                        }
+                        else{
+                            var nodeQuantity;
+                            if (generateNodes[b].getAttribute("quantity")!=null){
+                                nodeQuantity = generateNodes[b].getAttribute("quantity");
+//									console.log(nodeQuantity);
+                                nodeQuantity = incarnateRoll(nodeQuantity);
+//									console.log(nodeQuantity);
+                            }else{
+                                nodeQuantity = 1;
+                            }
+                            found = true;
+                            var fid=generateNodes[b].getAttribute("fid")
+//								console.log(fid);
+                            var result ="";
+                            for (e=0;e<nodeQuantity;e++){
+                                var preresult = rollTable(fid);
+                                //								console.log(preresult);
+                                //								console.log(preresult.match(regex).length);
+                                if (preresult.match(regex).length==1){
+                                    preresult = preresult.replace(regexStart,"");
+                                    preresult = preresult.replace(regexEnd,"");
+                                    //									console.log("After Cropping: "+preresult);
+                                }
+                                result = result + preresult;
+                            }
+                            generateNodes[b].innerHTML = result;
+                            generateNodes[b].setAttribute("date",new Date());
+                        }
+                    }
+//						console.log(generateNodes);
+                }
+                while (found === true);
+                do {
+                    found = false;
+                    var calcNodes = data[a].getElementsByTagName("calculate");
+                    var calcNodeLen = calcNodes.length;
+                    for (f=0;f<calcNodeLen;f++){
+                        if (calcNodes[f].hasAttribute("date")){
+                        }
+                        else {
+                            calcNodes[f].innerHTML=incarnateRoll(calcNodes[f].innerHTML);
+                            calcNodes[f].setAttribute("date",new Date());
+                        }
+                    }
+                }
+                while (found ===true);
+                do {
+                    found = false;
+                    var genLinkNodes = data[a].getElementsByTagName("genLink");
+                    var genLinkNodesLen = genLinkNodes.length;
+                    for (c=0;c<genLinkNodesLen;c++){
+                        if (genLinkNodes[c].hasAttribute("date")){
+                        }
+                        else {
+                            found = true;
+                            var linkFid = genLinkNodes[c].getAttribute("fid");
+                            result = "";
+                            for (b=0;b<genNodeLen;b++){
+                                if (linkFid == generateNodes[b].getAttribute("fid")){
+                                    result = result + generateNodes[b].innerHTML + " ";
+                                }
+                            }
+                            genLinkNodes[c].innerHTML = result;
+                            genLinkNodes[c].setAttribute("date",new Date());
+                        }
+                    }
+                }
+                while (found===true);
+            }
+        };
+        function incarnateRoll(dice) {
+            var numDice = 0, sizeDice= 0, modType="", modifier= 0, calculation= 0;
+            var fullPattern= /^[0-9]+d[0-9]+[\+\-]{1}[0-9]+$/;
+            var fullPatternFind = dice.split(/[\-\+d]/);
+            if (dice.search(fullPattern)==0) {
+//				console.log("section 1");
+                numDice = fullPatternFind[0];
+                sizeDice = fullPatternFind[1];
+                modifier = fullPatternFind[2];
+                if (dice.search(/\-/)!=-1){
+                    modType="-";
+                } else{
+                    modType="+";
+                }
+            } else if (dice.search(/^[0-9]+d[0-9]+$/)==0){
+//				console.log("section 2");
+                numDice = fullPatternFind[0];
+                sizeDice = fullPatternFind[1];
+            } else if (dice.search(/^[0-9]+[\+\-]{1}[0-9]+$/)==0){
+//				console.log("section 3");
+                calculation = fullPatternFind[0]*1;
+                modifier = fullPatternFind[1];
+                if (dice.search(/\-/)!=-1){
+                    modType="-";
+                } else{
+                    modType="+";
+                }
+            } else if (dice.search(/^[0-9]+$/)==0){
+//				console.log("section 4");
+                calculation = fullPatternFind[0]*1;
+            }
+            for (d=0;d<numDice;d++){
+                calculation = calculation + Math.floor(Math.random()*sizeDice) + 1;
+                rollCount++;
+            }
+            if (modType =="-"){
+                modifier = modifier*-1;
+            } else {
+                modifier = modifier * 1;
+            }
+            calculation = calculation + modifier;
+            return calculation;
+        }
+        function addDropDown (){
+            var preSelect = document.getElementById("mySelect");
+            var mySelect = preSelect.options[preSelect.selectedIndex].text;
+            var select = document.getElementById("selectChoices");
+            var selectLength = select.length;
+//				console.log(selectLength);
+            for (g=selectLength;g>-1;g--){
+                select.remove(g);
+            }
+            for (var tempVar in templates){
+//					console.log("run" + tempVar);
+//					console.log("run" + templates[tempVar].type);
+                if (templates[tempVar].type == mySelect){
+                    var option = document.createElement("option");
+                    var tempName= templates[tempVar].name;
+                    if (tempName.search(/<generate/)!=-1){
+                        tempName = tempName.replace(/<generate.*<\/generate> ?\-? ?/,"")
+                    }
+                    option.text=tempName;
+                    option.value=tempVar;
+                    select.appendChild(option);
+                }
+            }
+            return 0;
+        }
+        function populate (){
+//				console.log("running");
+            var popData = document.getElementsByTagName("populate");
+            var popLength = popData.length;
+//				console.log(popLength);
+            for (h=0; h<popLength; h++){
+                if (popData[h].hasAttribute("date")){
+                }
+                else {
+//						console.log(popData[h].getAttribute("fid"));
+                    var popCycle;
+                    if (popData[h].getAttribute("quantity") != null) {
+                        popCycle = incarnateRoll(popCycle);
+                    }else{
+                        popCycle = 1;
+                    }
+                    for (i=0; i<popCycle; i++){
+                        document.getElementById("Main").innerHTML += "<div class=\"template\" id=\"" + tempID +"\">\n" + templates[popData[h].getAttribute("fid")].description + "</div>\n"
+                        tempID++;
+                    }
+//						console.log(popCycle);
+                    popData[h].setAttribute("date",new Date());
+                    popData[h].setAttribute("id",tempID-1);
+                    popData[h].innerHTML = "<a href=\"http://www.incarnategamingllc.com/demo/#" + (tempID-1) + "\">" + popData[h].innerHTML + "</a>";
+                }
+            }
+        }
+        function templateInsert () {
+            document.getElementById("Main").innerHTML = document.getElementById("Main").innerHTML + "<div class=\"template\">\n" + templates[document.getElementById("selectChoices").value].description + "</div>\n";
+        }
+    </script>
+    <select id="mySelect" onchange="addDropDown()">
+        <option>Buildings</option>
+        <option>Chases</option>
+        <option>City</option>
+        <option>Dungeons</option>
+        <option>NPCs</option>
+        <option>Districts</option>
+    </select>
+    <select id="selectChoices"></select>
+    <div>
+        <button type="button" onclick="templateInsert()">
+            Insert Template</button>
+        <button type="button" onclick="generate()">
+            Generate</button>
+        <button type="button" onclick="populate()">
+            Populate</button>
+        <button type"button"="" onclick="alert(&quot;You have made &quot; + rollCount + &quot; rolls.&quot;)">Roll Count</button>
+    </div>
+    <div id="Main"></div>
+{% endblock %}
