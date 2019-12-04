@@ -22,15 +22,27 @@ class IncarnateBackgroundRepository extends ServiceEntityRepository
 
     public function findOneByFid($fid)//: ?IncarnateBackground
     {
-        return $this->filterByFid($fid)
-            ->andWhere('i.fid = :fid')
-            ->setParameter('fid', $fid)
-            ->select('i.author','i.bondfid','i.featurefid','i.flawfid','i.gp','i.idealfid','i.languages','i.legal','i.official','i.personalityfid','i.skillProf','i.startEq','i.toolProf','i.type','i.ugfid')
-            ->addSelect('i.id','i.fid','i.name','i.description')
+        $qb = $this->filterByFid($fid);
+        $qb = $this->selectIncarnateItemFields($qb);
+        return $this->addSelectBackgroundFields($qb)
             ->getQuery()
             ->getOneOrNullResult()
             ;
     }
+    public function findOneByName($name)//: ?IncarnateBackground
+    {
+        $name = str_replace('-',' ',$name);
+        $qb = $this->filterByName($name);
+        $qb = $this->selectIncarnateItemFields($qb);
+        return $this->addSelectBackgroundFields($qb)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+    private function addSelectBackgroundFields(QueryBuilder $qb=null){
+        return $this->getOrCreateQueryBuilder($qb)
+            ->addSelect('i.featurefid','i.gp','i.languages','i.skillProf','i.startEq','i.toolProf','i.personalityfid','i.idealfid','i.bondfid','i.flawfid');
+   }
 
     // /**
     //  * @return IncarnateBackground[] Returns an array of IncarnateBackground objects
@@ -65,7 +77,16 @@ class IncarnateBackgroundRepository extends ServiceEntityRepository
             ->andWhere('i.fid = :fid')
             ->setParameter('fid', $fid);
     }
+    private function filterByName($name,QueryBuilder $qb=null){
+        return $this->getOrCreateQueryBuilder($qb)
+            ->andWhere('i.name = :name')
+            ->setParameter('name', $name);
+    }
     private  function getOrCreateQueryBuilder(QueryBuilder $qb = null){
         return $qb ?: $this->createQueryBuilder('i');
+    }
+    private function selectIncarnateItemFields(QueryBuilder $qb = null){
+        return $this->getOrCreateQueryBuilder($qb)
+            ->select('i.id','i.fid','i.ugfid','i.name','i.description','i.author','i.official','i.legal','i.type');
     }
 }

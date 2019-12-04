@@ -28,7 +28,14 @@ class ContentController extends AbstractController
      */
     public function background($slug){
         $repository = $this->em->getRepository(IncarnateBackground::class);
-        $background = $repository->findOneByFid($slug);
+        if(16 == strlen($slug)){
+            $background = $repository->findOneByFid($slug);
+            if (null == $background){
+                $background = $repository->findOneByName($slug);
+            }
+        }else{
+            $background = $repository->findOneByName($slug);
+        }
         return $this->render('content/background.html.twig',[
             'genericParts' => $this->genericParts,
             'background' => $background,
