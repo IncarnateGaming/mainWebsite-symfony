@@ -10,12 +10,19 @@ use Doctrine\ORM\Mapping as ORM;
 class IncarnateBackground extends IncarnateItem
 {
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
-    private $featureFid;
+    private $id;
 
     /**
-     * @ORM\Column(type="integer", length=16)
+     * @ORM\Column(type="string", length=16, nullable=true)
+     */
+    private $featurefid;
+
+    /**
+     * @ORM\Column(type="integer")
      */
     private $gp;
 
@@ -27,51 +34,51 @@ class IncarnateBackground extends IncarnateItem
     /**
      * @ORM\Column(type="array")
      */
-    private $skillProficiencies = [];
+    private $skillProf = [];
 
     /**
      * @ORM\Column(type="array")
      */
-    private $startingEquipment = [];
+    private $startEq = [];
 
     /**
      * @ORM\Column(type="array", nullable=true)
      */
-    private $toolProficiencies = [];
+    private $toolProf = [];
 
     /**
      * @ORM\Column(type="string", length=16)
      */
-    private $personalityFID;
+    private $personalityfid;
 
     /**
      * @ORM\Column(type="string", length=16)
      */
-    private $idealFID;
+    private $idealfid;
 
     /**
      * @ORM\Column(type="string", length=16)
      */
-    private $bondFID;
+    private $bondfid;
 
     /**
      * @ORM\Column(type="string", length=16)
      */
-    private $flawFID;
+    private $flawfid;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getFeatureFid(): ?string
+    public function getFeaturefid(): ?string
     {
-        return $this->featureFid;
+        return $this->featurefid;
     }
 
-    public function setFeatureFid(string $featureFid): self
+    public function setFeaturefid(?string $featurefid): self
     {
-        $this->featureFid = $featureFid;
+        $this->featurefid = $featurefid;
 
         return $this;
     }
@@ -100,86 +107,86 @@ class IncarnateBackground extends IncarnateItem
         return $this;
     }
 
-    public function getSkillProficiencies(): ?array
+    public function getSkillProf(): ?array
     {
-        return $this->skillProficiencies;
+        return $this->skillProf;
     }
 
-    public function setSkillProficiencies(array $skillProficiencies): self
+    public function setSkillProf(array $skillProf): self
     {
-        $this->skillProficiencies = $skillProficiencies;
+        $this->skillProf = $skillProf;
 
         return $this;
     }
 
-    public function getStartingEquipment(): ?array
+    public function getStartEq(): ?array
     {
-        return $this->startingEquipment;
+        return $this->startEq;
     }
 
-    public function setStartingEquipment(array $startingEquipment): self
+    public function setStartEq(array $startEq): self
     {
-        $this->startingEquipment = $startingEquipment;
+        $this->startEq = $startEq;
 
         return $this;
     }
 
-    public function getToolProficiencies(): ?string
+    public function getToolProf(): ?array
     {
-        return $this->toolProficiencies;
+        return $this->toolProf;
     }
 
-    public function setToolProficiencies(?array $toolProficiencies): self
+    public function setToolProf(?array $toolProf): self
     {
-        $this->toolProficiencies = $toolProficiencies;
+        $this->toolProf = $toolProf;
 
         return $this;
     }
 
-    public function getPersonalityFID(): ?string
+    public function getPersonalityfid(): ?string
     {
-        return $this->personalityFID;
+        return $this->personalityfid;
     }
 
-    public function setPersonalityFID(string $personalityFID): self
+    public function setPersonalityfid(string $personalityfid): self
     {
-        $this->personalityFID = $personalityFID;
+        $this->personalityfid = $personalityfid;
 
         return $this;
     }
 
-    public function getIdealFID(): ?string
+    public function getIdealfid(): ?string
     {
-        return $this->idealFID;
+        return $this->idealfid;
     }
 
-    public function setIdealFID(string $idealFID): self
+    public function setIdealfid(string $idealfid): self
     {
-        $this->idealFID = $idealFID;
+        $this->idealfid = $idealfid;
 
         return $this;
     }
 
-    public function getBondFID(): ?string
+    public function getBondfid(): ?string
     {
-        return $this->bondFID;
+        return $this->bondfid;
     }
 
-    public function setBondFID(string $bondFID): self
+    public function setBondfid(string $bondfid): self
     {
-        $this->bondFID = $bondFID;
+        $this->bondfid = $bondfid;
 
         return $this;
     }
 
-    public function getFlawFID(): ?string
+    public function getFlawfid(): ?string
     {
-        return $this->flawFID;
+        return $this->flawfid;
     }
 
-    public function setFlawFID(string $flawFID): self
+    public function setFlawfid(string $flawfid): self
     {
-        $this->flawFID = $flawFID;
+        $this->flawfid = $flawfid;
 
         return $this;
     }

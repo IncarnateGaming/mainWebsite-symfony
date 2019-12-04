@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\IncarnateBackground;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method IncarnateBackground|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +18,18 @@ class IncarnateBackgroundRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, IncarnateBackground::class);
+    }
+
+    public function findOneByFid($fid)//: ?IncarnateBackground
+    {
+        return $this->filterByFid($fid)
+            ->andWhere('i.fid = :fid')
+            ->setParameter('fid', $fid)
+            ->select('i.author','i.bondfid','i.featurefid','i.flawfid','i.gp','i.idealfid','i.languages','i.legal','i.official','i.personalityfid','i.skillProf','i.startEq','i.toolProf','i.type','i.ugfid')
+            ->addSelect('i.id','i.fid','i.name','i.description')
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
     }
 
     // /**
@@ -47,4 +60,12 @@ class IncarnateBackgroundRepository extends ServiceEntityRepository
         ;
     }
     */
+    private function filterByFid($fid,QueryBuilder $qb=null){
+        return $this->getOrCreateQueryBuilder($qb)
+            ->andWhere('i.fid = :fid')
+            ->setParameter('fid', $fid);
+    }
+    private  function getOrCreateQueryBuilder(QueryBuilder $qb = null){
+        return $qb ?: $this->createQueryBuilder('i');
+    }
 }

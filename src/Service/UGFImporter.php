@@ -4,6 +4,7 @@
 namespace App\Service;
 
 
+use App\Entity\DeleteMe;
 use App\Entity\IncarnateBackground;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -70,74 +71,75 @@ class UGFImporter
         $backgrounds = $ugf->chapters->backgroundChapter->backgrounds;
         foreach ($backgrounds->children() as $background){
             $back = new IncarnateBackground();
-//            $back->setAuthor($background->backgroundAuthor);
-//            $back->setBondFID($background->backgroundSuggestedCharacteristics->backgroundBond['FID']);
-//            $description = $this->formatParagraphs($background->backgroundDescription);
-//            $back->setDescription($description);
-//            $back->setFeatureFid($background->backgroundFeature['FID']);
-//            $back->setFID($background['FID']);
-//            $back->setFlawFID($background->backgroundSuggestedCharacteristics->backgroundFlaw['FID']);
-//            $back->setGp(intval($background->backgroundGP));
-//            $back->setIdealFID($background->backgroundSuggestedCharacteristics->backgroundIdeal['FID']);
-//            if ($background->backgroundLanguages){
-//                $languages = $background->backgroundLanguages->children();
-//                $lanresult = array();
-//                foreach ($languages as $language){
-//                    $lanresult[] = $language->__toString();
-//                }
-//                $back->setLanguages($lanresult);
-//            }
-//            if ($background->backgroundLegal){
-//                $legal = $this->formatParagraphs($background->backgroundLegal);
-//                $back->setLegal($legal);
-//            }
+            $back->setAuthor($background->backgroundAuthor);
+            $back->setBondfid($background->backgroundSuggestedCharacteristics->backgroundBond['FID']);
+            $description = $this->formatParagraphs($background->backgroundDescription);
+            $back->setDescription($description);
+            $back->setFeaturefid($background->backgroundFeature['FID']);
+            $back->setFid($background['FID']);
+            $back->setFlawfid($background->backgroundSuggestedCharacteristics->backgroundFlaw['FID']);
+            $back->setGp(intval($background->backgroundGP));
+            $back->setIdealfid($background->backgroundSuggestedCharacteristics->backgroundIdeal['FID']);
+            if ($background->backgroundLanguages){
+                $languages = $background->backgroundLanguages->children();
+                $lanresult = array();
+                foreach ($languages as $language){
+                    $lanresult[] = $language->__toString();
+                }
+                $back->setLanguages($lanresult);
+            }
+            if ($background->backgroundLegal){
+                $legal = $this->formatParagraphs($background->backgroundLegal);
+                $back->setLegal($legal);
+            }
             $back->setName($background->backgroundName);
-//            $back->setOfficial($background->officialContent);
-//            $back->setPersonalityFID($background->backgroundSuggestedCharacteristics->backgroundPersonality['FID']);
-//            $skillProficiencies = $background->backgroundSkillProficiencies->description->children();
-//            $skillProfRes = array();
-//            foreach ($skillProficiencies as $skillProficiency){
-//                $skillArray = array(
-//                    'skill' => $skillProficiency->__toString(),
-//                    'fid' => $skillProficiency['FID']->__toString(),
-//                );
-//                $skillProfRes[] = $skillArray;
-//            }
-//            $back->setSkillProficiencies($skillProfRes);
-//            $startingEquipRes = array(
-//                'itemArray'=>array(),
-//                'description'=>'<p>' . $this->richText($background->backgroundStartingEquipment->description) . '</p>',
-//            );
-//            $startEquipItems = $background->backgroundStartingEquipment->defaultChoices->children();
-//            foreach ($startEquipItems as $item){
-//                $itemFormat = array(
-//                    'name'=>$item->inculdedItemName->__toString(),
-//                    'quantity'=>intval($item->inculdedItemQuantity->__toString()),
-//                    'FID'=>$item['FID']->__toString(),
-//                );
-//                $startingEquipRes['itemArray'][] = $itemFormat;
-//            }
-//            $back->setStartingEquipment($startingEquipRes);
-//            if ($background->backgroundToolProficiencies){
-//                $toolArray = array(
-//                    'description'=> '<p>' . $this->richText($background->backgroundToolProficiencies->description) . '</p>',
-//                    'tools'=> array(),
-//                );
-//                if ($background->backgroundToolProficiencies->description->crossReference){
-//                    foreach ($background->backgroundToolProficiencies->description->children() as $tool){
-//                        $toArray = array(
-//                            'name'=> $tool->__toString(),
-//                            'FID'=> $tool['FID']->__toString(),
-//                        );
-//                        $toolArray['tools'][] = $toArray;
-//                    }
-//                }
-//                $back->setToolProficiencies($toolArray);
-//            }
-//            $back->setType('background');
-//            $back->setUgfid($background['backgroundID']);
+            $back->setOfficial($background->officialContent);
+            $back->setPersonalityfid($background->backgroundSuggestedCharacteristics->backgroundPersonality['FID']);
+            $skillProficiencies = $background->backgroundSkillProficiencies->description->children();
+            $skillProfRes = array();
+            foreach ($skillProficiencies as $skillProficiency){
+                $skillArray = array(
+                    'skill' => $skillProficiency->__toString(),
+                    'fid' => $skillProficiency['FID']->__toString(),
+                );
+                $skillProfRes[] = $skillArray;
+            }
+            $back->setSkillProf($skillProfRes);
+            $startingEquipRes = array(
+                'itemArray'=>array(),
+                'description'=>'<p>' . $this->richText($background->backgroundStartingEquipment->description) . '</p>',
+            );
+            $startEquipItems = $background->backgroundStartingEquipment->defaultChoices->children();
+            foreach ($startEquipItems as $item){
+                $itemFormat = array(
+                    'name'=>$item->inculdedItemName->__toString(),
+                    'quantity'=>intval($item->inculdedItemQuantity->__toString()),
+                    'FID'=>$item['FID']->__toString(),
+                );
+                $startingEquipRes['itemArray'][] = $itemFormat;
+            }
+            $back->setStartEq($startingEquipRes);
+            if ($background->backgroundToolProficiencies){
+                $toolArray = array(
+                    'description'=> '<p>' . $this->richText($background->backgroundToolProficiencies->description) . '</p>',
+                    'tools'=> array(),
+                );
+                if ($background->backgroundToolProficiencies->description->crossReference){
+                    foreach ($background->backgroundToolProficiencies->description->children() as $tool){
+                        $toArray = array(
+                            'name'=> $tool->__toString(),
+                            'FID'=> $tool['FID']->__toString(),
+                        );
+                        $toolArray['tools'][] = $toArray;
+                    }
+                }
+                $back->setToolProf($toolArray);
+            }
+            $back->setType('background');
+            $back->setUgfid($background['backgroundID']);
             $this->em->persist($back);
-            $this->em->flush();
         }
+        $this->em->flush();
+        return true;
     }
 }

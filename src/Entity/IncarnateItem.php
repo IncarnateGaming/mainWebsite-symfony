@@ -17,12 +17,12 @@ class IncarnateItem
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=16, unique=true)
+     * @ORM\Column(type="string", length=16)
      */
-    private $FID;
+    private $fid;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $ugfid;
 
@@ -32,7 +32,7 @@ class IncarnateItem
     private $name;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
@@ -61,14 +61,14 @@ class IncarnateItem
         return $this->id;
     }
 
-    public function getFID(): ?string
+    public function getFid(): ?string
     {
-        return $this->FID;
+        return $this->fid;
     }
 
-    public function setFID(string $FID): self
+    public function setFid(string $fid): self
     {
-        $this->FID = $FID;
+        $this->fid = $fid;
 
         return $this;
     }
@@ -102,7 +102,7 @@ class IncarnateItem
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
