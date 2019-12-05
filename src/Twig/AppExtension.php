@@ -23,6 +23,7 @@ class AppExtension extends AbstractExtension
             // Reference: https://twig.symfony.com/doc/2.x/advanced.html#automatic-escaping
             new TwigFilter('array_convert', [$this, 'processArrayConvert'], ['is_safe' => ['html']]),
             new TwigFilter('array_convert_simple', [$this, 'processArrayConvertSimple']),
+            new TwigFilter('p_stripper', [$this, 'pStripper']),
         ];
     }
     public function assembleCrossReference(array $value, int $target){
@@ -55,6 +56,9 @@ class AppExtension extends AbstractExtension
             }
         }
         return $result;
+    }
+    public function pStripper($value){
+        return str_replace(['<p>','</p>'],'',$value);
     }
 
 //    public function getFilters(): array

@@ -44,9 +44,18 @@ class IncarnateBackgroundRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
             ;
     }
+    public function findOneById(int $id)//: ?IncarnateBackground
+    {
+        $qb = $this->filterById($id);
+        $qb = $this->selectIncarnateItemFields($qb);
+        return $this->addSelectBackgroundFields($qb)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
     private function addSelectBackgroundFields(QueryBuilder $qb=null){
         return $this->getOrCreateQueryBuilder($qb)
-            ->addSelect('i.featurefid','i.gp','i.languages','i.skillProf','i.startEq','i.toolProf','i.personalityfid','i.idealfid','i.bondfid','i.flawfid');
+            ->addSelect('i.featurefid','i.gp','i.languages','i.skillProf','i.startEq','i.toolProf','i.personalityfid','i.idealfid','i.bondfid','i.flawfid','i.suggestedCharIntro');
    }
 
     // /**
@@ -93,5 +102,10 @@ class IncarnateBackgroundRepository extends ServiceEntityRepository
     private function selectIncarnateItemFields(QueryBuilder $qb = null){
         return $this->getOrCreateQueryBuilder($qb)
             ->select('i.id','i.fid','i.ugfid','i.name','i.description','i.author','i.official','i.legal','i.type');
+    }
+    private function filterById(int $id,QueryBuilder $qb=null){
+        return $this->getOrCreateQueryBuilder($qb)
+            ->andWhere('i.id = :id')
+            ->setParameter('id', $id);
     }
 }

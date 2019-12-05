@@ -1,14 +1,37 @@
 {%  extends 'base.html.twig' %}
 {% block title %}{{ background.name }}{% endblock %}
 {% block body %}
-    {{ dump() }}
     <div class="container">
     <h2>{{ background.name }}</h2>
     <p>{{ background.description|raw }}</p>
     <p>{% if background.skillProf|length > 0 %}
         <strong>Skill Proficiencies:</strong> {{  background.skillProf|array_convert }}<br/>  {% endif %}{% if background.languages|length > 0 %}
-        <strong>Languages:</strong> {{ background.languages|array_convert_simple }}<br/>{% endif %}{% if background.toolProf.tools|length > 0 %}
+        <strong>Languages:</strong> {{ background.languages|array_convert_simple }}<br/>{% endif %}{% if background.toolProf|length > 0 %}
         <strong>Tool Proficiencies:</strong> {{ background.toolProf.tools|array_convert }}<br/>{% endif %}{% if background.startEq.description %}
-        <strong>Equipment:</strong> {{ background.startEq.description|raw }}{% endif %}</p>
+        <strong>Equipment:</strong> {{ background.startEq.description|raw }}{% endif %}</p>{% if feature %}
+    <h3>{{ feature.name }}</h3>
+    {{ feature.description|raw }}{% endif %}
+    <h3>Suggested Characteristics</h3>
+    {{ background.suggestedCharIntro|raw }}{% if personality %}
+    <table class="table table-striped">
+        <tr><th scope="col">d8</th><th scope="col">Personality Trait</th></tr>
+        {% for row in personality.tr %}<tr><th scope="row">{{ row.to }}</th><td>{{ row.td.0|p_stripper }}</td></tr>
+        {% endfor %}</table><br/>
+    {% endif %}{% if ideal %}
+        <table class="table table-striped">
+            <tr><th scope="col">d6</th><th scope="col">Ideal</th></tr>
+            {% for row in ideal.tr %}<tr><th scope="row">{{ row.to }}</th><td>{{ row.td.0|p_stripper }}</td></tr>
+            {% endfor %}</table><br/>
+    {% endif %}{% if bond %}
+        <table class="table table-striped">
+            <tr><th scope="col">d6</th><th scope="col">Bond</th></tr>
+            {% for row in bond.tr %}<tr><th scope="row">{{ row.to }}</th><td>{{ row.td.0|p_stripper }}</td></tr>
+            {% endfor %}</table><br/>
+    {% endif %}{% if flaw %}
+        <table class="table table-striped">
+            <tr><th scope="col">d6</th><th scope="col">Flaw</th></tr>
+            {% for row in flaw.tr %}<tr><th scope="row">{{ row.to }}</th><td>{{ row.td.0|p_stripper }}</td></tr>
+            {% endfor %}</table><br/>
+    {% endif %}{% if background.legal %}{{ background.legal|raw }}{% endif %}
     </div>
 {% endblock %}
