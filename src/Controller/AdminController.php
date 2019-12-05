@@ -38,6 +38,7 @@ class AdminController extends AbstractController
      * @Route("/admin/import/tables/")
      */
     public function importTables(){
+        $this->UGFImporter->importTables();
         return new Response('temp text');
     }
 }

@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\IncarnateBackgroundFeature;
+use App\Entity\IncarnateTable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method IncarnateBackgroundFeature|null find($id, $lockMode = null, $lockVersion = null)
- * @method IncarnateBackgroundFeature|null findOneBy(array $criteria, array $orderBy = null)
- * @method IncarnateBackgroundFeature[]    findAll()
- * @method IncarnateBackgroundFeature[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method IncarnateTable|null find($id, $lockMode = null, $lockVersion = null)
+ * @method IncarnateTable|null findOneBy(array $criteria, array $orderBy = null)
+ * @method IncarnateTable[]    findAll()
+ * @method IncarnateTable[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class IncarnateBackgroundFeatureRepository extends ServiceEntityRepository
+class IncarnateTableRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, IncarnateBackgroundFeature::class);
+        parent::__construct($registry, IncarnateTable::class);
     }
 
     public function deleteAll(){
@@ -25,7 +25,7 @@ class IncarnateBackgroundFeatureRepository extends ServiceEntityRepository
             ;
     }
     // /**
-    //  * @return IncarnateBackgroundFeature[] Returns an array of IncarnateBackgroundFeature objects
+    //  * @return IncarnateTable[] Returns an array of IncarnateTable objects
     //  */
     /*
     public function findByExampleField($value)
@@ -42,7 +42,7 @@ class IncarnateBackgroundFeatureRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?IncarnateBackgroundFeature
+    public function findOneBySomeField($value): ?IncarnateTable
     {
         return $this->createQueryBuilder('i')
             ->andWhere('i.exampleField = :val')

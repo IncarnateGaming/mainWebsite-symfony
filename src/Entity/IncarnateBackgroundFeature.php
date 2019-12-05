@@ -19,11 +19,6 @@ class IncarnateBackgroundFeature extends IncarnateItem
      */
     private $parentname;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
     public function getParentfid(): ?string
     {
         return $this->parentfid;

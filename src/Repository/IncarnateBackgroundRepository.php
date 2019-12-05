@@ -20,7 +20,7 @@ class IncarnateBackgroundRepository extends ServiceEntityRepository
         parent::__construct($registry, IncarnateBackground::class);
     }
 
-    public function deleteAllBackgrounds(){
+    public function deleteAll(){
         return $this->createQueryBuilder('a')
             ->delete()
             ;
