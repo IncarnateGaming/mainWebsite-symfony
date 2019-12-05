@@ -39,10 +39,13 @@ function genericParts(){
     $navArray = loadNav();
     $aboutArray = loadAbout();
     $mobileArray = findMobile();
+    $url = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
     return array(
         'publicFolder' => $publicFolder,
         'nav' => $navArray,
         'about' => $aboutArray,
         'mobileArray' => $mobileArray,
+        'url'=>$url,
+        'host'=>$_SERVER['SERVER_NAME'],
     );
 }

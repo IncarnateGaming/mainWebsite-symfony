@@ -1,3 +1,6 @@
+// Bootstrap and its default variables
+@import "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css";
+
 // Your variable overrides
 $body-bg: #060;
 $body-color: #171;
@@ -12,6 +15,21 @@ $theme-colors: (
         "light":#feffe2,
         "dark":#1F0208
 );
+:root{
+  --primary:#3E044D;
+  --secondary:#5d046e;
+  --dark:#1F0208;
+}
+//Flex
+.inc-flex-300{
+  flex: 0 0 300px;
+}
+//Pading
+.inc-padding-top{
+  padding-top:2em;
+}
 
-// Bootstrap and its default variables
-@import "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css";
+//Calm a
+a.calm-black{
+  color:var(--dark)
+}

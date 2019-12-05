@@ -1,3 +1,20 @@
 @import "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css";
+:root {
+  --primary:#3E044D;
+  --secondary:#5d046e;
+  --dark:#1F0208;
+}
+
+.inc-flex-300 {
+  flex: 0 0 300px;
+}
+
+.inc-padding-top {
+  padding-top: 2em;
+}
+
+a.calm-black {
+  color: var(--dark);
+}
 
 /*# sourceMappingURL=incBootstrap.css.map */

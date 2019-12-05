@@ -10,6 +10,83 @@
 		"pageName": "demo"
 	},
 	{
+		"pagePath": "/content/",
+		"pageTitle": "Content",
+		"pageName": "content",
+		"subpages": [
+			{
+				"pagePath": "/content/background/",
+				"pageTitle": "Backgrounds",
+				"pageName": "backgrounds"
+			},
+			{
+				"pagePath": "/content/class/",
+				"pageTitle": "Classes",
+				"pageName": "classes"
+			},
+			{
+				"pagePath": "/content/feat/",
+				"pageTitle": "Feats",
+				"pageName": "feats"
+			},
+			{
+				"pagePath": "/content/item/",
+				"pageTitle": "Items",
+				"pageName": "items"
+			},
+			{
+				"pagePath": "/content/magicProperty/",
+				"pageTitle": "Magical Properties",
+				"pageName": "magicalproperties"
+			},
+			{
+				"pagePath": "/content/npc/",
+				"pageTitle": "NPCs",
+				"pageName": "npcs"
+			},
+			{
+				"pagePath": "/content/lore/",
+				"pageTitle": "Lore",
+				"pageName": "lore"
+			},
+			{
+				"pagePath": "/content/race/",
+				"pageTitle": "Races",
+				"pageName": "races"
+			},
+			{
+				"pagePath": "/content/riddle/",
+				"pageTitle": "Riddles",
+				"pageName": "riddles"
+			},
+			{
+				"pagePath": "/content/rule/",
+				"pageTitle": "Rules",
+				"pageName": "rules"
+			},
+			{
+				"pagePath": "/content/skill/",
+				"pageTitle": "Skills",
+				"pageName": "skills"
+			},
+			{
+				"pagePath": "/content/spell/",
+				"pageTitle": "Spells",
+				"pageName": "spells"
+			},
+			{
+				"pagePath": "/content/table/",
+				"pageTitle": "Tables",
+				"pageName": "tables"
+			},
+			{
+				"pagePath": "/content/template/",
+				"pageTitle": "Template",
+				"pageName": "templates"
+			}
+		]
+	},
+	{
 		"pagePath": "/about/",
 		"pageTitle": "About",
 		"pageName": "about"

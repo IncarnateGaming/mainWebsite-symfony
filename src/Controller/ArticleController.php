@@ -13,7 +13,7 @@ class ArticleController extends AbstractController
 {
 
     /**
-     * @Route("/content/{slug}")
+     * @Route("/dummy/reference/people/wont/find/{slug}")
      */
     public function show($slug)
     {

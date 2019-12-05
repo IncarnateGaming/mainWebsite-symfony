@@ -1,12 +1,13 @@
 {%  extends 'base.html.twig' %}
 {% block title %}Demo{% endblock %}
 {% block body %}
+    {{ dump(genericParts) }}
     <script>
         var tempID = 1;
         var tables = {};
         var templates = {};
-        const tablesResponse =  fetch('{{ genericParts.publicFolder }}packs/incarnateTables.json');
-        const templatesResponse =  fetch('{{ genericParts.publicFolder }}packs/incarnateTables.json');
+        const tablesResponse =  fetch('{{ genericParts.host }}/packs/incarnateTables.json');
+        const templatesResponse =  fetch('{{ genericParts.host }}/packs/incarnateTables.json');
         Promise.all(tablesResponse,templateInsert()).then((tableRes,tempRes) =>{
             tables = tableRes.json();
             templates = tempRes.json();

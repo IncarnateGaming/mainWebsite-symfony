@@ -4,6 +4,7 @@
 namespace App\Service;
 
 
+use App\Entity\ChapterIntro;
 use App\Entity\DeleteMe;
 use App\Entity\IncarnateBackground;
 use App\Entity\IncarnateBackgroundFeature;
@@ -19,6 +20,19 @@ class UGFImporter
         $this->ugfFilePath = '../lib/xml/Incarnate-System.xml';
         $this->ugf = simplexml_load_file($this->ugfFilePath);
     }
+    public function headingText(string $string):string{
+        $string =  str_replace('<quoMark/>','"',$string);
+        $string = str_replace('<generate','<span class="generate"',$string);
+        $string = str_replace(' FID="',' data-FID="',$string);
+        $string = str_replace(' UGFLinkReference="',' data-UGFLinkReference="',$string);
+        $string = str_replace(' FIDparent="',' data-FIDparent="',$string);
+        $string = str_replace(' UGFparent="',' data-UGFparent="',$string);
+        $string = str_replace(' recurrance="',' data-recurrance="',$string);
+        $string = str_replace(' quantity="',' data-quantity="',$string);
+        $string = str_replace('</generate>','</span>',$string);
+        return $string;
+    }
+    //Takes either a string or a description simple xml element
     public function richText($string):string{
         if (is_string($string)){
             $result = $string;
@@ -45,7 +59,7 @@ class UGFImporter
         $result = str_replace('</hyperlink>','</a>',$result);
         return $result;
     }
-    public function formatParagraphs($xml):string {
+    public function formatParagraphs(\SimpleXMLElement $xml):string {
         $result = "";
         $children = $xml->children();
         foreach ($children as $child){
@@ -313,5 +327,50 @@ class UGFImporter
         }
         $this->em->flush();
         return true;
+    }
+    public function assembleSections(\SimpleXMLElement $sec1):string {
+        $result = '<h1 id="' . $sec1['FID'] . '">' . $this->headingText(str_replace(['<heading1>','</heading1>'],'',$sec1->heading1->asXML())) . '</h1>';
+        dump($_SERVER,$result);die;
+    }
+    public function prepareChapterIntro(\SimpleXMLElement $chapter){
+//        if($chapter->GMOnly){
+//            $test = boolval($chapter->GMOnly);
+//            if($test){
+//                return false;
+//            }
+//        }
+        foreach ($chapter->sections->section1 as $sec1) {
+            $sections = $this->assembleSections($sec1);
+            $new = new ChapterIntro();
+            $new->setAuthor('ProNobis');
+            $new->setDescription();
+            $new->setName($this->headingText(str_replace(['<heading1>', '</heading1>'], '', $sec1->heading1->asXML())));
+            $new->setFid($sec1['FID']);
+            if ($chapter->officialContent) {
+                $new->setOfficial($chapter->officialContent);
+            }
+            if ($sec1['simpleName']) {
+                $new->setSimpleName($sec1['simpleName']);
+            }
+            if ($sec1['template']) {
+                $new->setTemplate(boolval($sec1['template']));
+            }
+            $new->setType('chapterIntro');
+            $new->setUgfid($sec1['secID']);
+            $this->em->persist($new);
+        }
+        return true;
+    }
+    public function importChapterIntros(){
+        $repository = $this->em->getRepository(ChapterIntro::class);
+        $repository->deleteAll()->getQuery()->execute();
+        foreach($this->ugf->chapters->miscellaneousChapters->miscellaneousChapter as $chapter){
+            $this->prepareChapterIntro($chapter);
+        }
+        $this->em->flush();
+        return true;
+    }
+    public function importClasses(){
+        $repository = $this->em->getRepository(IncarnateTable::class);
     }
 }

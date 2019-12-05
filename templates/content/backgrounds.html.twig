@@ -1,5 +1,12 @@
 {%  extends 'base.html.twig' %}
 {% block title %}Backgrounds{% endblock %}
-{% block body
-    {{ dump() }}
+{% block body %}
+    <div class="d-flex flex-row flex-wrap">
+    {% for background in backgrounds %}
+        <a class="border inc-flex-300 d-flex flex-column calm-black" href="/content/background/{{ background.fid }}">
+            <h3 class="p-2 text-center inc-padding-top">{{ background.name }}</h3>
+            <span class="p-2 d-flex flex-row"><span class="p-2"><strong>Official:</strong> {{ background.official }}</span> <span class="p-2"><strong>Author:</strong> {{ background.author }}</span></span>
+        </a>
+    {% endfor %}
+    </div>
 {% endblock %}

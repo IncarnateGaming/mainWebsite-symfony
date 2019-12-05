@@ -45,8 +45,24 @@ class AdminController extends AbstractController
      * @Route("/admin/import/backgroundFeatures/")
      */
     public function importBackgroundFeatures(){
-        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import//';
+        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/rules/';
         $this->UGFImporter->importBackgroundFeatures();
+        return $this->redirect($path);
+    }
+    /**
+     * @Route("/admin/import/rules/")
+     */
+    public function importRules(){
+        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/classes/';
+        $this->UGFImporter->importChapterIntros();
+        return new Response('Import Complete');
+    }
+    /**
+     * @Route("/admin/import/classes/")
+     */
+    public function importClasses(){
+        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import//';
+        $this->UGFImporter->importClasses();
         return new Response('Import Complete');
     }
 }

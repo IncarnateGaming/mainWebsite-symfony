@@ -32,6 +32,7 @@ class ContentController extends AbstractController
     {
         $backgroundRepository = $this->em->getRepository(IncarnateBackground::class);
         $backgrounds = $backgroundRepository->findAll();
+//        dump($backgrounds,$this->genericParts);die;
         return $this->render('content/backgrounds.html.twig',[
             'genericParts' => $this->genericParts,
             'backgrounds' => $backgrounds,
