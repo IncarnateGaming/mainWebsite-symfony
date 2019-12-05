@@ -19,6 +19,21 @@ class AdminController extends AbstractController
     }
 
     /**
+     * @Route("/admin/import/start/")
+     */
+    public function importStart(){
+        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/tables/';
+        return $this->redirect($path);
+    }
+    /**
+     * @Route("/admin/import/tables/")
+     */
+    public function importTables(){
+        $this->UGFImporter->importTables();
+        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/backgrounds/';
+        return $this->redirect($path);
+    }
+    /**
      * @Route("/admin/import/backgrounds/")
      */
     public function importBackgrounds(){
@@ -30,15 +45,8 @@ class AdminController extends AbstractController
      * @Route("/admin/import/backgroundFeatures/")
      */
     public function importBackgroundFeatures(){
-        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/tables/';
+        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import//';
         $this->UGFImporter->importBackgroundFeatures();
-        return $this->redirect($path);
-    }
-    /**
-     * @Route("/admin/import/tables/")
-     */
-    public function importTables(){
-        $this->UGFImporter->importTables();
-        return new Response('temp text');
+        return new Response('Import Complete');
     }
 }

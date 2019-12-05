@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\IncarnateBackgroundFeature;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method IncarnateBackgroundFeature|null find($id, $lockMode = null, $lockVersion = null)
@@ -23,6 +24,29 @@ class IncarnateBackgroundFeatureRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('a')
             ->delete()
             ;
+    }
+    public function findOneByFid($fid)//: ?IncarnateBackgroundFeature
+    {
+        $qb = $this->filterByFid($fid);
+        $qb = $this->selectIncarnateItemFields($qb);
+        return $this->addSelectBackgroundFeatureFields($qb)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+    public function findOneByName($name)//: ?IncarnateBackgroundFeature
+    {
+        $name = str_replace('-',' ',$name);
+        $qb = $this->filterByName($name);
+        $qb = $this->selectIncarnateItemFields($qb);
+        return $this->addSelectBackgroundFeatureFields($qb)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+    private function addSelectBackgroundFeatureFields(QueryBuilder $qb=null){
+        return $this->getOrCreateQueryBuilder($qb)
+            ->addSelect('i.parentfid','i.parentname');
     }
     // /**
     //  * @return IncarnateBackgroundFeature[] Returns an array of IncarnateBackgroundFeature objects
@@ -52,4 +76,21 @@ class IncarnateBackgroundFeatureRepository extends ServiceEntityRepository
         ;
     }
     */
+    private function filterByFid($fid,QueryBuilder $qb=null){
+        return $this->getOrCreateQueryBuilder($qb)
+            ->andWhere('i.fid = :fid')
+            ->setParameter('fid', $fid);
+    }
+    private function filterByName($name,QueryBuilder $qb=null){
+        return $this->getOrCreateQueryBuilder($qb)
+            ->andWhere('i.name = :name')
+            ->setParameter('name', $name);
+    }
+    private  function getOrCreateQueryBuilder(QueryBuilder $qb = null){
+        return $qb ?: $this->createQueryBuilder('i');
+    }
+    private function selectIncarnateItemFields(QueryBuilder $qb = null){
+        return $this->getOrCreateQueryBuilder($qb)
+            ->select('i.id','i.fid','i.ugfid','i.name','i.description','i.author','i.official','i.legal','i.type');
+    }
 }

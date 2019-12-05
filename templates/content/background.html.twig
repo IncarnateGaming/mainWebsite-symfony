@@ -2,10 +2,13 @@
 {% block title %}{{ background.name }}{% endblock %}
 {% block body %}
     {{ dump() }}
-    <button type="button" class="btn btn-primary">Primary</button>
     <div class="container">
     <h2>{{ background.name }}</h2>
-    <p>{{ background.description|raw }}</p>{% if background.skillProf %}
-        <p><strong>Skill Proficiencies:</strong> {{  background.skillProf|arrayConvert }}  </p>{% endif %}
+    <p>{{ background.description|raw }}</p>
+    <p>{% if background.skillProf|length > 0 %}
+        <strong>Skill Proficiencies:</strong> {{  background.skillProf|array_convert }}<br/>  {% endif %}{% if background.languages|length > 0 %}
+        <strong>Languages:</strong> {{ background.languages|array_convert_simple }}<br/>{% endif %}{% if background.toolProf.tools|length > 0 %}
+        <strong>Tool Proficiencies:</strong> {{ background.toolProf.tools|array_convert }}<br/>{% endif %}{% if background.startEq.description %}
+        <strong>Equipment:</strong> {{ background.startEq.description|raw }}{% endif %}</p>
     </div>
 {% endblock %}

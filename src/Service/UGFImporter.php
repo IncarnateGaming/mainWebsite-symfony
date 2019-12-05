@@ -101,24 +101,28 @@ class UGFImporter
                 $skillArray = array(
                     'name' => $skillProficiency->__toString(),
                     'fid' => $skillProficiency['FID']->__toString(),
+                    'ugf' => $skillProficiency['UGFLinkReference']->__toString(),
                 );
                 $skillProfRes[] = $skillArray;
             }
             $back->setSkillProf($skillProfRes);
             $startingEquipRes = array(
                 'itemArray'=>array(),
-                'description'=>'<p>' . $this->richText($background->backgroundStartingEquipment->description) . '</p>',
+                'description'=>$this->richText($background->backgroundStartingEquipment->description),
             );
             $startEquipItems = $background->backgroundStartingEquipment->defaultChoices->children();
             foreach ($startEquipItems as $item){
                 $itemFormat = array(
                     'name'=>$item->inculdedItemName->__toString(),
                     'quantity'=>intval($item->inculdedItemQuantity->__toString()),
-                    'FID'=>$item['FID']->__toString(),
+                    'fid'=>$item['FID']->__toString(),
+                    'ugf' => $item['UGFLinkReference']->__toString(),
                 );
                 $startingEquipRes['itemArray'][] = $itemFormat;
             }
             $back->setStartEq($startingEquipRes);
+            $suggestedChar = $this->formatParagraphs($background->backgroundSuggestedCharacteristics->backgroundCharacteristicsDescription);
+            $back->setSuggestedCharIntro($suggestedChar);
             if ($background->backgroundToolProficiencies){
                 $toolArray = array(
                     'description'=> '<p>' . $this->richText($background->backgroundToolProficiencies->description) . '</p>',
@@ -128,7 +132,8 @@ class UGFImporter
                     foreach ($background->backgroundToolProficiencies->description->children() as $tool){
                         $toArray = array(
                             'name'=> $tool->__toString(),
-                            'FID'=> $tool['FID']->__toString(),
+                            'fid'=> $tool['FID']->__toString(),
+                            'ugf' => $tool['UGFLinkReference']->__toString(),
                         );
                         $toolArray['tools'][] = $toArray;
                     }

@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\IncarnateBackground;
+use App\Entity\IncarnateBackgroundFeature;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,19 +28,25 @@ class ContentController extends AbstractController
      * @Route("/content/background/{slug}")
      */
     public function background($slug){
-        $repository = $this->em->getRepository(IncarnateBackground::class);
+        $backgroundRepository = $this->em->getRepository(IncarnateBackground::class);
         if(16 == strlen($slug)){
-            $background = $repository->findOneByFid($slug);
+            $background = $backgroundRepository->findOneByFid($slug);
             if (null == $background){
-                $background = $repository->findOneByName($slug);
+                $background = $backgroundRepository->findOneByName($slug);
             }
         }else{
-            $background = $repository->findOneByName($slug);
+            $background = $backgroundRepository->findOneByName($slug);
+        }
+        $backgroundFeature = null;
+        if($background['featurefid']){
+            $backgroundFeatureRepository = $this->em->getRepository(IncarnateBackgroundFeature::class);
+            $backgroundFeature = $backgroundFeatureRepository->findOneByFid($background['featurefid']);
         }
         return $this->render('content/background.html.twig',[
             'genericParts' => $this->genericParts,
             'background' => $background,
             'slug' => $slug,
+            'feature' =>$backgroundFeature,
         ]);
     }
 }

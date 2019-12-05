@@ -66,6 +66,11 @@ class IncarnateBackground extends IncarnateItem
      */
     private $flawfid;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $suggestedCharIntro;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -187,6 +192,18 @@ class IncarnateBackground extends IncarnateItem
     public function setFlawfid(string $flawfid): self
     {
         $this->flawfid = $flawfid;
+
+        return $this;
+    }
+
+    public function getSuggestedCharIntro(): ?string
+    {
+        return $this->suggestedCharIntro;
+    }
+
+    public function setSuggestedCharIntro(?string $suggestedCharIntro): self
+    {
+        $this->suggestedCharIntro = $suggestedCharIntro;
 
         return $this;
     }
