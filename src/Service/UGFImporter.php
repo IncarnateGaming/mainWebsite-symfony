@@ -215,10 +215,10 @@ class UGFImporter
             }
             $new->setColumnNames($columnNameArray);
         }
-        if($table->diceModifier){
+        if($table->diceModifier && $table->diceModifier != '0'){
             $new->setDicemodifier(intval($table->diceModifier));
         }
-        if($table->diceToRoll){
+        if($table->diceToRoll && $table->diceToRoll != ''){
             $new->setDicetoroll($table->diceToRoll);
         }
         $tr = $this->prepareTableRows($table);
