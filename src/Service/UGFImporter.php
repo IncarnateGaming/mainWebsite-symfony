@@ -6,6 +6,7 @@ namespace App\Service;
 
 use App\Entity\DeleteMe;
 use App\Entity\IncarnateBackground;
+use App\Repository\IncarnateBackgroundRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 
@@ -14,6 +15,7 @@ class UGFImporter
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
+        $this->ugfFilePath = '../lib/xml/Incarnate-System.xml';
     }
 
     public function getUGF($ugfFilePath = '../lib/xml/Incarnate-System.xml'){
@@ -66,9 +68,11 @@ class UGFImporter
         $result = $this->richText($result);
         return $result;
     }
-    public function importBackgrounds($ugfFilePath = '../lib/xml/Incarnate-System.xml'){
-        $ugf = $this->getUGF($ugfFilePath);
+    public function importBackgrounds(){
+        $ugf = $this->getUGF($this->ugfFilePath);
         $backgrounds = $ugf->chapters->backgroundChapter->backgrounds;
+        $repository = $this->em->getRepository(IncarnateBackground::class);
+        $repository->deleteAllBackgrounds()->getQuery()->execute();
         foreach ($backgrounds->children() as $background){
             $back = new IncarnateBackground();
             $back->setAuthor($background->backgroundAuthor);
@@ -99,7 +103,7 @@ class UGFImporter
             $skillProfRes = array();
             foreach ($skillProficiencies as $skillProficiency){
                 $skillArray = array(
-                    'skill' => $skillProficiency->__toString(),
+                    'name' => $skillProficiency->__toString(),
                     'fid' => $skillProficiency['FID']->__toString(),
                 );
                 $skillProfRes[] = $skillArray;
@@ -141,5 +145,8 @@ class UGFImporter
         }
         $this->em->flush();
         return true;
+    }
+    public function importBackgroundFeatures(){
+
     }
 }

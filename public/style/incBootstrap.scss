@@ -1,0 +1,17 @@
+// Your variable overrides
+$body-bg: #060;
+$body-color: #171;
+$incarnate-color: #325;
+$theme-colors: (
+        "primary": #3E044D,
+        "secondary":#5d046e,
+        "success":#094d0c,
+        "danger": #d90005,
+        "warning":#d93f34,
+        "info":#3E044D,
+        "light":#feffe2,
+        "dark":#1F0208
+);
+
+// Bootstrap and its default variables
+@import "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css";

@@ -20,6 +20,11 @@ class IncarnateBackgroundRepository extends ServiceEntityRepository
         parent::__construct($registry, IncarnateBackground::class);
     }
 
+    public function deleteAllBackgrounds(){
+        return $this->createQueryBuilder('a')
+            ->delete()
+            ;
+    }
     public function findOneByFid($fid)//: ?IncarnateBackground
     {
         $qb = $this->filterByFid($fid);

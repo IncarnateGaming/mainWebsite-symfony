@@ -1,1 +1,11 @@
-{{ dump() }}
+{%  extends 'base.html.twig' %}
+{% block title %}{{ background.name }}{% endblock %}
+{% block body %}
+    {{ dump() }}
+    <button type="button" class="btn btn-primary">Primary</button>
+    <div class="container">
+    <h2>{{ background.name }}</h2>
+    <p>{{ background.description|raw }}</p>{% if background.skillProf %}
+        <p><strong>Skill Proficiencies:</strong> {{  background.skillProf|arrayConvert }}  </p>{% endif %}
+    </div>
+{% endblock %}
