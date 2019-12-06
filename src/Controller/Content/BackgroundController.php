@@ -47,16 +47,7 @@ class BackgroundController extends AbstractController
      */
     public function background($slug){
         $backgroundRepository = $this->em->getRepository(IncarnateBackground::class);
-        if(intval($slug) > 0 or "0" == $slug){
-            $background = $backgroundRepository->findOneById(intval($slug));
-        }elseif(16 == strlen($slug)){
-            $background = $backgroundRepository->findOneByFid($slug);
-            if (null == $background){
-                $background = $backgroundRepository->findOneByName($slug);
-            }
-        }else{
-            $background = $backgroundRepository->findOneByName($slug);
-        }
+        $background = findInRepository($slug,$backgroundRepository);
         if (!$background){
             throw $this->createNotFoundException('The background: "' . $slug . '" does not exist');
         }

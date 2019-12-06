@@ -1,4 +1,7 @@
 {%  extends 'base.html.twig' %}
-{% block title %}Rule{% endblock %}
+{% block title %}{{chapter.name}}{% endblock %}
 {% block body %}
+    <div class="container">
+    {{ chapter.description|raw }}
+    </div>
 {% endblock %}

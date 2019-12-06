@@ -49,3 +49,17 @@ function genericParts(){
         'host'=>$_SERVER['SERVER_NAME'],
     );
 }
+function findInRepository(string $slug, $repository){
+    $result = null;
+    if(is_numeric($slug)){
+        $result = $repository->findOneById(intval($slug));
+    }elseif(16 == strlen($slug)){
+        $result = $repository->findOneByFid($slug);
+        if (null == $result){
+            $result = $repository->findOneByName($slug);
+        }
+    }else{
+        $result = $repository->findOneByName($slug);
+    }
+    return $result;
+}

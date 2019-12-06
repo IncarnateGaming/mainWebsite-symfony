@@ -17,4 +17,16 @@ a.calm-black {
   color: var(--dark);
 }
 
+.crossReference {
+  color: var(--primary);
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+
+.crossReference:hover {
+  background-color: var(--primary);
+  color: var(--light);
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=incBootstrap.css.map */

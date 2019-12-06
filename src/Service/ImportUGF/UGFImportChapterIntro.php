@@ -10,7 +10,8 @@ class UGFImportChapterIntro extends BaseUGFImporter
 {
 
     public function assembleSections(\SimpleXMLElement $sec1,string $top='top'):string {
-        $result = '<h1 id="' . $sec1['FID'] . '">' . $this->functions->heading1($sec1->heading1,$top) . '</h1>';
+        $result='';
+//        $result = '<h1 id="' . $sec1['FID'] . '">' . $this->functions->heading1($sec1->heading1,$top) . '</h1>';
         if(count($sec1->section2)>1){
             foreach ($sec1->section2 as $sec2) {
                 $result.='<p>'.$this->functions->heading2($sec2->heading2,$sec2['FID']).'</p>';
@@ -71,7 +72,8 @@ class UGFImportChapterIntro extends BaseUGFImporter
         }
         return $result;
     }
-    public function prepareChapterIntro(\SimpleXMLElement $chapter, string $category = null){
+    public function prepareChapterIntro(\SimpleXMLElement $chapter, string $category = null,string $categoryfid=null){
+        $category= str_replace(['(',')','-'],'',$category);
         if(!$chapter){
             return false;
         }
@@ -86,7 +88,6 @@ class UGFImportChapterIntro extends BaseUGFImporter
         }
         foreach ($chapter->sections->section1 as $sec1) {
             $new = new ChapterIntro();
-            $new->setAuthor('ProNobis');
             $sections = $this->assembleSections($sec1,$top);
             if($category) {
                 $new->setCategory($category);
@@ -94,10 +95,20 @@ class UGFImportChapterIntro extends BaseUGFImporter
             $new->setDescription($sections);
             $new->setName($this->functions->heading1($sec1->heading1));
             $new->setFid($sec1['FID']);
+            if($categoryfid){
+                $new->setCategoryFid($categoryfid);
+            }
             if ($chapter->officialContent) {
-                $new->setOfficial($chapter->officialContent);
+                if('true'==$chapter->officialContent){
+                    $new->setOfficial(true);
+                    $new->setAuthor('SRD');
+                }else{
+                    $new->setOfficial(false);
+                    $new->setAuthor('ProNobis');
+                }
             }else{
                 $new->setOfficial(false);
+                $new->setAuthor('ProNobis');
             }
             if ($sec1['simpleName']) {
                 $new->setSimpleName($sec1['simpleName']);
@@ -130,7 +141,7 @@ class UGFImportChapterIntro extends BaseUGFImporter
         $this->prepareChapterIntro($this->ugf->chapters->skillsChapter->skillsIntroduction,'Skill Intro');
         $this->prepareChapterIntro($this->ugf->chapters->spellsChapter->spellsIntroduction,'Spell Intro');
         foreach($this->ugf->chapters->miscellaneousChapters->miscellaneousChapter as $chapter){
-            $this->prepareChapterIntro($chapter,$chapter->chapterName->__toString());
+            $this->prepareChapterIntro($chapter,$chapter->chapterName->__toString(),$chapter['FID']);
         }
         $this->em->flush();
         return true;

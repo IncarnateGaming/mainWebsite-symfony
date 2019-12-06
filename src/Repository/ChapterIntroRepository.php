@@ -20,7 +20,31 @@ class ChapterIntroRepository extends ServiceEntityRepository
         parent::__construct($registry, ChapterIntro::class);
     }
 
-    public function buildParagraphsByCategory(string $category):string{
+    public function buildParagraphsByArray(array $query,string $category=''):string{
+        $result = '';
+        $queryCount=count($query);
+        if($queryCount==0){
+            return $result;
+        }
+        if(''==$category&&$query['0']['category']){
+            $category = str_replace('-',' ',$query['0']['category']);
+        }
+        if($queryCount>1){
+            $result.='<h1 id="top">'.$category.'</h1>';
+            foreach ($query as $entry){
+                $result.='<p><a href="#'.$entry['fid'].'">'.$entry['name'].'</a></p>';
+            }
+        }
+        foreach ($query as $entry){
+            if($queryCount>1){
+                $result.='<h1 id="'.$entry['fid'].'"><a href="#top">'.$entry['name'].'</a></h1>';
+            }
+            $result.=$entry['description'];
+        }
+        return $result;
+    }
+    public function buildParagraphsByCategory(string $slug):string{
+        $category = str_replace('-',' ',$slug);
         $qb = $this->getOrCreateQueryBuilder();
         $qb->andWhere('i.category = :category')
             ->setParameter('category', $category);
@@ -28,21 +52,23 @@ class ChapterIntroRepository extends ServiceEntityRepository
         $qb = $this->addSelectChapterIntroFields($qb);
         $query = $qb->getQuery()
             ->getResult();
-        $result = '';
-        if(count($query)>1){
-            $result.='<i id="top"></i>';
-            foreach ($query as $entry){
-                $result.='<p><a href="#'.$entry['fid'].'">'.$entry['name'].'</a></p>';
-            }
-        }
-        foreach ($query as $entry){
-            $result.=$entry['description'];
-        }
+        $result = $this->buildParagraphsByArray($query,$category);
+        return $result;
+    }
+    public function buildParagraphsByCategoryFid(string $slug):string{
+        $qb = $this->getOrCreateQueryBuilder();
+        $qb->andWhere('i.categoryFid = :categoryfid')
+            ->setParameter('categoryfid', $slug);
+        $qb = $this->selectIncarnateItemFields($qb);
+        $qb = $this->addSelectChapterIntroFields($qb);
+        $query = $qb->getQuery()
+            ->getResult();
+        $result = $this->buildParagraphsByArray($query);
         return $result;
     }
     public function arrayOfNonIntroCategories():array{
         $qb = $this->getOrCreateQueryBuilder()
-            ->select('i.category','i.official');
+            ->select('i.category','i.official','i.author');
         $queryResult = $qb->getQuery()->getResult();
         $added = '';
         $result = array();
@@ -53,10 +79,8 @@ class ChapterIntroRepository extends ServiceEntityRepository
                 $entry['sanCat'] = str_replace(['(',')'],'',$entry['sanCat']);
                 if('false'===$entry['official'] || ''===$entry['official']){
                     $entry['official']=false;
-                    $entry['author']='ProNobis';
                 }elseif ('true'===$entry['official']){
                     $entry['official']=true;
-                    $entry['author']='SRD';
                 }
                 $result[]=$entry;
             }
@@ -68,37 +92,60 @@ class ChapterIntroRepository extends ServiceEntityRepository
             ->delete()
             ;
     }
+    public function headingBuilder(array $query):string{
+        if($query['categoryFid']){
+            return'<h1 id="'.$query['fid'].'"><a href="'.$query['categoryFid'].'#'.$query['fid'].'">'.$query['name'].'</a></h1>';
+        }else{
+            return'<h1 id="'.$query['fid'].'">'.$query['name'].'</h1>';
+        }
+    }
     public function findOneByFid($fid)//: ?IncarnateBackgroundFeature
     {
         $qb = $this->filterByFid($fid);
         $qb = $this->selectIncarnateItemFields($qb);
-        return $this->addSelectChapterIntroFields($qb)
+        $query = $this->addSelectChapterIntroFields($qb)
             ->getQuery()
             ->getOneOrNullResult()
             ;
+        if(null!=$query['name']){
+            $description=$this->headingBuilder($query);
+            $query['description']=$description.$query['description'];
+        }
+        return $query;
     }
     public function findOneByName($name)//: ?IncarnateBackgroundFeature
     {
         $name = str_replace('-',' ',$name);
         $qb = $this->filterByName($name);
         $qb = $this->selectIncarnateItemFields($qb);
-        return $this->addSelectChapterIntroFields($qb)
+        $query = $this->addSelectChapterIntroFields($qb)
             ->getQuery()
+            ->setMaxResults(1)
             ->getOneOrNullResult()
             ;
+        if(null!=$query['name']){
+            $description=$this->headingBuilder($query);
+            $query['description']=$description.$query['description'];
+        }
+        return $query;
     }
     public function findOneById(int $id)//: ?IncarnateBackgroundFeature
     {
         $qb = $this->filterById($id);
         $qb = $this->selectIncarnateItemFields($qb);
-        return $this->addSelectChapterIntroFields($qb)
+        $query = $this->addSelectChapterIntroFields($qb)
             ->getQuery()
             ->getOneOrNullResult()
             ;
+        if(null!=$query['name']){
+            $description=$this->headingBuilder($query);
+            $query['description']=$description.$query['description'];
+        }
+        return $query;
     }
     private function addSelectChapterIntroFields(QueryBuilder $qb=null){
         return $this->getOrCreateQueryBuilder($qb)
-            ->addSelect('i.template','i.simpleName','i.category');
+            ->addSelect('i.template','i.simpleName','i.category','i.categoryFid');
     }
 
     // /**

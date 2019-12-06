@@ -58,7 +58,7 @@ class AdminController extends AbstractController
     public function importRules(UGFImportChapterIntro $UGFImporter){
         $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/classes/';
         $UGFImporter->importChapterIntros();
-        return new Response('Import Complete');
+        return $this->redirect($path);
     }
     /**
      * @Route("/admin/import/classes/")

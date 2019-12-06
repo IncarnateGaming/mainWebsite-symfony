@@ -92,6 +92,7 @@ class UGFImportFunctions
         //TODO: handle private Paragraph
         //TODO: handle speech bubble
         //TODO: confirm normal tables work
+        $result = str_replace('<table>','<table class="table table-striped">',$result);
         $result = $this->richText($result);
         return $result;
     }

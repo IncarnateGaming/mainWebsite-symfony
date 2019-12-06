@@ -38,9 +38,26 @@ class RuleController extends AbstractController
      * @Route("/content/rule/{slug}", name="inc_rule")
      */
     public function rule($slug){
+//        dump($slug);die;
+        $chapterRepository = $this->em->getRepository(ChapterIntro::class);
+        $chapter = findInRepository($slug,$chapterRepository);
+        if(!$chapter) {
+            $description = $chapterRepository->buildParagraphsByCategory($slug);
+            if ($description === '' && strlen($slug) == 16) {
+                $description = $chapterRepository->buildParagraphsByCategoryFid($slug);
+            }
+            if ($description !== '') {
+                $chapter = array();
+                $chapter['description'] = $description;
+                $chapter['name'] = str_replace('-', ' ', $slug);
+            } else {
+                throw $this->createNotFoundException('The rule: "' . $slug . '" does not exist');
+            }
+        }
         return $this->render('content/rule.html.twig',[
             'genericParts' => $this->genericParts,
             'slug' => $slug,
+            'chapter'=>$chapter
         ]);
     }
 }
