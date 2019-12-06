@@ -23,7 +23,7 @@ class RaceController extends AbstractController
     }
 
     /**
-     * @Route("/content/race/")
+     * @Route("/content/race/", name="inc_races")
      */
     public function races(){
         return $this->render('content/races.html.twig',[
@@ -31,7 +31,7 @@ class RaceController extends AbstractController
         ]);
     }
     /**
-     * @Route("/content/race/{slug}")
+     * @Route("/content/race/{slug}", name="inc_race")
      */
     public function race($slug){
         return $this->render('content/race.html.twig',[

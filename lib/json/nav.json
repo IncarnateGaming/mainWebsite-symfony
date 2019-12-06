@@ -1,123 +1,123 @@
 [
 	{
-		"pagePath": "/",
+		"pagePath": "inc_homepage",
 		"pageTitle": "Home",
 		"pageName": "home"
 	},
 	{
-		"pagePath": "/demo/",
+		"pagePath": "inc_demo",
 		"pageTitle": "Demo",
 		"pageName": "demo"
 	},
 	{
-		"pagePath": "/content/",
+		"pagePath": "inc_content",
 		"pageTitle": "Content",
 		"pageName": "content",
 		"subpages": [
 			{
-				"pagePath": "/content/background/",
+				"pagePath": "inc_backgrounds",
 				"pageTitle": "Backgrounds",
 				"pageName": "backgrounds"
 			},
 			{
-				"pagePath": "/content/class/",
+				"pagePath": "inc_classes",
 				"pageTitle": "Classes",
 				"pageName": "classes"
 			},
 			{
-				"pagePath": "/content/equipment/",
+				"pagePath": "inc_equipments",
 				"pageTitle": "Equipment",
 				"pageName": "equipment"
 			},
 			{
-				"pagePath": "/content/feat/",
+				"pagePath": "inc_feats",
 				"pageTitle": "Feats",
 				"pageName": "feats"
 			},
 			{
-				"pagePath": "/content/magicProperty/",
+				"pagePath": "inc_magic_properties",
 				"pageTitle": "Magical Properties",
 				"pageName": "magicalproperties"
 			},
 			{
-				"pagePath": "/content/npc/",
+				"pagePath": "inc_npcs",
 				"pageTitle": "NPCs",
 				"pageName": "npcs"
 			},
 			{
-				"pagePath": "/content/lore/",
+				"pagePath": "inc_lores",
 				"pageTitle": "Lore",
 				"pageName": "lore"
 			},
 			{
-				"pagePath": "/content/race/",
+				"pagePath": "inc_races",
 				"pageTitle": "Races",
 				"pageName": "races"
 			},
 			{
-				"pagePath": "/content/riddle/",
+				"pagePath": "inc_riddles",
 				"pageTitle": "Riddles",
 				"pageName": "riddles"
 			},
 			{
-				"pagePath": "/content/rule/",
+				"pagePath": "inc_rules",
 				"pageTitle": "Rules",
 				"pageName": "rules"
 			},
 			{
-				"pagePath": "/content/skill/",
+				"pagePath": "inc_skills",
 				"pageTitle": "Skills",
 				"pageName": "skills"
 			},
 			{
-				"pagePath": "/content/spell/",
+				"pagePath": "inc_spells",
 				"pageTitle": "Spells",
 				"pageName": "spells"
 			},
 			{
-				"pagePath": "/content/table/",
+				"pagePath": "inc_tables",
 				"pageTitle": "Tables",
 				"pageName": "tables"
 			},
 			{
-				"pagePath": "/content/template/",
+				"pagePath": "inc_templates",
 				"pageTitle": "Template",
 				"pageName": "templates"
 			}
 		]
 	},
 	{
-		"pagePath": "/about/",
+		"pagePath": "inc_about",
 		"pageTitle": "About",
 		"pageName": "about"
 	},
 	{
-		"pagePath": "/join/",
+		"pagePath": "inc_join",
 		"pageTitle": "Join",
 		"pageName": "join"
 	},
 	{
-		"pagePath": "/policy/",
+		"pagePath": "inc_policy",
 		"pageTitle": "Policy",
 		"pageName": "policy",
 		"subpages": [
 			{
-				"pagePath": "/policy/igl/",
+				"pagePath": "inc_policy_general_license",
 				"pageTitle": "General License",
 				"pageName": "igl"
 			},
 			{
-				"pagePath": "/policy/isam/",
+				"pagePath": "inc_policy_stand_alone",
 				"pageTitle": "Stand Alone Content",
 				"pageName": "isam"
 			},
 			{
-				"pagePath": "/policy/iec/",
+				"pagePath": "inc_policy_embedded_content",
 				"pageTitle": "Embedded Content",
 				"pageName": "iec"
 			},
 			{
-				"pagePath": "/policy/website/",
+				"pagePath": "inc_policy",
 				"pageTitle": "Website Policy",
 				"pageName": "website"
 			}

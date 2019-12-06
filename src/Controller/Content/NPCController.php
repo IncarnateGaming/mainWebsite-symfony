@@ -23,7 +23,7 @@ class NPCController extends AbstractController
     }
 
     /**
-     * @Route("/content/npc/")
+     * @Route("/content/npc/", name="inc_npcs")
      */
     public function npcs(){
         return $this->render('content/npcs.html.twig',[
@@ -31,7 +31,7 @@ class NPCController extends AbstractController
         ]);
     }
     /**
-     * @Route("/content/npc/{slug}")
+     * @Route("/content/npc/{slug}", name="inc_npc")
      */
     public function npc($slug){
         return $this->render('content/npc.html.twig',[

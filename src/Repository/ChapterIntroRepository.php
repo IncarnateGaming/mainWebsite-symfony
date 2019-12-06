@@ -41,7 +41,27 @@ class ChapterIntroRepository extends ServiceEntityRepository
         return $result;
     }
     public function arrayOfNonIntroCategories():array{
-
+        $qb = $this->getOrCreateQueryBuilder()
+            ->select('i.category','i.official');
+        $queryResult = $qb->getQuery()->getResult();
+        $added = '';
+        $result = array();
+        foreach ($queryResult as $entry){
+            if(false === strpos($added,$entry['category']) && false === strpos($entry['category'],'Intro')){
+                $added.=$entry['category'];
+                $entry['sanCat'] = str_replace(' ','-',$entry['category']);
+                $entry['sanCat'] = str_replace(['(',')'],'',$entry['sanCat']);
+                if('false'===$entry['official'] || ''===$entry['official']){
+                    $entry['official']=false;
+                    $entry['author']='ProNobis';
+                }elseif ('true'===$entry['official']){
+                    $entry['official']=true;
+                    $entry['author']='SRD';
+                }
+                $result[]=$entry;
+            }
+        }
+        return $result;
     }
     public function deleteAll(){
         return $this->createQueryBuilder('a')

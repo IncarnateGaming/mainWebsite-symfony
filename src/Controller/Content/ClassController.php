@@ -23,7 +23,7 @@ class ClassController extends AbstractController
     }
 
     /**
-     * @Route("/content/class/")
+     * @Route("/content/class/", name="inc_classes")
      */
     public function classes(){
         return $this->render('content/classes.html.twig',[
@@ -31,7 +31,7 @@ class ClassController extends AbstractController
         ]);
     }
     /**
-     * @Route("/content/class/{slug}")
+     * @Route("/content/class/{slug}", name="inc_class")
      */
     public function class($slug){
         return $this->render('content/class.html.twig',[

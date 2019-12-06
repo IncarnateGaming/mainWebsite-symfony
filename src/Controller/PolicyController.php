@@ -11,7 +11,7 @@ class PolicyController extends AbstractController
 {
 
     /**
-     * @Route("/policy/website/")
+     * @Route("/policy/website/", name="inc_policy")
      * @Route("/policy/")
      */
     public function policy_website_page()
@@ -23,7 +23,7 @@ class PolicyController extends AbstractController
         ]);
     }
     /**
-     * @Route("/policy/igl/")
+     * @Route("/policy/igl/", name="inc_policy_general_license")
      * @Route("/incarnategenerallicense/")
      */
     public function policy_igl_page()
@@ -35,7 +35,7 @@ class PolicyController extends AbstractController
         ]);
     }
     /**
-     * @Route("/policy/isam/")
+     * @Route("/policy/isam/", name="inc_policy_stand_alone")
      */
     public function policy_isam_page()
     {
@@ -46,7 +46,7 @@ class PolicyController extends AbstractController
         ]);
     }
     /**
-     * @Route("/policy/iec/")
+     * @Route("/policy/iec/", name="inc_policy_embedded_content")
      */
     public function policy_iec_page()
     {

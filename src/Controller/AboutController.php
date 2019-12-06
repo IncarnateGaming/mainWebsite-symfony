@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AboutController extends AbstractController
 {
     /**
-     * @Route("/about/")
+     * @Route("/about/", name="inc_about")
      */
     public function about_page()
     {

@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class JoinController extends AbstractController
 {
     /**
-     * @Route("/join/")
+     * @Route("/join/", name="inc_join")
      */
     public function join_page()
     {

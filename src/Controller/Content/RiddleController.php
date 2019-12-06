@@ -23,7 +23,7 @@ class RiddleController extends AbstractController
     }
 
     /**
-     * @Route("/content/riddle/")
+     * @Route("/content/riddle/", name="inc_riddles")
      */
     public function riddles(){
         return $this->render('content/riddles.html.twig',[
@@ -31,7 +31,7 @@ class RiddleController extends AbstractController
         ]);
     }
     /**
-     * @Route("/content/riddle/{slug}")
+     * @Route("/content/riddle/{slug}", name="inc_riddle")
      */
     public function riddle($slug){
         return $this->render('content/riddle.html.twig',[

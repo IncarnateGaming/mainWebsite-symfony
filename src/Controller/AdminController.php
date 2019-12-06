@@ -4,6 +4,9 @@
 namespace App\Controller;
 
 
+use App\Service\ImportUGF\UGFImportBackgrounds;
+use App\Service\ImportUGF\UGFImportChapterIntro;
+use App\Service\ImportUGF\UGFImportRollableTables;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\UGFImporter;
@@ -12,14 +15,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AdminController extends AbstractController
 {
-    public function __construct(UGFImporter $UGFImporter)
-    {
-        $this->UGFImporter = $UGFImporter;
-//        $this->request = $request;
-    }
+//    public function __construct(UGFImporter $UGFImporter)
+//    {
+//        $this->UGFImporter = $UGFImporter;
+////        $this->request = $request;
+//    }
 
     /**
-     * @Route("/admin/import/start/")
+     * @Route("/admin/import/start/", name="inc_import_start")
      */
     public function importStart(){
         $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/tables/';
@@ -28,33 +31,33 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/import/tables/")
      */
-    public function importTables(){
-        $this->UGFImporter->importTables();
+    public function importTables(UGFImportRollableTables $UGFImporter){
+        $UGFImporter->importTables();
         $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/backgrounds/';
         return $this->redirect($path);
     }
     /**
      * @Route("/admin/import/backgrounds/")
      */
-    public function importBackgrounds(){
+    public function importBackgrounds(UGFImportBackgrounds $UGFImporter){
         $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/backgroundFeatures/';
-        $this->UGFImporter->importBackgrounds();
+        $UGFImporter->importBackgrounds();
         return $this->redirect($path);
     }
     /**
      * @Route("/admin/import/backgroundFeatures/")
      */
-    public function importBackgroundFeatures(){
+    public function importBackgroundFeatures(UGFImportBackgrounds $UGFImporter){
         $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/rules/';
-        $this->UGFImporter->importBackgroundFeatures();
+        $UGFImporter->importBackgroundFeatures();
         return $this->redirect($path);
     }
     /**
      * @Route("/admin/import/rules/")
      */
-    public function importRules(){
+    public function importRules(UGFImportChapterIntro $UGFImporter){
         $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/classes/';
-        $this->UGFImporter->importChapterIntros();
+        $UGFImporter->importChapterIntros();
         return new Response('Import Complete');
     }
     /**
@@ -62,7 +65,7 @@ class AdminController extends AbstractController
      */
     public function importClasses(){
         $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import//';
-        $this->UGFImporter->importClasses();
+//        $this->UGFImporter->importClasses();
         return new Response('Import Complete');
     }
 }

@@ -23,7 +23,7 @@ class SkillController extends AbstractController
     }
 
     /**
-     * @Route("/content/skill/")
+     * @Route("/content/skill/", name="inc_skills")
      */
     public function skills(){
         return $this->render('content/skills.html.twig',[
@@ -31,7 +31,7 @@ class SkillController extends AbstractController
         ]);
     }
     /**
-     * @Route("/content/skill/{slug}")
+     * @Route("/content/skill/{slug}", name="inc_skill")
      */
     public function skill($slug){
         return $this->render('content/skill.html.twig',[

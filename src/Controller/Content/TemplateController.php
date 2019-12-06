@@ -23,7 +23,7 @@ class TemplateController extends AbstractController
     }
 
     /**
-     * @Route("/content/template/")
+     * @Route("/content/template/", name="inc_templates")
      */
     public function templates(){
         return $this->render('content/templates.html.twig',[
@@ -31,7 +31,7 @@ class TemplateController extends AbstractController
         ]);
     }
     /**
-     * @Route("/content/template/{slug}")
+     * @Route("/content/template/{slug}", name="inc_template")
      */
     public function template($slug){
         return $this->render('content/template.html.twig',[

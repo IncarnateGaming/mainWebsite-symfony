@@ -23,7 +23,7 @@ class MagicalPropertyController extends AbstractController
     }
 
     /**
-     * @Route("/content/magicProperty/")
+     * @Route("/content/magicProperty/", name="inc_magic_properties")
      */
     public function magicprops(){
         return $this->render('content/magicprops.html.twig',[
@@ -31,7 +31,7 @@ class MagicalPropertyController extends AbstractController
         ]);
     }
     /**
-     * @Route("/content/magicProperty/{slug}")
+     * @Route("/content/magicProperty/{slug}", name="inc_magic_property")
      */
     public function magicprop($slug){
         return $this->render('content/magicprop.html.twig',[

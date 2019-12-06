@@ -23,7 +23,7 @@ class SpellController extends AbstractController
     }
 
     /**
-     * @Route("/content/spell/")
+     * @Route("/content/spell/", name="inc_spells")
      */
     public function spells(){
         return $this->render('content/spells.html.twig',[
@@ -31,7 +31,7 @@ class SpellController extends AbstractController
         ]);
     }
     /**
-     * @Route("/content/spell/{slug}")
+     * @Route("/content/spell/{slug}", name="inc_spell")
      */
     public function spell($slug){
         return $this->render('content/spell.html.twig',[

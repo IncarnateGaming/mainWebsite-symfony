@@ -8,8 +8,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class LoreController extends AbstractController
+class ContentController extends AbstractController
 {
+
     /**
      * @var array
      */
@@ -23,20 +24,11 @@ class LoreController extends AbstractController
     }
 
     /**
-     * @Route("/content/lore/", name="inc_lores")
+     * @Route("/content/", name="inc_content")
      */
-    public function lores(){
-        return $this->render('content/lores.html.twig',[
+    public function content(){
+        return $this->render('content.html.twig',[
             'genericParts' => $this->genericParts,
-        ]);
-    }
-    /**
-     * @Route("/content/lore/{slug}", name="inc_lore")
-     */
-    public function lore($slug){
-        return $this->render('content/lore.html.twig',[
-            'genericParts' => $this->genericParts,
-            'slug' => $slug,
         ]);
     }
 }

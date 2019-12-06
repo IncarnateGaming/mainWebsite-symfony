@@ -21,7 +21,7 @@ class EquipmentController extends AbstractController
         $this->genericParts = genericParts();
     }
     /**
-     * @Route("/content/equipment/")
+     * @Route("/content/equipment/", name="inc_equipments")
      */
     public function equipments(){
         return $this->render('content/equipments.html.twig',[
@@ -29,7 +29,7 @@ class EquipmentController extends AbstractController
         ]);
     }
     /**
-     * @Route("/content/equipment/{slug}")
+     * @Route("/content/equipment/{slug}", name="inc_equipment")
      */
     public function equipment($slug){
         return $this->render('content/equipment.html.twig',[

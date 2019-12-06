@@ -23,7 +23,7 @@ class FeatController extends AbstractController
     }
 
     /**
-     * @Route("/content/feat/")
+     * @Route("/content/feat/", name="inc_feats")
      */
     public function feats(){
         return $this->render('content/feats.html.twig',[
@@ -31,7 +31,7 @@ class FeatController extends AbstractController
         ]);
     }
     /**
-     * @Route("/content/feat/{slug}")
+     * @Route("/content/feat/{slug}", name="inc_feat")
      */
     public function feat($slug){
         return $this->render('content/feat.html.twig',[

@@ -23,7 +23,7 @@ class TableController extends AbstractController
     }
 
     /**
-     * @Route("/content/table/")
+     * @Route("/content/table/", name="inc_tables")
      */
     public function tables(){
         return $this->render('content/tables.html.twig',[
@@ -31,7 +31,7 @@ class TableController extends AbstractController
         ]);
     }
     /**
-     * @Route("/content/table/{slug}")
+     * @Route("/content/table/{slug}", name="inc_table")
      */
     public function table($slug){
         return $this->render('content/table.html.twig',[

@@ -24,17 +24,18 @@ class RuleController extends AbstractController
     }
 
     /**
-     * @Route("/content/rule/")
+     * @Route("/content/rule/", name="inc_rules")
      */
     public function rules(){
         $chapterIntroRepository = $this->em->getRepository(ChapterIntro::class);
-        $categories->$chapterIntroRepository->arrayOfNonIntroCategories();
+        $categories = $chapterIntroRepository->arrayOfNonIntroCategories();
         return $this->render('content/rules.html.twig',[
             'genericParts' => $this->genericParts,
+            'categories'=>$categories,
         ]);
     }
     /**
-     * @Route("/content/rule/{slug}")
+     * @Route("/content/rule/{slug}", name="inc_rule")
      */
     public function rule($slug){
         return $this->render('content/rule.html.twig',[

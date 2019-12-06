@@ -28,7 +28,7 @@ class BackgroundController extends AbstractController
     }
 
     /**
-     * @Route("/content/background/")
+     * @Route("/content/background/", name="inc_backgrounds")
      */
     public function backgrounds()
     {
@@ -43,7 +43,7 @@ class BackgroundController extends AbstractController
         ]);
     }
     /**
-     * @Route("/content/background/{slug}")
+     * @Route("/content/background/{slug}", name="inc_background")
      */
     public function background($slug){
         $backgroundRepository = $this->em->getRepository(IncarnateBackground::class);
