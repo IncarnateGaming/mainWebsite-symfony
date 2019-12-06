@@ -4,6 +4,7 @@
 namespace App\Controller\Content;
 
 
+use App\Entity\ChapterIntro;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,6 +27,8 @@ class RuleController extends AbstractController
      * @Route("/content/rule/")
      */
     public function rules(){
+        $chapterIntroRepository = $this->em->getRepository(ChapterIntro::class);
+        $categories->$chapterIntroRepository->arrayOfNonIntroCategories();
         return $this->render('content/rules.html.twig',[
             'genericParts' => $this->genericParts,
         ]);

@@ -40,6 +40,9 @@ class ChapterIntroRepository extends ServiceEntityRepository
         }
         return $result;
     }
+    public function arrayOfNonIntroCategories():array{
+
+    }
     public function deleteAll(){
         return $this->createQueryBuilder('a')
             ->delete()
