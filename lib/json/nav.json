@@ -25,14 +25,14 @@
 				"pageName": "classes"
 			},
 			{
+				"pagePath": "/content/equipment/",
+				"pageTitle": "Equipment",
+				"pageName": "equipment"
+			},
+			{
 				"pagePath": "/content/feat/",
 				"pageTitle": "Feats",
 				"pageName": "feats"
-			},
-			{
-				"pagePath": "/content/item/",
-				"pageTitle": "Items",
-				"pageName": "items"
 			},
 			{
 				"pagePath": "/content/magicProperty/",

@@ -19,6 +19,11 @@ class ChapterIntro extends IncarnateItem
      */
     private $simpleName;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $category;
+
     public function getTemplate(): ?bool
     {
         return $this->template;
@@ -39,6 +44,18 @@ class ChapterIntro extends IncarnateItem
     public function setSimpleName(?string $simpleName): self
     {
         $this->simpleName = $simpleName;
+
+        return $this;
+    }
+
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?string $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

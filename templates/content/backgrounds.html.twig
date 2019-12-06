@@ -1,6 +1,7 @@
 {%  extends 'base.html.twig' %}
 {% block title %}Backgrounds{% endblock %}
 {% block body %}
+    {{ intro|raw }}
     <div class="d-flex flex-row flex-wrap">
     {% for background in backgrounds %}
         <a class="border inc-flex-300 d-flex flex-column calm-black" href="/content/background/{{ background.fid }}">

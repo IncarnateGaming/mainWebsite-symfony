@@ -20,6 +20,26 @@ class ChapterIntroRepository extends ServiceEntityRepository
         parent::__construct($registry, ChapterIntro::class);
     }
 
+    public function buildParagraphsByCategory(string $category):string{
+        $qb = $this->getOrCreateQueryBuilder();
+        $qb->andWhere('i.category = :category')
+            ->setParameter('category', $category);
+        $qb = $this->selectIncarnateItemFields($qb);
+        $qb = $this->addSelectChapterIntroFields($qb);
+        $query = $qb->getQuery()
+            ->getResult();
+        $result = '';
+        if(count($query)>1){
+            $result.='<i id="top"></i>';
+            foreach ($query as $entry){
+                $result.='<p><a href="#'.$entry['fid'].'">'.$entry['name'].'</a></p>';
+            }
+        }
+        foreach ($query as $entry){
+            $result.=$entry['description'];
+        }
+        return $result;
+    }
     public function deleteAll(){
         return $this->createQueryBuilder('a')
             ->delete()
@@ -55,7 +75,7 @@ class ChapterIntroRepository extends ServiceEntityRepository
     }
     private function addSelectChapterIntroFields(QueryBuilder $qb=null){
         return $this->getOrCreateQueryBuilder($qb)
-            ->addSelect('i.template','i.simpleName');
+            ->addSelect('i.template','i.simpleName','i.category');
     }
 
     // /**

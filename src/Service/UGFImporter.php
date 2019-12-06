@@ -20,8 +20,38 @@ class UGFImporter
         $this->ugfFilePath = '../lib/xml/Incarnate-System.xml';
         $this->ugf = simplexml_load_file($this->ugfFilePath);
     }
+    public function wrapInInternalHyperlink(string $string, string $fid){
+        return '<a href="#'.$fid.'">'.$string.'</a>';
+    }
+    public function heading1(\SimpleXMLElement $xml,string $fid=null):string{
+        $string = $this->headingText(str_replace(['<heading1>','</heading1>'],'',$xml->asXML()));
+        if(''!==$fid){
+            $string=$this->wrapInInternalHyperlink($string,$fid);
+        }
+        return $string;
+    }
+    public function heading2(\SimpleXMLElement $xml,string $fid):string{
+        $string = $this->headingText(str_replace(['<heading2>','</heading2>'],'',$xml->asXML()));
+        return $this->wrapInInternalHyperlink($string,$fid);
+    }
+    public function heading3(\SimpleXMLElement $xml,string $fid):string{
+        $string = $this->headingText(str_replace(['<heading3>','</heading3>'],'',$xml->asXML()));
+        return $this->wrapInInternalHyperlink($string,$fid);
+    }
+    public function heading4(\SimpleXMLElement $xml,string $fid):string{
+        $string = $this->headingText(str_replace(['<heading4>','</heading4>'],'',$xml->asXML()));
+        return $this->wrapInInternalHyperlink($string,$fid);
+    }
+    public function heading5(\SimpleXMLElement $xml,string $fid):string{
+        $string = $this->headingText(str_replace(['<heading5>','</heading5>'],'',$xml->asXML()));
+        return $this->wrapInInternalHyperlink($string,$fid);
+    }
+    public function heading6(\SimpleXMLElement $xml,string $fid):string{
+        $string = $this->headingText(str_replace(['<heading6>','</heading6>'],'',$xml->asXML()));
+        return $this->wrapInInternalHyperlink($string,$fid);
+    }
     public function headingText(string $string):string{
-        $string =  str_replace('<quoMark/>','"',$string);
+        $string = str_replace('<quoMark/>','"',$string);
         $string = str_replace('<generate','<span class="generate"',$string);
         $string = str_replace(' FID="',' data-FID="',$string);
         $string = str_replace(' UGFLinkReference="',' data-UGFLinkReference="',$string);
@@ -328,32 +358,103 @@ class UGFImporter
         $this->em->flush();
         return true;
     }
-    public function assembleSections(\SimpleXMLElement $sec1):string {
-        $result = '<h1 id="' . $sec1['FID'] . '">' . $this->headingText(str_replace(['<heading1>','</heading1>'],'',$sec1->heading1->asXML())) . '</h1>';
-        dump($_SERVER,$result);die;
+    public function assembleSections(\SimpleXMLElement $sec1,string $top='top'):string {
+        $result = '<h1 id="' . $sec1['FID'] . '">' . $this->heading1($sec1->heading1,$top) . '</h1>';
+        if(count($sec1->section2)>1){
+            foreach ($sec1->section2 as $sec2) {
+                $result.='<p>'.$this->heading2($sec2->heading2,$sec2['FID']).'</p>';
+            }
+        }
+        foreach($sec1->paragraph as $par){
+            $result.=$this->formatParagraphs($par);
+        }
+        foreach($sec1->section2 as $sec2){
+            $result .= '<h2 id="'.$sec2['FID'].'">'.$this->heading2($sec2->heading2,$sec1['FID']).'</h2>';
+            if(count($sec2->section3)>1){
+                foreach ($sec2->section3 as $sec3){
+                    $result.='<p>'.$this->heading3($sec3->heading3,$sec3['FID']).'</p>';
+                }
+            }
+            foreach($sec2->paragraph as $par){
+                $result.=$this->formatParagraphs($par);
+            }
+            foreach ($sec2->section3 as $sec3){
+                $result.='<h3 id="'.$sec3['FID'].'">'.$this->heading3($sec3->heading3,$sec2['FID']).'</h3>';
+                if(count($sec3->section4)>1){
+                    foreach ($sec3->section4 as $sec4){
+                        $result.='<p>'.$this->heading4($sec4->heading4,$sec4['FID']).'</p>';
+                    }
+                }
+                foreach($sec3->paragraph as $par){
+                    $result.=$this->formatParagraphs($par);
+                }
+                foreach ($sec3->section4 as $sec4){
+                    $result.='<h4 id="'.$sec4['FID'].'">'.$this->heading4($sec4->heading4,$sec3['FID']).'</h4>';
+                    if(count($sec4->section5)>1){
+                        foreach ($sec4->section5 as $sec5){
+                            $result.='<p>'.$this->heading5($sec5->heading5,$sec5['FID']).'</p>';
+                        }
+                    }
+                    foreach($sec4->paragraph as $par){
+                        $result.=$this->formatParagraphs($par);
+                    }
+                    foreach ($sec4->section5 as $sec5){
+                        $result.='<h5 id="'.$sec5['FID'].'">'.$this->heading5($sec5->heading5,$sec5['FID']).'</h5>';
+                        if(count($sec5->section6)>1){
+                            foreach ($sec5->section6 as $sec6){
+                                $result.='<p>'.$this->heading6($sec6->heading6,$sec6['FID']).'</p>';
+                            }
+                        }
+                        foreach($sec5->paragraph as $par){
+                            $result.=$this->formatParagraphs($par);
+                        }
+                        foreach ($sec5->section6 as $sec6){
+                            $result.='<h6 id="'.$sec6['FID'].'">'.$this->heading6($sec6->heading6,$sec6['FID']).'</h6>';
+                            foreach($sec6->paragraph as $par){
+                                $result.=$this->formatParagraphs($par);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return $result;
     }
-    public function prepareChapterIntro(\SimpleXMLElement $chapter){
-//        if($chapter->GMOnly){
-//            $test = boolval($chapter->GMOnly);
-//            if($test){
-//                return false;
-//            }
-//        }
+    public function prepareChapterIntro(\SimpleXMLElement $chapter, string $category = null){
+        if(!$chapter){
+            return false;
+        }
+        if($chapter->GMOnly){
+            if('true'==$chapter->GMOnly->__toString()){
+                return false;
+            }
+        }
+        $top='top';
+        if(strpos($category,'Intro')!==false){
+            $top='';
+        }
         foreach ($chapter->sections->section1 as $sec1) {
-            $sections = $this->assembleSections($sec1);
             $new = new ChapterIntro();
             $new->setAuthor('ProNobis');
-            $new->setDescription();
+            $sections = $this->assembleSections($sec1,$top);
+            if($category) {
+                $new->setCategory($category);
+            }
+            $new->setDescription($sections);
             $new->setName($this->headingText(str_replace(['<heading1>', '</heading1>'], '', $sec1->heading1->asXML())));
             $new->setFid($sec1['FID']);
             if ($chapter->officialContent) {
                 $new->setOfficial($chapter->officialContent);
+            }else{
+                $new->setOfficial(false);
             }
             if ($sec1['simpleName']) {
                 $new->setSimpleName($sec1['simpleName']);
             }
             if ($sec1['template']) {
                 $new->setTemplate(boolval($sec1['template']));
+            }else{
+                $new->setTemplate(false);
             }
             $new->setType('chapterIntro');
             $new->setUgfid($sec1['secID']);
@@ -364,8 +465,21 @@ class UGFImporter
     public function importChapterIntros(){
         $repository = $this->em->getRepository(ChapterIntro::class);
         $repository->deleteAll()->getQuery()->execute();
+        $this->prepareChapterIntro($this->ugf->chapters->GMsBlind,'GMs Screen');
+        $this->prepareChapterIntro($this->ugf->chapters->PlayerQuickSheet,'Player Quick Sheet');
+        $this->prepareChapterIntro($this->ugf->chapters->backgroundChapter->backgroundsIntroduction,'Background Intro');
+        $this->prepareChapterIntro($this->ugf->chapters->classChapter->classIntroduction,'Class Intro');
+        $this->prepareChapterIntro($this->ugf->chapters->featChapter->featIntroduction,'Feat Intro');
+        $this->prepareChapterIntro($this->ugf->chapters->itemChapter->itemsIntroduction,'Equipment Intro');
+        $this->prepareChapterIntro($this->ugf->chapters->magicitemTemplatesChapter->magicItemTemplatesIntroduction,'Magical Properties Intro');
+        $this->prepareChapterIntro($this->ugf->chapters->npcChapter->npcsIntroduction,'NPC Intro');
+        $this->prepareChapterIntro($this->ugf->chapters->planeChapter->planesIntroduction,'Lore Intro');
+        $this->prepareChapterIntro($this->ugf->chapters->racesChapter->racesIntroduction,'Race Intro');
+        $this->prepareChapterIntro($this->ugf->chapters->riddlesChapter->riddlesIntroduction,'Riddle Intro');
+        $this->prepareChapterIntro($this->ugf->chapters->skillsChapter->skillsIntroduction,'Skill Intro');
+        $this->prepareChapterIntro($this->ugf->chapters->spellsChapter->spellsIntroduction,'Spell Intro');
         foreach($this->ugf->chapters->miscellaneousChapters->miscellaneousChapter as $chapter){
-            $this->prepareChapterIntro($chapter);
+            $this->prepareChapterIntro($chapter,$chapter->chapterName->__toString());
         }
         $this->em->flush();
         return true;
