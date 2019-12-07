@@ -12,25 +12,25 @@
         <h3>{{ feature.name }}</h3>
         {{ feature.description|raw }}{% endfor %}
     <h3>Suggested Characteristics</h3>
-    {{ background.suggestedCharIntro|raw }}{% if personality %}
+    {{ background.suggestedCharIntro|raw }}{% if background.personality %}
     <table class="table table-striped">
         <tr><th scope="col">d8</th><th scope="col">Personality Trait</th></tr>
-        {% for row in personality.tr %}<tr><th scope="row">{{ row.to }}</th><td>{{ row.td.0|p_stripper }}</td></tr>
+        {% for row in background.personality.tr %}<tr><th scope="row">{{ row.to }}</th><td>{{ row.td.0|p_stripper }}</td></tr>
         {% endfor %}</table><br/>
-    {% endif %}{% if ideal %}
+    {% endif %}{% if background.ideal %}
         <table class="table table-striped">
             <tr><th scope="col">d6</th><th scope="col">Ideal</th></tr>
-            {% for row in ideal.tr %}<tr><th scope="row">{{ row.to }}</th><td>{{ row.td.0|p_stripper }}</td></tr>
+            {% for row in background.ideal.tr %}<tr><th scope="row">{{ row.to }}</th><td>{{ row.td.0|p_stripper }}</td></tr>
             {% endfor %}</table><br/>
-    {% endif %}{% if bond %}
+    {% endif %}{% if background.bond %}
         <table class="table table-striped">
             <tr><th scope="col">d6</th><th scope="col">Bond</th></tr>
-            {% for row in bond.tr %}<tr><th scope="row">{{ row.to }}</th><td>{{ row.td.0|p_stripper }}</td></tr>
+            {% for row in background.bond.tr %}<tr><th scope="row">{{ row.to }}</th><td>{{ row.td.0|p_stripper }}</td></tr>
             {% endfor %}</table><br/>
-    {% endif %}{% if flaw %}
+    {% endif %}{% if background.flaw %}
         <table class="table table-striped">
             <tr><th scope="col">d6</th><th scope="col">Flaw</th></tr>
-            {% for row in flaw.tr %}<tr><th scope="row">{{ row.to }}</th><td>{{ row.td.0|p_stripper }}</td></tr>
+            {% for row in background.flaw.tr %}<tr><th scope="row">{{ row.to }}</th><td>{{ row.td.0|p_stripper }}</td></tr>
             {% endfor %}</table><br/>
     {% endif %}{% if background.legal %}{{ background.legal|raw }}{% endif %}
     </div>

@@ -46,6 +46,9 @@ class BackgroundController extends AbstractController
      * @Route("/content/background/{slug}", name="inc_background")
      */
     public function background($slug){
+//        $tableRepository = $this->em->getRepository(IncarnateTable::class);
+//        $testTable = $tableRepository->findOneBy(['fid'=>'I5qZ7Hl1YV7wCfK1']);
+//        dump($testTable);die;
         $backgroundRepository = $this->em->getRepository(IncarnateBackground::class);
         $background = $backgroundRepository->findOneBy(['fid'=>$slug]);
 //        dump($background,$background->getIncarnateBackgroundFeatures());die;
@@ -59,24 +62,24 @@ class BackgroundController extends AbstractController
 //            $backgroundFeature = $backgroundFeatureRepository->findOneByFid($background['featurefid']);
 //        }
 //        $backgroundFeature = $background
-        $tableRepository = $this->em->getRepository(IncarnateTable::class);
-        $personality = null;
-        if($background->getPersonalityfid()){
-            $personality = $tableRepository->findOneByFid($background->getPersonalityfid());
-        }
-        $ideal = null;
-        if($background->getIdealfid()){
-            $ideal = $tableRepository->findOneByFid($background->getIdealfid());
-        }
-        $bond = null;
-        if($background->getBondfid()){
-            $bond = $tableRepository->findOneByFid($background->getBondfid());
-        }
-        $flaw = null;
-        if($background->getFlawfid()){
-            $flaw = $tableRepository->findOneByFid($background->getFlawfid());
-        }
-        $rulesRepository = $this->em->getRepository(ChapterIntro::class);
+//        $tableRepository = $this->em->getRepository(IncarnateTable::class);
+//        $personality = null;
+//        if($background->getPersonalityfid()){
+//            $personality = $tableRepository->findOneByFid($background->getPersonalityfid());
+//        }
+//        $ideal = null;
+//        if($background->getIdealfid()){
+//            $ideal = $tableRepository->findOneByFid($background->getIdealfid());
+//        }
+//        $bond = null;
+//        if($background->getBondfid()){
+//            $bond = $tableRepository->findOneByFid($background->getBondfid());
+//        }
+//        $flaw = null;
+//        if($background->getFlawfid()){
+//            $flaw = $tableRepository->findOneByFid($background->getFlawfid());
+//        }
+//        $rulesRepository = $this->em->getRepository(ChapterIntro::class);
 //        $countedEntries = $backgroundRepository->count([]);
 //        $navButtons = array(
 //            'next'=>$_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'content/background/',
@@ -94,10 +97,10 @@ class BackgroundController extends AbstractController
             'genericParts' => $this->genericParts,
             'background' => $background,
             'slug' => $slug,
-            'personality' =>$personality,
-            'ideal' =>$ideal,
-            'bond' =>$bond,
-            'flaw'=>$flaw,
+//            'personality' =>$personality,
+//            'ideal' =>$ideal,
+//            'bond' =>$bond,
+//            'flaw'=>$flaw,
         ]);
     }
 }

@@ -11,6 +11,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class IncarnateClass extends IncarnateItem
 {
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -71,6 +77,11 @@ class IncarnateClass extends IncarnateItem
     {
         $this->incarnateClassTraits = new ArrayCollection();
         $this->incarnateClassArchetypes = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 
     public function getClassAmmendment(): ?string

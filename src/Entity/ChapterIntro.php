@@ -10,6 +10,13 @@ use Doctrine\ORM\Mapping as ORM;
 class ChapterIntro extends IncarnateItem
 {
     /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $template;
@@ -28,6 +35,11 @@ class ChapterIntro extends IncarnateItem
      * @ORM\Column(type="string", length=16, nullable=true)
      */
     private $categoryFid;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getTemplate(): ?bool
     {

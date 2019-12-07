@@ -10,6 +10,13 @@ use Doctrine\ORM\Mapping as ORM;
 class IncarnateBackgroundFeature extends IncarnateItem
 {
     /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
      * @ORM\Column(type="string", length=16)
      */
     private $parentfid;
@@ -24,6 +31,11 @@ class IncarnateBackgroundFeature extends IncarnateItem
      * @ORM\JoinColumn(nullable=false)
      */
     private $incarnateBackground;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getParentfid(): ?string
     {

@@ -9,6 +9,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class IncarnateEquipmentPack extends IncarnateItem
 {
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
 
     /**
      * @ORM\Column(type="array", nullable=true)
@@ -24,6 +30,11 @@ class IncarnateEquipmentPack extends IncarnateItem
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $packtype;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getIncludeditems(): ?array
     {

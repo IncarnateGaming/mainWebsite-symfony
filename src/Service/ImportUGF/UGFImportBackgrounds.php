@@ -6,6 +6,7 @@ namespace App\Service\ImportUGF;
 
 use App\Entity\IncarnateBackground;
 use App\Entity\IncarnateBackgroundFeature;
+use App\Entity\IncarnateTable;
 
 class UGFImportBackgrounds extends BaseUGFImporter
 {
@@ -18,14 +19,11 @@ class UGFImportBackgrounds extends BaseUGFImporter
         foreach ($backgrounds->children() as $background){
             $back = new IncarnateBackground();
             $back->setAuthor($background->backgroundAuthor);
-            $back->setBondfid($background->backgroundSuggestedCharacteristics->backgroundBond['FID']);
             $description = $this->functions->formatParagraphs($background->backgroundDescription);
             $back->setDescription($description);
             $back->setFeaturefid($background->backgroundFeature['FID']);
             $back->setFid($background['FID']);
-            $back->setFlawfid($background->backgroundSuggestedCharacteristics->backgroundFlaw['FID']);
             $back->setGp(intval($background->backgroundGP));
-            $back->setIdealfid($background->backgroundSuggestedCharacteristics->backgroundIdeal['FID']);
             if ($background->backgroundLanguages){
                 $languages = $background->backgroundLanguages->children();
                 $lanresult = array();
@@ -40,7 +38,6 @@ class UGFImportBackgrounds extends BaseUGFImporter
             }
             $back->setName($background->backgroundName);
             $back->setOfficial($background->officialContent);
-            $back->setPersonalityfid($background->backgroundSuggestedCharacteristics->backgroundPersonality['FID']);
             $skillProficiencies = $background->backgroundSkillProficiencies->description->children();
             $skillProfRes = array();
             foreach ($skillProficiencies as $skillProficiency){
@@ -88,6 +85,17 @@ class UGFImportBackgrounds extends BaseUGFImporter
             }
             $back->setType('background');
             $back->setUgfid($background['backgroundID']);
+            $tableRepository = $this->em->getRepository(IncarnateTable::class);
+            $personality = $tableRepository->findOneBy(['fid'=>$background->backgroundSuggestedCharacteristics->backgroundPersonality['FID']->__toString()]);
+            $ideal = $tableRepository->findOneBy(['fid'=>$background->backgroundSuggestedCharacteristics->backgroundIdeal['FID']->__toString()]);
+            $bond = $tableRepository->findOneBy(['fid'=>$background->backgroundSuggestedCharacteristics->backgroundBond['FID']->__toString()]);
+            $flaw = $tableRepository->findOneBy(['fid'=>$background->backgroundSuggestedCharacteristics->backgroundFlaw['FID']->__toString()]);
+//            dump($personality,$ideal,$bond,$flaw);die;
+            $back->setPersonality($personality);
+            $back->setIdeal($ideal);
+            $back->setBond($bond);
+            $back->setFlaw($flaw);
+//            dump($back);die;
             $this->importBackgroundFeature($background,$back);
             $this->em->persist($back);
         }

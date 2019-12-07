@@ -28,6 +28,7 @@ class AdminController extends AbstractController
     public function importStart(){
         $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/tables/';
         return $this->redirect($path);
+//        return new Response('Import not started');
     }
     /**
      * @Route("/admin/import/tables/")
@@ -36,6 +37,7 @@ class AdminController extends AbstractController
         $UGFImporter->importTables();
         $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/backgrounds/';
         return $this->redirect($path);
+//        return new Response('Import stopped at tables');
     }
     /**
      * @Route("/admin/import/backgrounds/")
@@ -44,6 +46,7 @@ class AdminController extends AbstractController
         $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/rules/';
         $UGFImporter->importBackgrounds();
         return $this->redirect($path);
+//        return new Response('Import stopped at backgrounds');
     }
     /**
      * @Route("/admin/import/rules/")
@@ -52,6 +55,7 @@ class AdminController extends AbstractController
         $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/classes/';
         $UGFImporter->importChapterIntros();
         return $this->redirect($path);
+//        return new Response('Import stopped at rules');
     }
     /**
      * @Route("/admin/import/classes/")
@@ -59,6 +63,6 @@ class AdminController extends AbstractController
     public function importClasses(UGFImportClasses $UGFImporter){
         $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import//';
         $UGFImporter->importClasses();
-        return new Response('Import Complete');
+        return new Response('Import stopped at classes');
     }
 }

@@ -19,11 +19,6 @@ class IncarnateBackground extends IncarnateItem
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=16, nullable=true)
-     */
-    private $featurefid;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $gp;
@@ -49,26 +44,6 @@ class IncarnateBackground extends IncarnateItem
     private $toolProf = [];
 
     /**
-     * @ORM\Column(type="string", length=16)
-     */
-    private $personalityfid;
-
-    /**
-     * @ORM\Column(type="string", length=16)
-     */
-    private $idealfid;
-
-    /**
-     * @ORM\Column(type="string", length=16)
-     */
-    private $bondfid;
-
-    /**
-     * @ORM\Column(type="string", length=16)
-     */
-    private $flawfid;
-
-    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $suggestedCharIntro;
@@ -78,19 +53,38 @@ class IncarnateBackground extends IncarnateItem
      */
     private $incarnateBackgroundFeatures;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\IncarnateTable")
+     */
+    private $personality;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\IncarnateTable")
+     */
+    private $ideal;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\IncarnateTable")
+     */
+    private $bond;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\IncarnateTable")
+     */
+    private $flaw;
+
     public function __construct()
     {
         $this->incarnateBackgroundFeatures = new ArrayCollection();
+        $this->personality = new ArrayCollection();
+        $this->ideal = new ArrayCollection();
+        $this->bond = new ArrayCollection();
+        $this->flaw = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getFeaturefid(): ?string
-    {
-        return $this->featurefid;
     }
 
     public function setFeaturefid(?string $featurefid): self
@@ -160,54 +154,6 @@ class IncarnateBackground extends IncarnateItem
         return $this;
     }
 
-    public function getPersonalityfid(): ?string
-    {
-        return $this->personalityfid;
-    }
-
-    public function setPersonalityfid(string $personalityfid): self
-    {
-        $this->personalityfid = $personalityfid;
-
-        return $this;
-    }
-
-    public function getIdealfid(): ?string
-    {
-        return $this->idealfid;
-    }
-
-    public function setIdealfid(string $idealfid): self
-    {
-        $this->idealfid = $idealfid;
-
-        return $this;
-    }
-
-    public function getBondfid(): ?string
-    {
-        return $this->bondfid;
-    }
-
-    public function setBondfid(string $bondfid): self
-    {
-        $this->bondfid = $bondfid;
-
-        return $this;
-    }
-
-    public function getFlawfid(): ?string
-    {
-        return $this->flawfid;
-    }
-
-    public function setFlawfid(string $flawfid): self
-    {
-        $this->flawfid = $flawfid;
-
-        return $this;
-    }
-
     public function getSuggestedCharIntro(): ?string
     {
         return $this->suggestedCharIntro;
@@ -250,4 +196,53 @@ class IncarnateBackground extends IncarnateItem
 
         return $this;
     }
+
+    public function getPersonality(): ?IncarnateTable
+    {
+        return $this->personality;
+    }
+
+    public function setPersonality(?IncarnateTable $personality): self
+    {
+        $this->personality = $personality;
+
+        return $this;
+    }
+
+    public function getIdeal(): ?IncarnateTable
+    {
+        return $this->ideal;
+    }
+
+    public function setIdeal(?IncarnateTable $ideal): self
+    {
+        $this->ideal = $ideal;
+
+        return $this;
+    }
+
+    public function getBond(): ?IncarnateTable
+    {
+        return $this->bond;
+    }
+
+    public function setBond(?IncarnateTable $bond): self
+    {
+        $this->bond = $bond;
+
+        return $this;
+    }
+
+    public function getFlaw(): ?IncarnateTable
+    {
+        return $this->flaw;
+    }
+
+    public function setFlaw(?IncarnateTable $flaw): self
+    {
+        $this->flaw = $flaw;
+
+        return $this;
+    }
+
 }

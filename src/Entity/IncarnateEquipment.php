@@ -10,6 +10,13 @@ use Doctrine\ORM\Mapping as ORM;
 class IncarnateEquipment extends IncarnateItem
 {
     /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $gmonly;
@@ -113,6 +120,11 @@ class IncarnateEquipment extends IncarnateItem
      * @ORM\Column(type="string", length=255)
      */
     private $equipmentType;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getGmonly(): ?bool
     {

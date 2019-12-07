@@ -9,6 +9,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class IncarnateFeat extends IncarnateItem
 {
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -19,6 +25,11 @@ class IncarnateFeat extends IncarnateItem
      * @ORM\Column(type="array", nullable=true)
      */
     private $recommendedclasses = [];
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getPrerequisite(): ?string
     {
