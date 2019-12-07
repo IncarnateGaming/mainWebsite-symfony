@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -54,6 +56,22 @@ class IncarnateClass extends IncarnateItem
      * @ORM\Column(type="integer", nullable=true)
      */
     private $darkvision;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\IncarnateClassTrait", mappedBy="incarnateClass")
+     */
+    private $incarnateClassTraits;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\IncarnateClassArchetype", mappedBy="incarnateClass")
+     */
+    private $incarnateClassArchetypes;
+
+    public function __construct()
+    {
+        $this->incarnateClassTraits = new ArrayCollection();
+        $this->incarnateClassArchetypes = new ArrayCollection();
+    }
 
     public function getClassAmmendment(): ?string
     {
@@ -159,6 +177,68 @@ class IncarnateClass extends IncarnateItem
     public function setDarkvision(?int $darkvision): self
     {
         $this->darkvision = $darkvision;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|IncarnateClassTrait[]
+     */
+    public function getIncarnateClassTraits(): Collection
+    {
+        return $this->incarnateClassTraits;
+    }
+
+    public function addIncarnateClassTrait(IncarnateClassTrait $incarnateClassTrait): self
+    {
+        if (!$this->incarnateClassTraits->contains($incarnateClassTrait)) {
+            $this->incarnateClassTraits[] = $incarnateClassTrait;
+            $incarnateClassTrait->setIncarnateClass($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIncarnateClassTrait(IncarnateClassTrait $incarnateClassTrait): self
+    {
+        if ($this->incarnateClassTraits->contains($incarnateClassTrait)) {
+            $this->incarnateClassTraits->removeElement($incarnateClassTrait);
+            // set the owning side to null (unless already changed)
+            if ($incarnateClassTrait->getIncarnateClass() === $this) {
+                $incarnateClassTrait->setIncarnateClass(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|IncarnateClassArchetype[]
+     */
+    public function getIncarnateClassArchetypes(): Collection
+    {
+        return $this->incarnateClassArchetypes;
+    }
+
+    public function addIncarnateClassArchetype(IncarnateClassArchetype $incarnateClassArchetype): self
+    {
+        if (!$this->incarnateClassArchetypes->contains($incarnateClassArchetype)) {
+            $this->incarnateClassArchetypes[] = $incarnateClassArchetype;
+            $incarnateClassArchetype->setIncarnateClass($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIncarnateClassArchetype(IncarnateClassArchetype $incarnateClassArchetype): self
+    {
+        if ($this->incarnateClassArchetypes->contains($incarnateClassArchetype)) {
+            $this->incarnateClassArchetypes->removeElement($incarnateClassArchetype);
+            // set the owning side to null (unless already changed)
+            if ($incarnateClassArchetype->getIncarnateClass() === $this) {
+                $incarnateClassArchetype->setIncarnateClass(null);
+            }
+        }
 
         return $this;
     }

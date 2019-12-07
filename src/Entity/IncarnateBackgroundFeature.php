@@ -19,6 +19,12 @@ class IncarnateBackgroundFeature extends IncarnateItem
      */
     private $parentname;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\IncarnateBackground", inversedBy="incarnateBackgroundFeatures")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $incarnateBackground;
+
     public function getParentfid(): ?string
     {
         return $this->parentfid;
@@ -39,6 +45,18 @@ class IncarnateBackgroundFeature extends IncarnateItem
     public function setParentname(string $parentname): self
     {
         $this->parentname = $parentname;
+
+        return $this;
+    }
+
+    public function getIncarnateBackground(): ?IncarnateBackground
+    {
+        return $this->incarnateBackground;
+    }
+
+    public function setIncarnateBackground(?IncarnateBackground $incarnateBackground): self
+    {
+        $this->incarnateBackground = $incarnateBackground;
 
         return $this;
     }

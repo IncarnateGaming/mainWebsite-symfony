@@ -8,9 +8,9 @@
         <strong>Skill Proficiencies:</strong> {{  background.skillProf|array_convert }}<br/>  {% endif %}{% if background.languages|length > 0 %}
         <strong>Languages:</strong> {{ background.languages|array_convert_simple }}<br/>{% endif %}{% if background.toolProf|length > 0 %}
         <strong>Tool Proficiencies:</strong> {{ background.toolProf.tools|array_convert }}<br/>{% endif %}{% if background.startEq.description %}
-        <strong>Equipment:</strong> {{ background.startEq.description|raw }}{% endif %}</p>{% if feature %}
-    <h3>{{ feature.name }}</h3>
-    {{ feature.description|raw }}{% endif %}
+        <strong>Equipment:</strong> {{ background.startEq.description|raw }}{% endif %}</p>{% for feature in background.incarnateBackgroundFeatures %}
+        <h3>{{ feature.name }}</h3>
+        {{ feature.description|raw }}{% endfor %}
     <h3>Suggested Characteristics</h3>
     {{ background.suggestedCharIntro|raw }}{% if personality %}
     <table class="table table-striped">

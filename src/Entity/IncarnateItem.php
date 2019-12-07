@@ -6,6 +6,20 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\IncarnateItemRepository")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="item_type",type="string")
+ * @ORM\DiscriminatorMap({"chapterintro"="ChapterIntro",
+ *     "background"="IncarnateBackground",
+ *     "background_feature"="IncarnateBackgroundFeature",
+ *     "class"="IncarnateClass",
+ *     "class_archetype"="IncarnateClassArchetype",
+ *     "classarche_type_trait"="IncarnateClassArchetypeTrait",
+ *     "class_trait"="IncarnateClassTrait",
+ *     "equipment"="IncarnateEquipment",
+ *     "equipment_pack"="IncarnateEquipmentPack",
+ *     "feat"="IncarnateFeat",
+ *     "item"="IncarnateItem",
+ *     "table"="IncarnateTable"})
  */
 class IncarnateItem
 {

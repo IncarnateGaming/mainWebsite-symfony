@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Service\ImportUGF\UGFImportBackgrounds;
 use App\Service\ImportUGF\UGFImportChapterIntro;
+use App\Service\ImportUGF\UGFImportClasses;
 use App\Service\ImportUGF\UGFImportRollableTables;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -40,16 +41,8 @@ class AdminController extends AbstractController
      * @Route("/admin/import/backgrounds/")
      */
     public function importBackgrounds(UGFImportBackgrounds $UGFImporter){
-        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/backgroundFeatures/';
-        $UGFImporter->importBackgrounds();
-        return $this->redirect($path);
-    }
-    /**
-     * @Route("/admin/import/backgroundFeatures/")
-     */
-    public function importBackgroundFeatures(UGFImportBackgrounds $UGFImporter){
         $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/rules/';
-        $UGFImporter->importBackgroundFeatures();
+        $UGFImporter->importBackgrounds();
         return $this->redirect($path);
     }
     /**
@@ -63,9 +56,9 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/import/classes/")
      */
-    public function importClasses(){
+    public function importClasses(UGFImportClasses $UGFImporter){
         $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import//';
-//        $this->UGFImporter->importClasses();
+        $UGFImporter->importClasses();
         return new Response('Import Complete');
     }
 }

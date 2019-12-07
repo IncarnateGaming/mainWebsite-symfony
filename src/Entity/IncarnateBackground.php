@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -70,6 +72,16 @@ class IncarnateBackground extends IncarnateItem
      * @ORM\Column(type="text", nullable=true)
      */
     private $suggestedCharIntro;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\IncarnateBackgroundFeature", mappedBy="incarnateBackground")
+     */
+    private $incarnateBackgroundFeatures;
+
+    public function __construct()
+    {
+        $this->incarnateBackgroundFeatures = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -204,6 +216,37 @@ class IncarnateBackground extends IncarnateItem
     public function setSuggestedCharIntro(?string $suggestedCharIntro): self
     {
         $this->suggestedCharIntro = $suggestedCharIntro;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|IncarnateBackgroundFeature[]
+     */
+    public function getIncarnateBackgroundFeatures(): Collection
+    {
+        return $this->incarnateBackgroundFeatures;
+    }
+
+    public function addIncarnateBackgroundFeature(IncarnateBackgroundFeature $incarnateBackgroundFeature): self
+    {
+        if (!$this->incarnateBackgroundFeatures->contains($incarnateBackgroundFeature)) {
+            $this->incarnateBackgroundFeatures[] = $incarnateBackgroundFeature;
+            $incarnateBackgroundFeature->setIncarnateBackground($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIncarnateBackgroundFeature(IncarnateBackgroundFeature $incarnateBackgroundFeature): self
+    {
+        if ($this->incarnateBackgroundFeatures->contains($incarnateBackgroundFeature)) {
+            $this->incarnateBackgroundFeatures->removeElement($incarnateBackgroundFeature);
+            // set the owning side to null (unless already changed)
+            if ($incarnateBackgroundFeature->getIncarnateBackground() === $this) {
+                $incarnateBackgroundFeature->setIncarnateBackground(null);
+            }
+        }
 
         return $this;
     }

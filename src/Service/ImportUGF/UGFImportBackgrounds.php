@@ -11,6 +11,8 @@ class UGFImportBackgrounds extends BaseUGFImporter
 {
     public function importBackgrounds(){
         $backgrounds = $this->ugf->chapters->backgroundChapter->backgrounds;
+        $backgroundFeatureRepository = $this->em->getRepository(IncarnateBackgroundFeature::class);
+        $backgroundFeatureRepository->deleteAll()->getQuery()->execute();
         $repository = $this->em->getRepository(IncarnateBackground::class);
         $repository->deleteAll()->getQuery()->execute();
         foreach ($backgrounds->children() as $background){
@@ -86,9 +88,31 @@ class UGFImportBackgrounds extends BaseUGFImporter
             }
             $back->setType('background');
             $back->setUgfid($background['backgroundID']);
+            $this->importBackgroundFeature($background,$back);
             $this->em->persist($back);
         }
         $this->em->flush();
+        return true;
+    }
+    public function importBackgroundFeature(\SimpleXMLElement $background,IncarnateBackground $backgroundEntity){
+        $backFeat = new IncarnateBackgroundFeature();
+        $backFeat->setAuthor($background->backgroundAuthor);
+        $description = $this->functions->formatParagraphs($background->backgroundFeature->backgroundFeatureDescription);
+        $backFeat->setDescription($description);
+        $backFeat->setFid($background->backgroundFeature['FID']);
+        if ($background->backgroundLegal){
+            $legal = $this->functions->formatParagraphs($background->backgroundLegal);
+            $backFeat->setLegal($legal);
+        }
+        $backFeat->setName($background->backgroundFeature->backgroundFeatureName);
+        $backFeat->setOfficial($background->officialContent);
+        $backFeat->setParentfid($background['FID']);
+        $backFeat->setParentname($background->backgroundName);
+        $backFeat->setType('backgroundFeature');
+        $backFeat->setUgfid($background->backgroundFeature['backgroundFeatureID']);
+        $backFeat->setIncarnateBackground($backgroundEntity);
+        $this->em->persist($backFeat);
+//        $backgroundEntity->addIncarnateBackgroundFeature($backFeat);
         return true;
     }
     public function importBackgroundFeatures(){
@@ -96,7 +120,6 @@ class UGFImportBackgrounds extends BaseUGFImporter
         $repository = $this->em->getRepository(IncarnateBackgroundFeature::class);
         $repository->deleteAll()->getQuery()->execute();
         foreach ($backgrounds->children() as $background){
-//            dump($background);die;
             $backFeat = new IncarnateBackgroundFeature();
             $backFeat->setAuthor($background->backgroundAuthor);
             $description = $this->functions->formatParagraphs($background->backgroundFeature->backgroundFeatureDescription);
