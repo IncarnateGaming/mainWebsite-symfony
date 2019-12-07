@@ -46,61 +46,24 @@ class BackgroundController extends AbstractController
      * @Route("/content/background/{slug}", name="inc_background")
      */
     public function background($slug){
-//        $tableRepository = $this->em->getRepository(IncarnateTable::class);
-//        $testTable = $tableRepository->findOneBy(['fid'=>'I5qZ7Hl1YV7wCfK1']);
-//        dump($testTable);die;
         $backgroundRepository = $this->em->getRepository(IncarnateBackground::class);
-        $background = $backgroundRepository->findOneBy(['fid'=>$slug]);
-//        dump($background,$background->getIncarnateBackgroundFeatures());die;
-//        $background = findInRepository($slug,$backgroundRepository);
-//        if (!$background){
-//            throw $this->createNotFoundException('The background: "' . $slug . '" does not exist');
-//        }
-//        $backgroundFeature = null;
-//        if($background['featurefid']){
-//            $backgroundFeatureRepository = $this->em->getRepository(IncarnateBackgroundFeature::class);
-//            $backgroundFeature = $backgroundFeatureRepository->findOneByFid($background['featurefid']);
-//        }
-//        $backgroundFeature = $background
-//        $tableRepository = $this->em->getRepository(IncarnateTable::class);
-//        $personality = null;
-//        if($background->getPersonalityfid()){
-//            $personality = $tableRepository->findOneByFid($background->getPersonalityfid());
-//        }
-//        $ideal = null;
-//        if($background->getIdealfid()){
-//            $ideal = $tableRepository->findOneByFid($background->getIdealfid());
-//        }
-//        $bond = null;
-//        if($background->getBondfid()){
-//            $bond = $tableRepository->findOneByFid($background->getBondfid());
-//        }
-//        $flaw = null;
-//        if($background->getFlawfid()){
-//            $flaw = $tableRepository->findOneByFid($background->getFlawfid());
-//        }
-//        $rulesRepository = $this->em->getRepository(ChapterIntro::class);
-//        $countedEntries = $backgroundRepository->count([]);
-//        $navButtons = array(
-//            'next'=>$_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'content/background/',
-//            'prev'=>$_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'content/background/',
-//        );
-//        if($background['id'] + 1 >= $countedEntries){
-//            $navButtons['next'] .= '0';
-//        }else{
-//            $navButtons['next'] .= ($background['id'] + 1);
-//        }
-//        if($background['id'] - 1 < 0){
-//            $navButtons['']
-//        }
+        $background=null;
+        if (strlen($slug)==16){
+            $background = $backgroundRepository->findOneBy(['fid'=>$slug]);
+        }
+        if (!$background){
+            $background = $backgroundRepository->findOneBy(['name'=>$slug]);
+        }
+        if(!$background && is_numeric($slug)){
+            $background = $backgroundRepository->find(intval($slug));
+        }
+        if(!$background){
+            throw $this->createNotFoundException('The background: "' . $slug . '" does not exist');
+        }
         return $this->render('content/background.html.twig',[
             'genericParts' => $this->genericParts,
             'background' => $background,
             'slug' => $slug,
-//            'personality' =>$personality,
-//            'ideal' =>$ideal,
-//            'bond' =>$bond,
-//            'flaw'=>$flaw,
         ]);
     }
 }

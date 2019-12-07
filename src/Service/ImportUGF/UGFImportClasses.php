@@ -5,62 +5,138 @@ namespace App\Service\ImportUGF;
 
 
 use App\Entity\IncarnateClass;
+use App\Entity\IncarnateClassArchetype;
+use App\Entity\IncarnateClassArchetypeTrait;
+use App\Entity\IncarnateClassTrait;
 
 class UGFImportClasses extends BaseUGFImporter
 {
-    public function assembleTraits(\SimpleXMLElement $traits):array{
-        $result = array();
-        foreach ($traits as $trait){
-            $traitArray = array(
-                'description'=>$this->functions->formatParagraphs($trait->classTraitDescription),
-                'fid'=>$trait['FID'],
-                'level'=>intval($trait->classTraitLevel),
-                'name'=>$trait->classTraitName,
-                'ugfid'=>$trait['classArchtypeTraitID'],
-            );
-            $result[]=$traitArray;
-        }
-        return $result;
+    //Takes either (\SimpleXMLElement $trait, IncarnateClassTrait $new, IncarnateClass $parent)
+    //or (\SimpleXMLElement $trait, IncarnateClassArchetypeTrait $new, IncarnateClassArchetype $parent)
+    public function classTraitSharedParts(\SimpleXMLElement $trait,$new,$parent):bool{
+        $new->setAuthor($parent->getAuthor());
+        $new->setDescription($this->functions->formatParagraphs($trait->classTraitDescription));
+        $new->setFid($trait['FID']);
+        $new->setLegal($parent->getLegal());
+        $new->setLevel(intval($trait->classTraitLevel));
+        $new->setName($trait->classTraitName);
+        $new->setOfficial($parent->getOfficial());
+        return true;
     }
-    public function assembleArchetypes(\SimpleXMLElement $archetypes):array{
-        $result = array();
-        foreach ($archetypes as $archetype){
-            $archetypeArray = array(
-                'description'=>$this->functions->formatParagraphs($archetype->classArchetypeDescription),
-                'fid'=>$archetype['FID'],
-                'legal'=>null,
-                'name'=>$archetype->classArchetypeName,
-                'traits'=>$this->assembleTraits($archetype->classArchetypeTraits->classarchetypeTrait),
-                'official'=>$archetype->officialContent,
-                'ugfid'=>$archetype['classArchtypeID'],
-            );
-            if($archetype->classArchetypeLegal){
-                $archetypeArray['legal']=$this->functions->formatParagraphs($archetype->classArchetypeLegal);
-            }
-            $result[]=$archetypeArray;
+    public function assembleArchetypeTraits(\SimpleXMLElement $traits,IncarnateClassArchetype $parent):bool{
+        foreach ($traits as $trait){
+            $new = new IncarnateClassArchetypeTrait();
+            $new->setType('archetypeTrait');
+            $new->setUgfid($trait['classArchtypeTraitID']);
+            $new->setIncarnateClassArchetype($parent);
+            $this->classTraitSharedParts($trait,$new,$parent);
+            $this->em->persist($new);
         }
-        return result;
+        return true;
+    }
+    public function  assembleClassTraits(\SimpleXMLElement $traits,IncarnateClass $parent):bool{
+        foreach ($traits as $trait){
+            $new = new IncarnateClassTrait();
+            $new->setType('classTrait');
+            $new->setUgfid($trait['classTraitID']);
+            $new->setIncarnateClass($parent);
+            if($trait->classSpecializationChoice && 'true'==$trait->classSpecializationChoice->__toString()){
+                $new->setSpecializationChoice(true);
+            }
+            else{
+                $new->setSpecializationChoice(false);
+            }
+            $this->classTraitSharedParts($trait,$new,$parent);
+            $this->em->persist($new);
+        }
+        return true;
+    }
+    public function assembleArchetypes(\SimpleXMLElement $archetypes,IncarnateClass $class):bool {
+        foreach ($archetypes as $archetype){
+            $new = new IncarnateClassArchetype();
+            $new->setAuthor($archetype->author);
+            $new->setDescription($this->functions->formatParagraphs($archetype->classArchetypeDescription));
+//            $new->setEquipment();
+            $new->setFid($archetype['FID']);
+            if($archetype->classArchetypeLegal){
+                $legal = $this->functions->formatParagraphs($archetype->classArchetypeLegal);
+            }else{
+                $legal=$class->getLegal();
+            }
+            $new->setLegal($legal);
+            $new->setName($archetype->classArchetypeName);
+            $new->setOfficial($archetype->officialContent);
+            $new->setType('archetype');
+            $new->setUgfid($archetype['classArchtypeID']);
+            $new->setIncarnateClass($class);
+            $this->assembleArchetypeTraits($archetype->classArchetypeTraits->classArchetypeTrait,$new,$legal);
+            $this->em->persist($new);
+        }
+        return true;
     }
     public function importClasses(){
         $ugfClasses = $this->ugf->chapters->classChapter->classes->class;
         foreach ($ugfClasses as $class){
             $new = new IncarnateClass();
-            $new->setArchetype($class->classArchetypes->classArchetype);
-            $new->setAuthor();
-            $new->setClassAmmendment();
-            $new->setDarkvision();
-            $new->setDescription();
-            $new->setEquipment();
-            $new->setFid();
-            $new->setHitpoints();
-            $new->setLegal();
-            $new->setMulticlass();
-            $new->setName();
-            $new->setOfficial();
-            $new->setProficiencies();
-            $new->setTrait();
-            $new->setType();
-            $new->setUgfid();
+            $new->setAuthor($class->author);
+            if($class->classAmmendments) {
+                $new->setClassAmmendment($this->functions->formatParagraphs($class->classAmmendments));
+            }
+            if($class->darkvision) {
+                $new->setDarkvision($class->darkvision);
+            }
+            $new->setDescription($this->functions->formatParagraphs($class->classDescription));
+            $equipment=array(
+                'description'=>'',
+            );
+            foreach ($class->classEquipment->optionDescription as $option){
+                $equipment['description']='<p>'.$this->functions->headingText(str_replace(['<optionDescription>','</optionDescription>'],'',$option->asXML())).'</p>';
+            }
+            $new->setEquipment($equipment);
+            $new->setFid($class['FID']);
+            $hitPoints=array(
+                'hitDice'=>$class->classHitPoints->hitDice->__toString(),
+                'hitPointsAt1stLevel'=>$class->classHitPoints->hitPointsAt1stLevel->__toString(),
+                'hitPointsAtHigherLevels'=>$class->classHitPoints->hitPointsAtHigherLevels->__toString(),
+                'dieSize'=>$class->classHitPoints->dieSize->__toString(),
+            );
+            $new->setHitpoints($hitPoints);
+            $legal = null;
+            if($class->classLegal) {
+                $legal = $this->functions->formatParagraphs($class->classLegal);
+            }
+            $new->setLegal($legal);
+            $multiclass=array();
+            if($class->classMulticlassProficiencies){
+                if($class->classMulticlassProficiencies->armor){
+                    $multiclass['armor']=$class->classMulticlassProficiencies->armor->__toString();
+                }
+                if($class->classMulticlassProficiencies->weapons){
+                    $multiclass['weapons']=$class->classMulticlassProficiencies->weapons->__toString();
+                }
+                if($class->classMulticlassProficiencies->tools){
+                    $multiclass['tools']=$class->classMulticlassProficiencies->tools->__toString();
+                }
+                if($class->classMulticlassProficiencies->skills){
+                    $multiclass['skills']=$this->functions->headingText(str_replace(['<skills>','</skills>'],'',$class->classMulticlassProficiencies->skills->asXML()));
+                }
+            }
+            $new->setLeveltable($this->functions->formatParagraphs($class->classTable));
+            $new->setMulticlass($multiclass);
+            $new->setName($class->className->__toString());
+            $new->setOfficial($class->officialContent->__toString());
+            $proficiencies=array(
+                'armor'=>$class->classProficiencies->armor->__toString(),
+                'weapons'=>$class->classProficiencies->weapons->__toString(),
+                'tools'=>$class->classProficiencies->tools->__toString(),
+                'savingThrows'=>$class->classProficiencies->savingThrows->__toString(),
+                'skills'=>$this->functions->headingText(str_replace(['<skills>','</skills>'],'',$class->classProficiencies->skills->asXML())),
+            );
+            $new->setProficiencies($proficiencies);
+            $new->setType('class');
+            $new->setUgfid($class['classID']);
+            $this->assembleArchetypes($class->classArchetypes->classArchetype,$new);
+            $this->assembleClassTraits($class->classTraits->classTrait,$new);
             $this->em->persist($new);
         }
         $this->em->flush();

@@ -25,38 +25,6 @@ class IncarnateBackgroundFeatureRepository extends ServiceEntityRepository
             ->delete()
             ;
     }
-    public function findOneByFid($fid)//: ?IncarnateBackgroundFeature
-    {
-        $qb = $this->filterByFid($fid);
-        $qb = $this->selectIncarnateItemFields($qb);
-        return $this->addSelectBackgroundFeatureFields($qb)
-            ->getQuery()
-            ->getOneOrNullResult()
-            ;
-    }
-    public function findOneByName($name)//: ?IncarnateBackgroundFeature
-    {
-        $name = str_replace('-',' ',$name);
-        $qb = $this->filterByName($name);
-        $qb = $this->selectIncarnateItemFields($qb);
-        return $this->addSelectBackgroundFeatureFields($qb)
-            ->getQuery()
-            ->getOneOrNullResult()
-            ;
-    }
-    public function findOneById(int $id)//: ?IncarnateBackgroundFeature
-    {
-        $qb = $this->filterById($id);
-        $qb = $this->selectIncarnateItemFields($qb);
-        return $this->addSelectBackgroundFeatureFields($qb)
-            ->getQuery()
-            ->getOneOrNullResult()
-            ;
-    }
-    private function addSelectBackgroundFeatureFields(QueryBuilder $qb=null){
-        return $this->getOrCreateQueryBuilder($qb)
-            ->addSelect('i.parentfid','i.parentname');
-    }
     // /**
     //  * @return IncarnateBackgroundFeature[] Returns an array of IncarnateBackgroundFeature objects
     //  */
@@ -85,26 +53,4 @@ class IncarnateBackgroundFeatureRepository extends ServiceEntityRepository
         ;
     }
     */
-    private function filterByFid($fid,QueryBuilder $qb=null){
-        return $this->getOrCreateQueryBuilder($qb)
-            ->andWhere('i.fid = :fid')
-            ->setParameter('fid', $fid);
-    }
-    private function filterByName($name,QueryBuilder $qb=null){
-        return $this->getOrCreateQueryBuilder($qb)
-            ->andWhere('i.name = :name')
-            ->setParameter('name', $name);
-    }
-    private  function getOrCreateQueryBuilder(QueryBuilder $qb = null){
-        return $qb ?: $this->createQueryBuilder('i');
-    }
-    private function selectIncarnateItemFields(QueryBuilder $qb = null){
-        return $this->getOrCreateQueryBuilder($qb)
-            ->select('i.id','i.fid','i.ugfid','i.name','i.description','i.author','i.official','i.legal','i.type');
-    }
-    private function filterById(int $id,QueryBuilder $qb=null){
-        return $this->getOrCreateQueryBuilder($qb)
-            ->andWhere('i.id = :id')
-            ->setParameter('id', $id);
-    }
 }

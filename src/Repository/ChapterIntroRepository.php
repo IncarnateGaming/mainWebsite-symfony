@@ -23,53 +23,56 @@ class ChapterIntroRepository extends ServiceEntityRepository
     public function buildParagraphsByArray(array $query,string $category=''):string{
         $result = '';
         $queryCount=count($query);
-        if($queryCount==0){
+        if($queryCount==0) {
             return $result;
         }
-        if(''==$category&&$query['0']['category']){
-            $category = str_replace('-',' ',$query['0']['category']);
+        if(''==$category&&$query['0']->getCategory()){
+            $category = str_replace('-',' ',$query['0']->getCategory());
         }
         if($queryCount>1){
             $result.='<h1 id="top">'.$category.'</h1>';
             foreach ($query as $entry){
-                $result.='<p><a href="#'.$entry['fid'].'">'.$entry['name'].'</a></p>';
+                $result.='<p><a href="#'.$entry->getFid().'">'.$entry->getName().'</a></p>';
             }
         }
         foreach ($query as $entry){
             if($queryCount>1){
-                $result.='<h1 id="'.$entry['fid'].'"><a href="#top">'.$entry['name'].'</a></h1>';
+                $result.='<h1 id="'.$entry->getFid().'"><a href="#top">'.$entry->getName().'</a></h1>';
             }
-            $result.=$entry['description'];
+            $result.=$entry->getDescription();
         }
         return $result;
     }
     public function buildParagraphsByCategory(string $slug):string{
         $category = str_replace('-',' ',$slug);
-        $qb = $this->getOrCreateQueryBuilder();
-        $qb->andWhere('i.category = :category')
-            ->setParameter('category', $category);
-        $qb = $this->selectIncarnateItemFields($qb);
-        $qb = $this->addSelectChapterIntroFields($qb);
-        $query = $qb->getQuery()
-            ->getResult();
+        $query = $this->findBy(['category'=>$category]);
+//        $qb = $this->getOrCreateQueryBuilder();
+//        $qb->andWhere('i.category = :category')
+//            ->setParameter('category', $category);
+//        $qb = $this->selectIncarnateItemFields($qb);
+//        $qb = $this->addSelectChapterIntroFields($qb);
+//        $query = $qb->getQuery()
+//            ->getResult();
         $result = $this->buildParagraphsByArray($query,$category);
         return $result;
     }
     public function buildParagraphsByCategoryFid(string $slug):string{
-        $qb = $this->getOrCreateQueryBuilder();
-        $qb->andWhere('i.categoryFid = :categoryfid')
-            ->setParameter('categoryfid', $slug);
-        $qb = $this->selectIncarnateItemFields($qb);
-        $qb = $this->addSelectChapterIntroFields($qb);
-        $query = $qb->getQuery()
-            ->getResult();
+        $query = $this->findBy(['categoryFid'=>$slug]);
+//        $qb = $this->createQueryBuilder('i');
+//        $qb->andWhere('i.categoryFid = :categoryfid')
+//            ->setParameter('categoryfid', $slug);
+//        $qb = $this->selectIncarnateItemFields($qb);
+//        $qb = $this->addSelectChapterIntroFields($qb);
+//        $query = $qb->getQuery()
+//            ->getResult();
         $result = $this->buildParagraphsByArray($query);
         return $result;
     }
     public function arrayOfNonIntroCategories():array{
-        $qb = $this->getOrCreateQueryBuilder()
+        $qb = $this->createQueryBuilder('i')
             ->select('i.category','i.official','i.author');
         $queryResult = $qb->getQuery()->getResult();
+//        dump($queryResult);die;
         $added = '';
         $result = array();
         foreach ($queryResult as $entry){
@@ -92,60 +95,59 @@ class ChapterIntroRepository extends ServiceEntityRepository
             ->delete()
             ;
     }
-    public function headingBuilder(array $query):string{
-        if($query['categoryFid']){
-            return'<h1 id="'.$query['fid'].'"><a href="'.$query['categoryFid'].'#'.$query['fid'].'">'.$query['name'].'</a></h1>';
+    public function headingBuilder(ChapterIntro $query):string{
+        if($query->getCategoryFid()){
+            return'<h1 id="'.$query->getFid().'"><a href="'.$query->getCategoryFid().'#'.$query->getFid().'">'.$query->getName().'</a></h1>';
         }else{
-            return'<h1 id="'.$query['fid'].'">'.$query['name'].'</h1>';
+            return'<h1 id="'.$query->getFid().'">'.$query->getName().'</h1>';
         }
     }
-    public function findOneByFid($fid)//: ?IncarnateBackgroundFeature
+    public function findOneByFid($fid): ?ChapterIntro
     {
-        $qb = $this->filterByFid($fid);
-        $qb = $this->selectIncarnateItemFields($qb);
-        $query = $this->addSelectChapterIntroFields($qb)
-            ->getQuery()
-            ->getOneOrNullResult()
-            ;
-        if(null!=$query['name']){
+        $query = $this->findOneBy(['fid'=>$fid]);
+//        $qb = $this->filterByFid($fid);
+//        $qb = $this->selectIncarnateItemFields($qb);
+//        $query = $this->addSelectChapterIntroFields($qb)
+//            ->getQuery()
+//            ->getOneOrNullResult()
+//            ;
+        if($query){
             $description=$this->headingBuilder($query);
-            $query['description']=$description.$query['description'];
+            $query->setDescription($description.$query->getDescription());
         }
         return $query;
     }
-    public function findOneByName($name)//: ?IncarnateBackgroundFeature
+    public function findOneByName($name): ?ChapterIntro
     {
         $name = str_replace('-',' ',$name);
-        $qb = $this->filterByName($name);
-        $qb = $this->selectIncarnateItemFields($qb);
-        $query = $this->addSelectChapterIntroFields($qb)
-            ->getQuery()
-            ->setMaxResults(1)
-            ->getOneOrNullResult()
-            ;
-        if(null!=$query['name']){
+        $query = $this->findOneBy(['name'=>$name]);
+//        $qb = $this->filterByName($name);
+//        $qb = $this->selectIncarnateItemFields($qb);
+//        $query = $this->addSelectChapterIntroFields($qb)
+//            ->getQuery()
+//            ->setMaxResults(1)
+//            ->getOneOrNullResult()
+//            ;
+        if($query){
             $description=$this->headingBuilder($query);
             $query['description']=$description.$query['description'];
         }
         return $query;
     }
-    public function findOneById(int $id)//: ?IncarnateBackgroundFeature
+    public function findOneById(int $id): ?ChapterIntro
     {
-        $qb = $this->filterById($id);
-        $qb = $this->selectIncarnateItemFields($qb);
-        $query = $this->addSelectChapterIntroFields($qb)
-            ->getQuery()
-            ->getOneOrNullResult()
-            ;
-        if(null!=$query['name']){
+        $query = $this->find($id);
+//        $qb = $this->filterById($id);
+//        $qb = $this->selectIncarnateItemFields($qb);
+//        $query = $this->addSelectChapterIntroFields($qb)
+//            ->getQuery()
+//            ->getOneOrNullResult()
+//            ;
+        if(null!=$query->getName()){
             $description=$this->headingBuilder($query);
             $query['description']=$description.$query['description'];
         }
         return $query;
-    }
-    private function addSelectChapterIntroFields(QueryBuilder $qb=null){
-        return $this->getOrCreateQueryBuilder($qb)
-            ->addSelect('i.template','i.simpleName','i.category','i.categoryFid');
     }
 
     // /**
@@ -176,26 +178,4 @@ class ChapterIntroRepository extends ServiceEntityRepository
         ;
     }
     */
-    private function filterByFid($fid,QueryBuilder $qb=null){
-        return $this->getOrCreateQueryBuilder($qb)
-            ->andWhere('i.fid = :fid')
-            ->setParameter('fid', $fid);
-    }
-    private function filterByName($name,QueryBuilder $qb=null){
-        return $this->getOrCreateQueryBuilder($qb)
-            ->andWhere('i.name = :name')
-            ->setParameter('name', $name);
-    }
-    private  function getOrCreateQueryBuilder(QueryBuilder $qb = null){
-        return $qb ?: $this->createQueryBuilder('i');
-    }
-    private function selectIncarnateItemFields(QueryBuilder $qb = null){
-        return $this->getOrCreateQueryBuilder($qb)
-            ->select('i.id','i.fid','i.ugfid','i.name','i.description','i.author','i.official','i.legal','i.type');
-    }
-    private function filterById(int $id,QueryBuilder $qb=null){
-        return $this->getOrCreateQueryBuilder($qb)
-            ->andWhere('i.id = :id')
-            ->setParameter('id', $id);
-    }
 }
