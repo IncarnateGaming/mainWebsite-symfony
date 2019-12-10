@@ -19,6 +19,12 @@ class IncarnateEquipmentPackRepository extends ServiceEntityRepository
         parent::__construct($registry, IncarnateEquipmentPack::class);
     }
 
+    public function deleteAll(){
+        return $this->createQueryBuilder('a')
+            ->delete()
+            ;
+    }
+
     // /**
     //  * @return IncarnateEquipmentPack[] Returns an array of IncarnateEquipmentPack objects
     //  */

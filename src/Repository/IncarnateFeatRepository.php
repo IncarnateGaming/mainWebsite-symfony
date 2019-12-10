@@ -19,6 +19,12 @@ class IncarnateFeatRepository extends ServiceEntityRepository
         parent::__construct($registry, IncarnateFeat::class);
     }
 
+    public function deleteAll(){
+        return $this->createQueryBuilder('a')
+            ->delete()
+            ;
+    }
+
     // /**
     //  * @return IncarnateFeat[] Returns an array of IncarnateFeat objects
     //  */

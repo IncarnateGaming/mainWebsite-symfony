@@ -46,7 +46,7 @@ class UGFImportRollableTables extends BaseUGFImporter
         }
         $new->setName($table->title);
         $new->setOfficial($official);
-        $new->setType('rollableTable');
+        $new->setType($this->incImportType['table']);
         $new->setUgfid($table['tableID']);
         if ($table->chapterTableColumnTitles){
             $columnNameArray = array();
@@ -66,7 +66,7 @@ class UGFImportRollableTables extends BaseUGFImporter
         $this->em->persist($new);
         return true;
     }
-    public function importTables(){
+    public function import(){
         $repository = $this->em->getRepository(IncarnateTable::class);
         $repository->deleteAll()->getQuery()->execute();
         $backgrounds = $this->ugf->chapters->backgroundChapter->backgrounds;

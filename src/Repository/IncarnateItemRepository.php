@@ -19,6 +19,12 @@ class IncarnateItemRepository extends ServiceEntityRepository
         parent::__construct($registry, IncarnateItem::class);
     }
 
+    public function deleteAll(){
+        return $this->createQueryBuilder('a')
+            ->delete()
+            ;
+    }
+
     // /**
     //  * @return IncarnateItem[] Returns an array of IncarnateItem objects
     //  */

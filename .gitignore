@@ -18,3 +18,5 @@
 /.web-server-pid
 ###< symfony/web-server-bundle ###
 /public/bootstrap-native-master/
+/public/bootstrap-4.0.0/
+/.vimrc

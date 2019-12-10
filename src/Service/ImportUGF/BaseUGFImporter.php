@@ -15,5 +15,6 @@ class BaseUGFImporter
         $this->ugfFilePath = '../lib/xml/Incarnate-System.xml';
         $this->ugf = simplexml_load_file($this->ugfFilePath);
         $this->functions = $functions;
+        $this->incImportType = $incImportType = require('ImportTypes.php');
     }
 }

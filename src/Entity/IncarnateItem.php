@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     "background_feature"="IncarnateBackgroundFeature",
  *     "class"="IncarnateClass",
  *     "class_archetype"="IncarnateClassArchetype",
- *     "classarche_type_trait"="IncarnateClassArchetypeTrait",
+ *     "class_archetype_trait"="IncarnateClassArchetypeTrait",
  *     "class_trait"="IncarnateClassTrait",
  *     "equipment"="IncarnateEquipment",
  *     "equipment_pack"="IncarnateEquipmentPack",

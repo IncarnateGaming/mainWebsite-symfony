@@ -54,11 +54,6 @@ class IncarnateClass extends IncarnateItem
     private $leveltable;
 
     /**
-     * @ORM\Column(type="array")
-     */
-    private $trait = [];
-
-    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $darkvision;
@@ -72,6 +67,11 @@ class IncarnateClass extends IncarnateItem
      * @ORM\OneToMany(targetEntity="App\Entity\IncarnateClassArchetype", mappedBy="incarnateClass")
      */
     private $incarnateClassArchetypes;
+
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $archetypeInfo = [];
 
     public function __construct()
     {
@@ -168,18 +168,6 @@ class IncarnateClass extends IncarnateItem
         return $this;
     }
 
-    public function getTrait(): ?array
-    {
-        return $this->trait;
-    }
-
-    public function setTrait(array $trait): self
-    {
-        $this->trait = $trait;
-
-        return $this;
-    }
-
     public function getDarkvision(): ?int
     {
         return $this->darkvision;
@@ -250,6 +238,18 @@ class IncarnateClass extends IncarnateItem
                 $incarnateClassArchetype->setIncarnateClass(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getArchetypeInfo(): ?array
+    {
+        return $this->archetypeInfo;
+    }
+
+    public function setArchetypeInfo(array $archetypeInfo): self
+    {
+        $this->archetypeInfo = $archetypeInfo;
 
         return $this;
     }

@@ -50,16 +50,18 @@ function genericParts(){
     );
 }
 function findInRepository(string $slug, $repository){
-    $result = null;
+//    if(false !== strpos($slug,'#')){
+//        $slug = substr($slug,0,16);
+//    }
+    $result=null;
     if(is_numeric($slug)){
-        $result = $repository->findOneById(intval($slug));
-    }elseif(16 == strlen($slug)){
-        $result = $repository->findOneByFid($slug);
-        if (null == $result){
-            $result = $repository->findOneByName($slug);
-        }
-    }else{
-        $result = $repository->findOneByName($slug);
+        $result = $repository->find(intval($slug));
+    }
+    if (!$result && strlen($slug)==16){
+        $result = $repository->findOneBy(['fid'=>$slug]);
+    }
+    if (!$result){
+        $result = $repository->findOneBy(['name'=>str_replace('-',' ',$slug)]);
     }
     return $result;
 }

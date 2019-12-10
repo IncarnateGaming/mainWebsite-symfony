@@ -1,4 +1,13 @@
 {%  extends 'base.html.twig' %}
 {% block title %}Classes{% endblock %}
 {% block body %}
+    {{ intro|raw }}
+    <div class="d-flex flex-row flex-wrap">
+        {% for class in classes %}
+            <a class="border inc-flex-300 d-flex flex-column calm-black" href="{{ path('inc_class',{slug: class.fid }) }}">
+                <h3 class="p-2 text-center inc-padding-top">{{ class.name }}</h3>
+                <span class="p-2 d-flex flex-row justify-content-center"><span class="p-2"><strong>Official:</strong> {{ class.official }}</span> <span class="p-2"><strong>Author:</strong> {{ class.author }}</span></span>
+            </a>
+        {% endfor %}
+    </div>
 {% endblock %}

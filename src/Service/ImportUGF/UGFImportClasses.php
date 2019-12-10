@@ -26,7 +26,7 @@ class UGFImportClasses extends BaseUGFImporter
     public function assembleArchetypeTraits(\SimpleXMLElement $traits,IncarnateClassArchetype $parent):bool{
         foreach ($traits as $trait){
             $new = new IncarnateClassArchetypeTrait();
-            $new->setType('archetypeTrait');
+            $new->setType($this->incImportType['classArchetypeTrait']);
             $new->setUgfid($trait['classArchtypeTraitID']);
             $new->setIncarnateClassArchetype($parent);
             $this->classTraitSharedParts($trait,$new,$parent);
@@ -37,14 +37,15 @@ class UGFImportClasses extends BaseUGFImporter
     public function  assembleClassTraits(\SimpleXMLElement $traits,IncarnateClass $parent):bool{
         foreach ($traits as $trait){
             $new = new IncarnateClassTrait();
-            $new->setType('classTrait');
+            $new->setType($this->incImportType['classTrait']);
             $new->setUgfid($trait['classTraitID']);
             $new->setIncarnateClass($parent);
+            //TODO get specialization choice working
             if($trait->classSpecializationChoice && 'true'==$trait->classSpecializationChoice->__toString()){
-                $new->setSpecializationChoice(true);
+                $new->setSpecializationChoice(1);
             }
             else{
-                $new->setSpecializationChoice(false);
+                $new->setSpecializationChoice(0);
             }
             $this->classTraitSharedParts($trait,$new,$parent);
             $this->em->persist($new);
@@ -66,7 +67,7 @@ class UGFImportClasses extends BaseUGFImporter
             $new->setLegal($legal);
             $new->setName($archetype->classArchetypeName);
             $new->setOfficial($archetype->officialContent);
-            $new->setType('archetype');
+            $new->setType($this->incImportType['classArchetype']);
             $new->setUgfid($archetype['classArchtypeID']);
             $new->setIncarnateClass($class);
             $this->assembleArchetypeTraits($archetype->classArchetypeTraits->classArchetypeTrait,$new,$legal);
@@ -74,10 +75,23 @@ class UGFImportClasses extends BaseUGFImporter
         }
         return true;
     }
-    public function importClasses(){
+    public function import(){
+        $classArchetypeTraitRepository = $this->em->getRepository(IncarnateClassArchetypeTrait::class);
+        $classArchetypeTraitRepository->deleteAll()->getQuery()->execute();
+        $classArchetypeRepository = $this->em->getRepository(IncarnateClassArchetype::class);
+        $classArchetypeRepository->deleteAll()->getQuery()->execute();
+        $classTraitRepository = $this->em->getRepository(IncarnateClassTrait::class);
+        $classTraitRepository->deleteAll()->getQuery()->execute();
+        $classRepository = $this->em->getRepository(IncarnateClass::class);
+        $classRepository->deleteAll()->getQuery()->execute();
         $ugfClasses = $this->ugf->chapters->classChapter->classes->class;
         foreach ($ugfClasses as $class){
             $new = new IncarnateClass();
+            $archetypeInfo = array(
+                'description'=>$this->functions->formatParagraphs($class->classArchetypes->archetypeDescription),
+                'namePlural'=>$class->classArchetypes->archetypeName['plural']->__toString(),
+            );
+            $new->setArchetypeInfo($archetypeInfo);
             $new->setAuthor($class->author);
             if($class->classAmmendments) {
                 $new->setClassAmmendment($this->functions->formatParagraphs($class->classAmmendments));
@@ -89,14 +103,14 @@ class UGFImportClasses extends BaseUGFImporter
             $equipment=array(
                 'description'=>'',
             );
-            foreach ($class->classEquipment->optionDescription as $option){
-                $equipment['description']='<p>'.$this->functions->headingText(str_replace(['<optionDescription>','</optionDescription>'],'',$option->asXML())).'</p>';
+            foreach ($class->classEquipment->options->optionDescription as $option){
+                $equipment['description'].='<li>'.$this->functions->headingText(str_replace(['<optionDescription>','</optionDescription>'],'',$option->asXML())).'</li>';
             }
             $new->setEquipment($equipment);
             $new->setFid($class['FID']);
             $hitPoints=array(
                 'hitDice'=>$class->classHitPoints->hitDice->__toString(),
-                'hitPointsAt1stLevel'=>$class->classHitPoints->hitPointsAt1stLevel->__toString(),
+                'hitPointsAt1stLevel'=>$class->classHitPoints->hitPointsAt1stlevel->__toString(),
                 'hitPointsAtHigherLevels'=>$class->classHitPoints->hitPointsAtHigherLevels->__toString(),
                 'dieSize'=>$class->classHitPoints->dieSize->__toString(),
             );
@@ -130,10 +144,10 @@ class UGFImportClasses extends BaseUGFImporter
                 'weapons'=>$class->classProficiencies->weapons->__toString(),
                 'tools'=>$class->classProficiencies->tools->__toString(),
                 'savingThrows'=>$class->classProficiencies->savingThrows->__toString(),
-                'skills'=>$this->functions->headingText(str_replace(['<skills>','</skills>'],'',$class->classProficiencies->skills->asXML())),
+                'skills'=>$this->functions->headingText(str_replace(['<choiceDescription>','</choiceDescription>'],'',$class->classProficiencies->skills->choiceDescription->asXML())),
             );
             $new->setProficiencies($proficiencies);
-            $new->setType('class');
+            $new->setType($this->incImportType['class']);
             $new->setUgfid($class['classID']);
             $this->assembleArchetypes($class->classArchetypes->classArchetype,$new);
             $this->assembleClassTraits($class->classTraits->classTrait,$new);

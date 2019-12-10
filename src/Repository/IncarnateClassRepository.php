@@ -18,6 +18,11 @@ class IncarnateClassRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, IncarnateClass::class);
     }
+    public function deleteAll(){
+        return $this->createQueryBuilder('a')
+            ->delete()
+            ;
+    }
 
     // /**
     //  * @return IncarnateClass[] Returns an array of IncarnateClass objects

@@ -1,10 +1,9 @@
-// Bootstrap and its default variables
-@import "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css";
+
 
 // Your variable overrides
-$body-bg: #060;
-$body-color: #171;
-$incarnate-color: #325;
+//$body-bg: #060;
+//$body-color: #171;
+//$incarnate-color: #325;
 $theme-colors: (
         "primary": #3E044D,
         "secondary":#5d046e,
@@ -44,3 +43,5 @@ a.calm-black{
   color:var(--light);
   cursor:pointer;
 }
+// Bootstrap and its default variables
+@import "../bootstrap-4.0.0/scss/bootstrap.scss";

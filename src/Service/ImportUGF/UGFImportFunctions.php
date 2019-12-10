@@ -38,6 +38,8 @@ class UGFImportFunctions
     }
     public function headingText(string $string):string{
         $string = str_replace('<quoMark/>','"',$string);
+        $string = str_replace('<crossReference','<span class="crossReference"',$string);
+        $string = str_replace('</crossReference>','</span>',$string);
         $string = str_replace('<generate','<span class="generate"',$string);
         $string = str_replace(' FID="',' data-FID="',$string);
         $string = str_replace(' UGFLinkReference="',' data-UGFLinkReference="',$string);

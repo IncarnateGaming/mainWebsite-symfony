@@ -8,6 +8,7 @@ use App\Entity\ChapterIntro;
 use App\Entity\IncarnateBackground;
 use App\Entity\IncarnateBackgroundFeature;
 use App\Entity\IncarnateTable;
+use App\Service\IncarnateTemplateFunctions;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,7 +24,7 @@ class BackgroundController extends AbstractController
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
-        require '../lib/php/functions.php';
+        require_once '../lib/php/functions.php';
         $this->genericParts = genericParts();
     }
 
@@ -47,16 +48,8 @@ class BackgroundController extends AbstractController
      */
     public function background($slug){
         $backgroundRepository = $this->em->getRepository(IncarnateBackground::class);
-        $background=null;
-        if (strlen($slug)==16){
-            $background = $backgroundRepository->findOneBy(['fid'=>$slug]);
-        }
-        if (!$background){
-            $background = $backgroundRepository->findOneBy(['name'=>$slug]);
-        }
-        if(!$background && is_numeric($slug)){
-            $background = $backgroundRepository->find(intval($slug));
-        }
+        require_once '../lib/php/functions.php';
+        $background = findInRepository($slug,$backgroundRepository);
         if(!$background){
             throw $this->createNotFoundException('The background: "' . $slug . '" does not exist');
         }

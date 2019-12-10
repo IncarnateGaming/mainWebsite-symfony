@@ -1,0 +1,6 @@
+{%  extends 'base.html.twig' %}
+{% block title %}{{ trait.name }}{% endblock %}
+{% block body %}
+    <h5 id="{{ trait.fid }}"><a href="{{ parentfid }}#{{ trait.fid }}">{{ trait.name }}</a></h5>
+    {{ trait.description|raw }}
+{% endblock %}

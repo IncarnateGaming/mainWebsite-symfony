@@ -18,6 +18,11 @@ class IncarnateClassArchetypeTraitRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, IncarnateClassArchetypeTrait::class);
     }
+    public function deleteAll(){
+        return $this->createQueryBuilder('a')
+            ->delete()
+            ;
+    }
 
     // /**
     //  * @return IncarnateClassArchetypeTrait[] Returns an array of IncarnateClassArchetypeTrait objects

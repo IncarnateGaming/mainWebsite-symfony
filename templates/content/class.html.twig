@@ -1,4 +1,48 @@
 {%  extends 'base.html.twig' %}
-{% block title %}Class{% endblock %}
+{% block title %}{{ class.name }}{% endblock %}
 {% block body %}
+    <i id="top"></i><div class="d-flex flex-row flex-wrap">
+        {% for archetype in class.incarnateClassArchetypes %}
+            <a class="border inc-flex-300 d-flex flex-column calm-black" href="{{ path('inc_class',{slug: class.fid }) }}#{{ archetype.fid }}">
+                <h3 class="p-2 text-center inc-padding-top">{{ archetype.name }}</h3>
+                <span class="p-2 d-flex flex-row justify-content-center"><span class="p-2"><strong>Official:</strong> {{ archetype.official }}</span> <span class="p-2"><strong>Author:</strong> {{ archetype.author }}</span></span>
+            </a>
+        {% endfor %}
+    </div>
+    <div class="container">
+        <h2 id="{{ class.fid }}">{{ class.name }}</h2>
+        <h3>Class Features</h3>
+        <p>As a {{ class.name }}, you gain the following class features.</p>
+        <h4>Hit Points</h4>
+        <p><strong>Hig Dice:</strong> {{ class.hitpoints.hitDice }}</p>
+        <p><strong>Hit Points at 1st Level:</strong> {{ class.hitpoints.hitPointsAt1stLevel }}</p>
+        <p><strong>Hit Points at Higher Levels:</strong> {{ class.hitpoints.hitPointsAtHigherLevels }}</p>
+        <h4>Proficiencies</h4>
+        <p><strong>Armor:</strong>{{ class.proficiencies.armor }}</p>
+        <p><strong>Weapons:</strong> {{ class.proficiencies.weapons }}</p>
+        <p><strong>Tools:</strong> {{ class.proficiencies.tools }}</p>
+        <p><strong>Saving Throws:</strong> {{ class.proficiencies.savingThrows }}</p>
+        <p><strong>Skills:</strong> {{ class.proficiencies.skills|raw }}</p>
+        <h4>Equipment</h4>
+        <p>You start with the following equipment, in addition to the equipment granted by your background:</p>
+        <ul>{{ class.equipment.description|raw }}</ul>
+        <h5>The {{ class.name }}</h5>
+        <table class="table table-striped">{{ class.leveltable|raw }}</table>
+        {% for trait in class.incarnateClassTraits %}
+            <h4 id="{{ trait.fid }}">{{ trait.name }}</h4>
+            {{ trait.description|raw }}
+        {% endfor %}
+        <h3>{{ class.archetypeInfo.namePlural }}</h3>
+        {{ class.archetypeInfo.description|raw }}
+        {% for archetype in class.incarnateClassArchetypes %}
+            <h4 id="{{ archetype.fid }}">{{ archetype.name }}</h4>
+            {{ archetype.description|raw }}
+            {% for trait in archetype.incarnateClassArchetypeTraits %}
+                <h5 id="{{ trait.fid }}">{{ trait.name }}</h5>
+                {{ trait.description|raw }}
+            {% endfor %}
+            {{ archetype.legal|raw }}
+        {% endfor %}
+        {{ class.legal|raw }}
+    </div>
 {% endblock %}

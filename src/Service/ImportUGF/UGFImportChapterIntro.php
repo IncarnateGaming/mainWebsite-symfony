@@ -5,6 +5,14 @@ namespace App\Service\ImportUGF;
 
 
 use App\Entity\ChapterIntro;
+use App\Entity\IncarnateBackground;
+use App\Entity\IncarnateBackgroundFeature;
+use App\Entity\IncarnateClass;
+use App\Entity\IncarnateClassArchetype;
+use App\Entity\IncarnateClassArchetypeTrait;
+use App\Entity\IncarnateClassTrait;
+use App\Entity\IncarnateEquipment;
+use App\Entity\IncarnateItem;
 
 class UGFImportChapterIntro extends BaseUGFImporter
 {
@@ -118,13 +126,44 @@ class UGFImportChapterIntro extends BaseUGFImporter
             }else{
                 $new->setTemplate(false);
             }
-            $new->setType('chapterIntro');
+            $new->setType($this->incImportType['rule']);
             $new->setUgfid($sec1['secID']);
             $this->em->persist($new);
         }
         return true;
     }
-    public function importChapterIntros(){
+    public function makeChapterCategories(\SimpleXMLElement $chapters){
+        foreach ($chapters as $chapter){
+            $new = new IncarnateItem();
+            $new->setDescription('');
+            $new->setLegal('');
+            $author = $chapter->officialContent->__toString() === 'true' ? 'SRD' : 'ProNobis';
+            $new->setAuthor($author);
+            $new->setName($chapter->chapterName->__toString());
+            $new->setFid($chapter['FID']);
+            $new->setUgfid($chapter['miscellaneousChapterID']);
+            $new->setType($this->incImportType['rule']);
+            $official = $chapter->officialContent->__toString() === 'true' ? true : false;
+            $new->setOfficial($official);
+            $this->em->persist($new);
+        }
+        return true;
+    }
+    public function import(){
+        $equipmentRepository = $this->em->getRepository(IncarnateEquipment::class);
+        $equipmentRepository->deleteAll()->getQuery()->execute();
+        $backgroundFeatureRepository = $this->em->getRepository(IncarnateBackgroundFeature::class);
+        $backgroundFeatureRepository->deleteAll()->getQuery()->execute();
+        $repository = $this->em->getRepository(IncarnateBackground::class);
+        $repository->deleteAll()->getQuery()->execute();
+        $classArchetypeTraitRepository = $this->em->getRepository(IncarnateClassArchetypeTrait::class);
+        $classArchetypeTraitRepository->deleteAll()->getQuery()->execute();
+        $classArchetypeRepository = $this->em->getRepository(IncarnateClassArchetype::class);
+        $classArchetypeRepository->deleteAll()->getQuery()->execute();
+        $classTraitRepository = $this->em->getRepository(IncarnateClassTrait::class);
+        $classTraitRepository->deleteAll()->getQuery()->execute();
+        $classRepository = $this->em->getRepository(IncarnateClass::class);
+        $classRepository->deleteAll()->getQuery()->execute();
         $repository = $this->em->getRepository(ChapterIntro::class);
         $repository->deleteAll()->getQuery()->execute();
         $this->prepareChapterIntro($this->ugf->chapters->GMsBlind,'GMs Screen');
@@ -143,6 +182,7 @@ class UGFImportChapterIntro extends BaseUGFImporter
         foreach($this->ugf->chapters->miscellaneousChapters->miscellaneousChapter as $chapter){
             $this->prepareChapterIntro($chapter,$chapter->chapterName->__toString(),$chapter['FID']);
         }
+        $this->makeChapterCategories($this->ugf->chapters->miscellaneousChapters->miscellaneousChapter);
         $this->em->flush();
         return true;
     }

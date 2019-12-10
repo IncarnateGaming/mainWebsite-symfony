@@ -10,7 +10,7 @@ use App\Entity\IncarnateTable;
 
 class UGFImportBackgrounds extends BaseUGFImporter
 {
-    public function importBackgrounds(){
+    public function import(){
         $backgrounds = $this->ugf->chapters->backgroundChapter->backgrounds;
         $backgroundFeatureRepository = $this->em->getRepository(IncarnateBackgroundFeature::class);
         $backgroundFeatureRepository->deleteAll()->getQuery()->execute();
@@ -83,7 +83,7 @@ class UGFImportBackgrounds extends BaseUGFImporter
                 }
                 $back->setToolProf($toolArray);
             }
-            $back->setType('background');
+            $back->setType($this->incImportType['background']);
             $back->setUgfid($background['backgroundID']);
             $tableRepository = $this->em->getRepository(IncarnateTable::class);
             $personality = $tableRepository->findOneBy(['fid'=>$background->backgroundSuggestedCharacteristics->backgroundPersonality['FID']->__toString()]);
@@ -116,36 +116,36 @@ class UGFImportBackgrounds extends BaseUGFImporter
         $backFeat->setOfficial($background->officialContent);
         $backFeat->setParentfid($background['FID']);
         $backFeat->setParentname($background->backgroundName);
-        $backFeat->setType('backgroundFeature');
+        $backFeat->setType($this->incImportType['backgroundFeature']);
         $backFeat->setUgfid($background->backgroundFeature['backgroundFeatureID']);
         $backFeat->setIncarnateBackground($backgroundEntity);
         $this->em->persist($backFeat);
 //        $backgroundEntity->addIncarnateBackgroundFeature($backFeat);
         return true;
     }
-    public function importBackgroundFeatures(){
-        $backgrounds = $this->ugf->chapters->backgroundChapter->backgrounds;
-        $repository = $this->em->getRepository(IncarnateBackgroundFeature::class);
-        $repository->deleteAll()->getQuery()->execute();
-        foreach ($backgrounds->children() as $background){
-            $backFeat = new IncarnateBackgroundFeature();
-            $backFeat->setAuthor($background->backgroundAuthor);
-            $description = $this->functions->formatParagraphs($background->backgroundFeature->backgroundFeatureDescription);
-            $backFeat->setDescription($description);
-            $backFeat->setFid($background->backgroundFeature['FID']);
-            if ($background->backgroundLegal){
-                $legal = $this->functions->formatParagraphs($background->backgroundLegal);
-                $backFeat->setLegal($legal);
-            }
-            $backFeat->setName($background->backgroundFeature->backgroundFeatureName);
-            $backFeat->setOfficial($background->officialContent);
-            $backFeat->setParentfid($background['FID']);
-            $backFeat->setParentname($background->backgroundName);
-            $backFeat->setType('backgroundFeature');
-            $backFeat->setUgfid($background->backgroundFeature['backgroundFeatureID']);
-            $this->em->persist($backFeat);
-        }
-        $this->em->flush();
-        return true;
-    }
+//    public function importBackgroundFeatures(){
+//        $backgrounds = $this->ugf->chapters->backgroundChapter->backgrounds;
+//        $repository = $this->em->getRepository(IncarnateBackgroundFeature::class);
+//        $repository->deleteAll()->getQuery()->execute();
+//        foreach ($backgrounds->children() as $background){
+//            $backFeat = new IncarnateBackgroundFeature();
+//            $backFeat->setAuthor($background->backgroundAuthor);
+//            $description = $this->functions->formatParagraphs($background->backgroundFeature->backgroundFeatureDescription);
+//            $backFeat->setDescription($description);
+//            $backFeat->setFid($background->backgroundFeature['FID']);
+//            if ($background->backgroundLegal){
+//                $legal = $this->functions->formatParagraphs($background->backgroundLegal);
+//                $backFeat->setLegal($legal);
+//            }
+//            $backFeat->setName($background->backgroundFeature->backgroundFeatureName);
+//            $backFeat->setOfficial($background->officialContent);
+//            $backFeat->setParentfid($background['FID']);
+//            $backFeat->setParentname($background->backgroundName);
+//            $backFeat->setType($this->incImportType['backgroundFeature']);
+//            $backFeat->setUgfid($background->backgroundFeature['backgroundFeatureID']);
+//            $this->em->persist($backFeat);
+//        }
+//        $this->em->flush();
+//        return true;
+//    }
 }
