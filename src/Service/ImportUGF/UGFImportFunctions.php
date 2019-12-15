@@ -36,7 +36,11 @@ class UGFImportFunctions
         $string = $this->headingText(str_replace(['<heading6>','</heading6>'],'',$xml->asXML()));
         return $this->wrapInInternalHyperlink($string,$fid);
     }
+    public function removeLineReturns(string $string):string{
+        return str_replace(["\r","\n","\t"],'',$string);
+    }
     public function headingText(string $string):string{
+        $string = $this->removeLineReturns($string);
         $string = str_replace('<quoMark/>','"',$string);
         $string = str_replace('<crossReference','<span class="crossReference"',$string);
         $string = str_replace('</crossReference>','</span>',$string);
@@ -59,6 +63,7 @@ class UGFImportFunctions
             $result = str_replace('<description>','',$result);
             $result = str_replace('</description>','',$result);
         }
+        $result = $this->removeLineReturns($result);
         //TODO: handle sound
         $result = str_replace('<quoMark/>','"',$result);
         $result = str_replace('<calculate>','<span class="calculate">',$result);

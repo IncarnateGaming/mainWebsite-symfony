@@ -21,11 +21,18 @@ $theme-colors: (
 }
 //Flex
 .inc-flex-300{
-  flex: 1 0 300px;
+  flex: 0 0 18rem;
+}
+.inc-flex-200{
+  flex: 0 0 12rem;
 }
 //Pading
 .inc-padding-top{
-  padding-top:2em;
+  padding-top:2rem;
+}
+.inc-padding-sides{
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 //Calm a

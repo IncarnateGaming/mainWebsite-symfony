@@ -77,19 +77,9 @@ class IncarnateEquipment extends IncarnateItem
     private $offensebonus;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
-     */
-    private $properties = [];
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $itemrange;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $rarity;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -120,6 +110,16 @@ class IncarnateEquipment extends IncarnateItem
      * @ORM\Column(type="string", length=255)
      */
     private $equipmentType;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $properties;
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $rarity = [];
 
     public function getId(): ?int
     {
@@ -270,18 +270,6 @@ class IncarnateEquipment extends IncarnateItem
         return $this;
     }
 
-    public function getProperties(): ?array
-    {
-        return $this->properties;
-    }
-
-    public function setProperties(?array $properties): self
-    {
-        $this->properties = $properties;
-
-        return $this;
-    }
-
     public function getItemrange(): ?string
     {
         return $this->itemrange;
@@ -290,18 +278,6 @@ class IncarnateEquipment extends IncarnateItem
     public function setItemrange(?string $itemrange): self
     {
         $this->itemrange = $itemrange;
-
-        return $this;
-    }
-
-    public function getRarity(): ?string
-    {
-        return $this->rarity;
-    }
-
-    public function setRarity(?string $rarity): self
-    {
-        $this->rarity = $rarity;
 
         return $this;
     }
@@ -374,6 +350,30 @@ class IncarnateEquipment extends IncarnateItem
     public function setEquipmentType(string $equipmentType): self
     {
         $this->equipmentType = $equipmentType;
+
+        return $this;
+    }
+
+    public function getProperties(): ?string
+    {
+        return $this->properties;
+    }
+
+    public function setProperties(?string $properties): self
+    {
+        $this->properties = $properties;
+
+        return $this;
+    }
+
+    public function getRarity(): ?array
+    {
+        return $this->rarity;
+    }
+
+    public function setRarity(?array $rarity): self
+    {
+        $this->rarity = $rarity;
 
         return $this;
     }

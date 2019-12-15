@@ -1,0 +1,14 @@
+{%  extends 'base.html.twig' %}
+{% block body %}
+    {% block preList %}{% endblock %}
+    {% if intro %}{{ intro|raw }}{% endif %}
+    <div class="d-flex flex-row flex-wrap">
+        {% for item in loop %}
+            <a class="border inc-flex-300 d-flex flex-column calm-black" href="{{ path(path,{slug: item.fid }) }}">
+                <h3 class="p-2 text-center inc-padding-top">{{ item.name }}</h3>
+                <span class="p-2 d-flex flex-row justify-content-center"><span class="p-2"><strong>Official:</strong> {% if item.official %}Yes{% else %}No{% endif %}</span> <span class="p-2"><strong>Author:</strong> {{ item.author }}</span></span>
+            </a>
+        {% endfor %}
+    </div>
+    {% block postList %}{% endblock %}
+{% endblock %}

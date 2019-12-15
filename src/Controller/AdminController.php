@@ -77,28 +77,10 @@ class AdminController extends AbstractController
      * @Route("/admin/import/equipment/")
      */
     public function importEquipment(UGFImportEquipment $UGFImporter){
-        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/magicProp/';
-        $UGFImporter->import();
-        return new Response('Import stopped at equipment');
-//        return $this->redirect($path);
-    }
-    /**
-     * @Route("/admin/import/magicProp/")
-     */
-    public function importMagicProp(UGFImportMagicProperty $UGFImporter){
-        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/npc/';
-        $UGFImporter->import();
-        return new Response('Import stopped at magic properties');
-//        return $this->redirect($path);
-    }
-    /**
-     * @Route("/admin/import/npc/")
-     */
-    public function importNPCs(UGFImportNPCs $UGFImporter){
         $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/race/';
         $UGFImporter->import();
-        return new Response('Import stopped at NPCs');
-//        return $this->redirect($path);
+//        return new Response('Import stopped at equipment');
+        return $this->redirect($path);
     }
     /**
      * @Route("/admin/import/race/")
@@ -140,9 +122,27 @@ class AdminController extends AbstractController
      * @Route("/admin/import/template/")
      */
     public function importTemplates(UGFImportTemplate $UGFImporter){
-//        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import//';
+        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/npc/';
         $UGFImporter->import();
         return new Response('Import stopped at templates');
+//        return $this->redirect($path);
+    }
+    /**
+     * @Route("/admin/import/npc/")
+     */
+    public function importNPCs(UGFImportNPCs $UGFImporter){
+        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/magicProp/';
+        $UGFImporter->import();
+        return new Response('Import stopped at NPCs');
+//        return $this->redirect($path);
+    }
+    /**
+     * @Route("/admin/import/magicProp/")
+     */
+    public function importMagicProp(UGFImportMagicProperty $UGFImporter){
+//        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/npc/';
+        $UGFImporter->import();
+        return new Response('Import stopped at magic properties');
 //        return $this->redirect($path);
     }
 }

@@ -5,15 +5,16 @@
         <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" type="image/x-icon">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
+            <script src="https://kit.fontawesome.com/6f58c46118.js" crossorigin="anonymous"></script>
+        {% endblock %}
+        {% block boostrapStyle %}
             {#
             <script src="text/javascript" src="https://cdn.jsdelivr.net/gh/thednp/minifill@0.0.4/dist/minifill.min.js"> </script>
             <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
             <![endif]-->
             #}
-            <script src="https://kit.fontawesome.com/6f58c46118.js" crossorigin="anonymous"></script>
             <link rel="stylesheet" href="{{ asset('style/incBootstrap.css') }}">
-
         {% endblock %}
     </head>
     <body>

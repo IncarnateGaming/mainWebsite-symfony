@@ -19,6 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     "equipment_pack"="IncarnateEquipmentPack",
  *     "feat"="IncarnateFeat",
  *     "item"="IncarnateItem",
+ *     "riddle"="IncarnateRiddle",
  *     "table"="IncarnateTable"})
  */
 class IncarnateItem

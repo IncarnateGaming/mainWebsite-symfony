@@ -1,4 +1,186 @@
 {%  extends 'base.html.twig' %}
+{% block boostrapStyle %}
+    <link rel="stylesheet" href="{{ asset('style/incEquipment.css') }}">
+{% endblock %}
 {% block title %}Equipment{% endblock %}
 {% block body %}
+    <div id="columnFilters" class="d-flex flex-row flex-wrap inc-padding-sides">
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="nameColumn" name="hide-name" checked>
+            <label class="form-check-label" for="nameColumn">Name</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="valueColumn" name="hide-value" checked>
+            <label class="form-check-label" for="valueColumn">Value</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="weightColumn" name="hide-weight" checked>
+            <label class="form-check-label" for="weightColumn">Weight</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="armorClassColumn" name="hide-ac">
+            <label class="form-check-label" for="armorClassColumn">Armor Class</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="damageColumn" name="hide-damage">
+            <label class="form-check-label" for="damageColumn">Damage</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="rangeColumn" name="hide-range">
+            <label class="form-check-label" for="rangeColumn">Range</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="propertiesColumn" name="hide-properties">
+            <label class="form-check-label" for="propertiesColumn">Properties</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="gmOnlyColumn" name="hide-gmOnly">
+            <label class="form-check-label" for="gmOnlyColumn">GM Only</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="magicalColumn" name="hide-magical">
+            <label class="form-check-label" for="magicalColumn">Magical</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="mundaneColumn" name="hide-mundane">
+            <label class="form-check-label" for="mundaneColumn">Mundane</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="carryingCapacityColumn" name="hide-carrying">
+            <label class="form-check-label" for="carryingCapacityColumn">Carrying Capacity</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="holdingCapacityColumn" name="hide-holding">
+            <label class="form-check-label" for="holdingCapacityColumn">Holding Capacity</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="recommendedLevelColumn" name="hide-level">
+            <label class="form-check-label" for="recommendedLevelColumn">Recommended Level</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="consumableColumn" name="hide-consumable">
+            <label class="form-check-label" for="consumableColumn">Consumable</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="offensiveBonusColumn" name="hide-offense">
+            <label class="form-check-label" for="offensiveBonusColumn">Offensive Bonus</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="speedColumn" name="hide-speed">
+            <label class="form-check-label" for="speedColumn">Speed</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="stealthColumn" name="hide-stealth">
+            <label class="form-check-label" for="stealthColumn">Stealth</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="strengthColumn" name="hide-strength">
+            <label class="form-check-label" for="strengthColumn">Strength Requirement</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="typeColumn" name="hide-type">
+            <label class="form-check-label" for="typeColumn">Type</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="subtypeColumn" name="hide-subtype">
+            <label class="form-check-label" for="subtypeColumn">Subtype</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="rarityColumn" name="hide-rarity">
+            <label class="form-check-label" for="rarityColumn">Rarity</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="fidColumn" name="hide-fid">
+            <label class="form-check-label" for="fidColumn">FID</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="descriptionColumn" name="hide-description">
+            <label class="form-check-label" for="descriptionColumn">Description</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="authorColumn" name="hide-author">
+            <label class="form-check-label" for="authorColumn">Author</label>
+        </div>
+        <div class="form-check inc-flex-200">
+            <input type="checkbox" class="form-check-input inc-column-toggle" id="officialColumn" name="hide-official">
+            <label class="form-check-label" for="officialColumn">Official</label>
+        </div>
+{#        <div class="form-check inc-flex-200">#}
+{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="legalColumn" name="hide-legal">#}
+{#            <label class="form-check-label" for="legalColumn">Legal</label>#}
+{#        </div>#}
+{#        <div class="form-check inc-flex-200">#}
+{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="idColumn" name="hide-id">#}
+{#            <label class="form-check-label" for="idColumn">ID</label>#}
+{#        </div>#}
+    </div>
+    <table id="equipmentTable" class="table table-striped hide-ac hide-damage hide-range hide-properties hide-gmOnly hide-magical hide-mundane hide-carrying hide-holding hide-level hide-consumable hide-offense hide-speed hide-stealth hide-strength hide-type hide-subtype hide-rarity hide-fid hide-description hide-author hide-official hide-legal hide-id">
+        <thead>
+            <tr>
+                <th scope="col" name="0" data-type="string">Name</th>
+                <th scope="col" name="1" data-type="float">Value</th>
+                <th scope="col" name="2" data-type="float">Weight</th>
+                <th scope="col" name="3" data-type="float">AC</th>
+                <th scope="col" name="4" data-type="string">Damage</th>
+                <th scope="col" name="5" data-type="string">Item Range</th>
+                <th scope="col" name="6" data-type="string">Properties</th>
+                <th scope="col" name="7" data-type="boolean">GM Only</th>
+                <th scope="col" name="8" data-type="boolean">Magical</th>
+                <th scope="col" name="9" data-type="boolean">Mundane</th>
+                <th scope="col" name="10" data-type="string">Carrying Capacity</th>
+                <th scope="col" name="11" data-type="string">Holding Capacity</th>
+                <th scope="col" name="12" data-type="float">Recommended Level</th>
+                <th scope="col" name="13" data-type="boolean">Consumable</th>
+                <th scope="col" name="14" data-type="float">Offense Bonus</th>
+                <th scope="col" name="15" data-type="string">Speed</th>
+                <th scope="col" name="16" data-type="string">Stealth</th>
+                <th scope="col" name="17" data-type="string">Strength Requirement</th>
+                <th scope="col" name="18" data-type="string">Type</th>
+                <th scope="col" name="19" data-type="string">Subtype</th>
+                <th scope="col" name="20" data-type="string">Rarity</th>
+                <th scope="col" name="21" data-type="string">Fid</th>
+                <th scope="col" name="22" data-type="string">Description</th>
+                <th scope="col" name="23" data-type="string">Author</th>
+                <th scope="col" name="24" data-type="string">Official</th>
+{#                <th scope="col" name="25" data-type="string">Legal</th>#}
+{#                <th scope="col" name="26" data-type="float">id</th>#}
+            </tr>
+        </thead>
+        <tbody id="inc-table-main-body">
+        {% for item in equipment %}
+        <tr class="inc-table-main-row">
+            <td data-value="{{ item.name|lower }}" class="inc-main-table-column">{{ item.name }}</td>
+            <td data-value="{{ item.costSortable }}" class="inc-main-table-column">{{ item.cost }}</td>
+            <td data-value="{{ item.weight }}" class="inc-main-table-column">{{ item.weight }}</td>
+            <td data-value="{% if item.ac %}{{ item.ac.ac }}{% else %}-1{% endif %}" class="inc-main-table-column">{% if item.ac %}{{ item.ac.ac }}{% if item.ac.mod %} {{ item.ac.mod }}{% endif %}{% endif %}</td>
+            <td data-value="{% if item.damage|length > 0 %}-1{% else %}-1{% endif %}" class="inc-main-table-column">
+{#                {% for line in item.damage %}{% if line.formula %}{{ line.formula }}{% endif %}{% if line.modifier %} + {{ line.modifier }}{% endif %}{% if line.ability %} + {{ line.ability }}{% endif %}{% if line.proficiency %} + prof{% endif %}{% if line.type %} {{ line.type }}{% endif %}{% if line.material %} {{ line.material }}{% endif %}{% endfor %}#}
+            </td>
+            <td data-value="{% if item.itemrange %}{{ item.itemrange }}{% else %}-1{% endif %}" class="inc-main-table-column">{% if item.itemrange %}{{ item.itemrange }}{% endif %}</td>
+            <td data-value="{% if item.properties %}{{ item.properties }}{% else %}-1{% endif %}" class="inc-main-table-column">{% if item.properties %}{{ item.properties|raw }}{% endif %}</td>
+            <td data-value="{% if item.gmonly %}true{% else %}false{% endif %}" class="inc-main-table-column">{% if item.gmonly %}true{% else %}false{% endif %}</td>
+            <td data-value="{% if item.magical %}true{% else %}false{% endif %}" class="inc-main-table-column">{% if item.magical %}true{% else %}false{% endif %}</td>
+            <td data-value="{% if item.mundane %}true{% else %}false{% endif %}" class="inc-main-table-column">{% if item.mundane %}true{% else %}false{% endif %}</td>
+            <td data-value="{%  if item.carryingcapacity %}{{  item.carryingcapacity }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.carryingcapacity %}{{ item.carryingcapacity }}{% endif %}</td>
+            <td data-value="{%  if item.holdingcapacity %}{{  item.holdingcapacity }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.holdingcapacity %}{{ item.holdingcapacity }}{% endif %}</td>
+            <td data-value="{% if item.recommendedlevel %}{{ item.recommendedlevel }}{% else %}-1{% endif %}" class="inc-main-table-column">{% if item.recommendedlevel %}{{ item.recommendedlevel }}{% endif %}</td>
+            <td data-value="{%  if item.consumable %}true{%  else %}false{%  endif %}" class="inc-main-table-column">{% if item.consumable %}true{% else %}false{% endif %}</td>
+            <td data-value="{%  if item.offensebonus %}{{  item.offensebonus }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.offensebonus %}{{ item.offensebonus }}{% endif %}</td>
+            <td data-value="{%  if item.speed %}{{  item.speed }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.speed %}{{ item.speed }}{% endif %}</td>
+            <td data-value="{%  if item.stealth %}{{  item.stealth }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.stealth %}{{ item.stealth }}{% endif %}</td>
+            <td data-value="{%  if item.strengthrequirement %}{{  item.strengthrequirement }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.strengthrequirement %}{{ item.strengthrequirement }}{% endif %}</td>
+            <td data-value="{%  if item.equipmentType %}{{  item.equipmentType }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.equipmentType %}{{ item.equipmentType }}{% endif %}</td>
+            <td data-value="{%  if item.subtype %}{{  item.subtype }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.subtype %}{{ item.subtype }}{% endif %}</td>
+            <td data-value="{%  if item.rarity %}{{  item.rarity.level }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.rarity %}{{ item.rarity.level }}{% endif %}</td>
+            <td data-value="{{ item.fid }}" class="inc-main-table-column">{{ item.fid }}</td>
+            <td data-value="{%  if item.description %}{{  item.description }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.description %}{{ item.description|raw }}{% endif %}</td>
+            <td data-value="{%  if item.author %}{{  item.author }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.author %}{{ item.author }}{% endif %}</td>
+            <td data-value="{{ item.official }}" class="inc-main-table-column">{{ item.official }}</td>
+{#            <td data-value="{%  if item.legal %}{{  item.legal }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.legal %}{{ item.legal }}{% endif %}</td>#}
+{#            <td data-value="{{ item.id }}" class="inc-main-table-column">{{ item.id }}</td>#}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <script src="{{asset('packs/js/equipment.js')}}"></script>
 {% endblock %}

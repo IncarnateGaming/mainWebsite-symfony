@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="navbar">
-    <a class="navbar-brand" href="/">Incarnate Gaming</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-secondary sticky-top" id="navbar">
+    <a class="navbar-brand text-light" href="/">Incarnate Gaming</a>
     <button class="btn btn-secondary" id="topButton" type="button" aria-label="Navigate to Top">Top</button>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -12,11 +12,11 @@
             </li>#}
             {% for item in genericParts.nav  %}
             <li class="nav-item">
-                <a class="nav-link" href="{{ path(item.pagePath) }}"{% if item.subpages is defined %} id="{{ item.pageName }}DropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% endif %}>{{ item.pageTitle }}</a>
+                <a class="nav-link text-light" href="{{ path(item.pagePath) }}"{% if item.subpages is defined %} id="{{ item.pageName }}DropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% endif %}>{{ item.pageTitle }}</a>
                 {% if item.subpages is defined %}
                 <div class="dropdown-menu" aria-labelledby="{{ item.pageName }}Dropdown">
                     {% for subitem in item.subpages %}
-                    <a class="dropdown-item" href="{{ path(subitem.pagePath) }}">{{ subitem.pageTitle }}</a>
+                    <a class="dropdown-item text-primary" href="{{ path(subitem.pagePath) }}">{{ subitem.pageTitle }}</a>
                     {% endfor %}
                     {# <div class="dropdown-divider"></div> #}
                 </div>
