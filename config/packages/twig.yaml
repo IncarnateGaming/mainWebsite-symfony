@@ -2,3 +2,10 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+
+    globals:
+        email: 'incarnategamingllc@gmail.com'
+        discord: 'pqkeFYc'
+        patreon: 'incarnategaming'
+        gitlab: 'incarnate-foundry-mods/issue-tracking'
+        youtube: 'UC4mUHQC49lUqAf1Uvekmx-w'

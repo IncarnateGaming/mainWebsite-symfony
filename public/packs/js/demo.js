@@ -237,3 +237,10 @@ function templateInsert () {
     template = templates[document.getElementById("selectChoices").value];
     document.getElementById("Main").innerHTML += '<div class="template">\n<h2>' + template.name + '</h2>\n' + template.data.description + "</div>\n";
 }
+function clearContent(){
+    document.getElementById("Main").innerHTML = '';
+}
+document.getElementById('insertTemplate').addEventListener('click',templateInsert);
+document.getElementById('generate').addEventListener('click',generate);
+document.getElementById('populate').addEventListener('click',populate);
+document.getElementById('clearContent').addEventListener('click',clearContent);

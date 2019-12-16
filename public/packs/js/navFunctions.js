@@ -2,7 +2,7 @@ let incScrolling = false;
 let incLastKnownScroll = 0;
 class NavFunctions{
     static hideNav(){
-        document.getElementById('navbar').style.top='-4rem';
+        document.getElementById('navbar').style.top='-10rem';
     }
     static showNav(){
         document.getElementById('navbar').style.top='0';
