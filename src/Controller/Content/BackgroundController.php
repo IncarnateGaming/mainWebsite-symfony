@@ -39,7 +39,7 @@ class BackgroundController extends AbstractController
         $intro = $chapterIntroRepository->buildParagraphsByCategory('Background Intro');
         return $this->render('content/backgrounds.html.twig',[
             'genericParts' => $this->genericParts,
-            'backgrounds' => $backgrounds,
+            'loop' => $backgrounds,
             'intro' => $intro,
         ]);
     }

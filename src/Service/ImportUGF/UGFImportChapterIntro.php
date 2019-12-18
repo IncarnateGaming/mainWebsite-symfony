@@ -5,13 +5,6 @@ namespace App\Service\ImportUGF;
 
 
 use App\Entity\ChapterIntro;
-use App\Entity\IncarnateBackground;
-use App\Entity\IncarnateBackgroundFeature;
-use App\Entity\IncarnateClass;
-use App\Entity\IncarnateClassArchetype;
-use App\Entity\IncarnateClassArchetypeTrait;
-use App\Entity\IncarnateClassTrait;
-use App\Entity\IncarnateEquipment;
 use App\Entity\IncarnateItem;
 
 class UGFImportChapterIntro extends BaseUGFImporter
@@ -150,20 +143,6 @@ class UGFImportChapterIntro extends BaseUGFImporter
         return true;
     }
     public function import(){
-        $equipmentRepository = $this->em->getRepository(IncarnateEquipment::class);
-        $equipmentRepository->deleteAll()->getQuery()->execute();
-        $backgroundFeatureRepository = $this->em->getRepository(IncarnateBackgroundFeature::class);
-        $backgroundFeatureRepository->deleteAll()->getQuery()->execute();
-        $repository = $this->em->getRepository(IncarnateBackground::class);
-        $repository->deleteAll()->getQuery()->execute();
-        $classArchetypeTraitRepository = $this->em->getRepository(IncarnateClassArchetypeTrait::class);
-        $classArchetypeTraitRepository->deleteAll()->getQuery()->execute();
-        $classArchetypeRepository = $this->em->getRepository(IncarnateClassArchetype::class);
-        $classArchetypeRepository->deleteAll()->getQuery()->execute();
-        $classTraitRepository = $this->em->getRepository(IncarnateClassTrait::class);
-        $classTraitRepository->deleteAll()->getQuery()->execute();
-        $classRepository = $this->em->getRepository(IncarnateClass::class);
-        $classRepository->deleteAll()->getQuery()->execute();
         $repository = $this->em->getRepository(ChapterIntro::class);
         $repository->deleteAll()->getQuery()->execute();
         $this->prepareChapterIntro($this->ugf->chapters->GMsBlind,'GMs Screen');

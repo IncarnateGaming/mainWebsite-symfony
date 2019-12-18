@@ -1,27 +1,28 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-secondary sticky-top" id="navbar">
-    <a class="navbar-brand text-light" href="/"><img src="{{ asset('assets/images/favicon.ico') }}">Incarnate Gaming</a>
-    <button class="btn btn-secondary" id="topButton" type="button" aria-label="Navigate to Top">Top</button>
-    <button class="navbar-toggler bg-primary text-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+{#<nav class="navbar navbar-expand-lg navbar-light bg-secondary sticky-top" id="navbar">#}
+{#    <a class="navbar-brand text-light" href="/"><img src="{{ asset('assets/images/favicon.ico') }}">Incarnate Gaming</a>#}
+{#    <button class="btn btn-secondary" id="topButton" type="button" aria-label="Navigate to Top">Top</button>#}
+{#    {% block backButton %}{% endblock %}#}
+{#    <button class="navbar-toggler bg-primary text-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">#}
+{#        <span class="navbar-toggler-icon"></span>#}
+{#    </button>#}
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            {#<li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>#}
-            {% for item in genericParts.nav  %}
-            <li class="nav-item">
-                <a class="nav-link text-light" href="{{ path(item.pagePath) }}"{% if item.subpages is defined %} id="{{ item.pageName }}DropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% endif %}>{{ item.pageTitle }}</a>
-                {% if item.subpages is defined %}
-                <div class="dropdown-menu" aria-labelledby="{{ item.pageName }}Dropdown">
-                    {% for subitem in item.subpages %}
-                    <a class="dropdown-item text-primary" href="{{ path(subitem.pagePath) }}">{{ subitem.pageTitle }}</a>
-                    {% endfor %}
-                    {# <div class="dropdown-divider"></div> #}
-                </div>
-                {% endif %}
-            </li>{% endfor %}
-        </ul>
-    </div>
-</nav>
+{#    <div class="collapse navbar-collapse" id="navbarSupportedContent">#}
+{#        <ul class="navbar-nav mr-auto">#}
+{#            #}{#<li class="nav-item active">#}
+{#                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>#}
+{#            </li>#}
+{#            {% for item in genericParts.nav  %}#}
+{#            <li class="nav-item">#}
+{#                <a class="nav-link text-light" href="{{ path(item.pagePath) }}"{% if item.subpages is defined %} id="{{ item.pageName }}DropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% endif %}>{{ item.pageTitle }}</a>#}
+{#                {% if item.subpages is defined %}#}
+{#                <div class="dropdown-menu" aria-labelledby="{{ item.pageName }}Dropdown">#}
+{#                    {% for subitem in item.subpages %}#}
+{#                    <a class="dropdown-item text-primary" href="{{ path(subitem.pagePath) }}">{{ subitem.pageTitle }}</a>#}
+{#                    {% endfor %}#}
+{#                    #}{# <div class="dropdown-divider"></div> #}
+{#                </div>#}
+{#                {% endif %}#}
+{#            </li>{% endfor %}#}
+{#        </ul>#}
+{#    </div>#}
+{#</nav>#}

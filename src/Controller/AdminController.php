@@ -15,6 +15,7 @@ use App\Service\ImportUGF\UGFImportRiddle;
 use App\Service\ImportUGF\UGFImportRollableTables;
 use App\Service\ImportUGF\UGFImportSkill;
 use App\Service\ImportUGF\UGFImportSpell;
+use App\Service\ImportUGF\UGFImportStart;
 use App\Service\ImportUGF\UGFImportTemplate;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\UGFImporter;
@@ -32,8 +33,9 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/import/start/", name="inc_import_start")
      */
-    public function importStart(){
+    public function importStart(UGFImportStart $UGFImporter){
         $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/rules/';
+        $UGFImporter->purge();
         return $this->redirect($path);
 //        return new Response('Import not started');
     }

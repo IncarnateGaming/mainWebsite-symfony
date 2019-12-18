@@ -22,4 +22,11 @@ return array(
     'spell'=>'spell',
     'table'=>'table',
     'template'=>'template',
+    'chapter'=>'chap',
+    'section1'=>'sec1',
+    'section2'=>'sec2',
+    'section3'=>'sec3',
+    'section4'=>'sec4',
+    'section5'=>'sec5',
+    'section6'=>'sec6',
 );

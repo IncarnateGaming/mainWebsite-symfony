@@ -45,6 +45,12 @@ class FidController extends AbstractController
             return $this->redirect($this->generateUrl('inc_npc',['slug'=>$slug]));
         }elseif($incImportType['race']==$type||$incImportType['raceTrait']==$type||$incImportType['raceSubrace']==$type||$incImportType['raceSubraceTrait']==$type){
             return $this->redirect($this->generateUrl('inc_race',['slug'=>$slug]));
+        }elseif($incImportType['raceSubrace']==$type||$incImportType['raceTrait']==$type||$incImportType['raceSubrace']==$type||$incImportType['raceSubraceTrait']==$type){
+            return $this->redirect($this->generateUrl('inc_race',['slug'=>$slug]));
+        }elseif($incImportType['raceTrait']==$type||$incImportType['raceTrait']==$type||$incImportType['raceSubrace']==$type||$incImportType['raceSubraceTrait']==$type){
+            return $this->redirect($this->generateUrl('inc_race',['slug'=>$slug]));
+        }elseif($incImportType['raceSubraceTrait']==$type||$incImportType['raceTrait']==$type||$incImportType['raceSubrace']==$type||$incImportType['raceSubraceTrait']==$type){
+            return $this->redirect($this->generateUrl('inc_race',['slug'=>$slug]));
         }elseif($incImportType['riddle']==$type){
             return $this->redirect($this->generateUrl('inc_riddle',['slug'=>$slug]));
         }elseif($incImportType['rule']==$type){

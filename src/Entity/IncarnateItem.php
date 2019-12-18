@@ -20,6 +20,10 @@ use Doctrine\ORM\Mapping as ORM;
  *     "feat"="IncarnateFeat",
  *     "item"="IncarnateItem",
  *     "riddle"="IncarnateRiddle",
+ *     "race"="IncarnateRace",
+ *     "race_subrace"="IncarnateRaceSubrace",
+ *     "race_trait"="IncarnateRaceTrait",
+ *     "race_subrace_trait"="IncarnateRaceSubraceTrait",
  *     "table"="IncarnateTable"})
  */
 class IncarnateItem
