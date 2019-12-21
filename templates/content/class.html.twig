@@ -1,7 +1,10 @@
 {%  extends 'base.html.twig' %}
 {% block title %}{{ class.name }}{% endblock %}
+{% block backButton %}
+    <button class="btn btn-secondary" id="backButton" type="button" aria-label="Navigate back" onclick="window.location.href = '{{ url('inc_classes') }}';">Classes</button>
+{% endblock %}
 {% block body %}
-    <i id="top"></i><div class="d-flex flex-row flex-wrap">
+    <i id="top"></i><div class="d-flex flex-row flex-wrap justify-content-center">
         {% for archetype in class.incarnateClassArchetypes %}
             <a class="border inc-flex-300 d-flex flex-column calm-black" href="{{ path('inc_class',{slug: class.fid }) }}#{{ archetype.fid }}">
                 <h3 class="p-2 text-center inc-padding-top">{{ archetype.name }}</h3>
@@ -35,7 +38,9 @@
         <h3>{{ class.archetypeInfo.namePlural }}</h3>
         {{ class.archetypeInfo.description|raw }}
         {% for archetype in class.incarnateClassArchetypes %}
-            <h4 id="{{ archetype.fid }}">{{ archetype.name }}</h4>
+            <h4 id="{{ archetype.fid }}"><a href="#{{ class.id }}">{{ archetype.name }}</a>
+                <span class="inc-pointer" onclick="window.location.href='{{ path('inc_class',{slug: archetype.fid}) }}'"><i class="fas fa-scroll"></i></span>
+            </h4>
             {{ archetype.description|raw }}
             {% for trait in archetype.incarnateClassArchetypeTraits %}
                 <h5 id="{{ trait.fid }}">{{ trait.name }}</h5>

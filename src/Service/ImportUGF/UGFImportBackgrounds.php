@@ -37,7 +37,7 @@ class UGFImportBackgrounds extends BaseUGFImporter
                 $back->setLegal($legal);
             }
             $back->setName($background->backgroundName);
-            $back->setOfficial($background->officialContent);
+            $back->setOfficial($background->officialContent === 'true' ? true : false);
             $skillProficiencies = $background->backgroundSkillProficiencies->description->children();
             $skillProfRes = array();
             foreach ($skillProficiencies as $skillProficiency){

@@ -19,6 +19,9 @@ $theme-colors: (
   --secondary:#5d046e;
   --dark:#1F0208;
 }
+body{
+  height:100vh;
+}
 //Flex
 .inc-flex-300{
   flex: 0 0 18rem;
@@ -26,7 +29,13 @@ $theme-colors: (
 .inc-flex-200{
   flex: 0 0 12rem;
 }
-//Pading
+.inc-flex-auto{
+  flex: 0 0 auto;
+}
+.inc-flex-grow{
+  flex: 1;
+}
+//Padding
 .inc-padding-top{
   padding-top:2rem;
 }
@@ -36,6 +45,12 @@ $theme-colors: (
 }
 .inc-padding-right{
   padding-right: 1rem;
+}
+//Alignment
+.inc-blockify-center{
+  display:block;
+  width:100%;
+  text-align:center;
 }
 
 //Calm a
@@ -53,6 +68,18 @@ a.calm-black{
   color:var(--light);
   cursor:pointer;
 }
-
+//Header
+nav.inc-sticky-header{
+  position:fixed;
+  top:0;
+  width:100%;
+}
+.inc-body{
+  padding-top:5.4rem;
+}
+//Pointers
+.inc-pointer{
+  cursor: pointer;
+}
 // Bootstrap and its default variables
 @import "../bootstrap-4.0.0/scss/bootstrap.scss";

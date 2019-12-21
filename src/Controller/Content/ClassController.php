@@ -37,8 +37,9 @@ class ClassController extends AbstractController
         $intro = $chapterIntroRepository->buildParagraphsByCategory('Class Intro');
         return $this->render('content/classes.html.twig',[
             'genericParts' => $this->genericParts,
-            'classes'=>$classes,
+            'loop'=>$classes,
             'intro'=>$intro,
+            'path'=>'inc_class',
         ]);
     }
     /**

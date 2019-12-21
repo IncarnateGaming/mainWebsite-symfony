@@ -15,6 +15,7 @@ SELECT * from incarnate_race;
 SELECT * from incarnate_race_trait;
 SELECT * from incarnate_race_subrace;
 SELECT * from incarnate_race_subrace_trait;
+SELECT * from incarnate_skill;
 SELECT * from incarnate_item WHERE id = 11163;
 SELECT * from incarnate_table WHERE id = 1574;
 SELECT * from migration_versions;

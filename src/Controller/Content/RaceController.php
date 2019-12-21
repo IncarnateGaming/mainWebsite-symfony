@@ -6,6 +6,7 @@ namespace App\Controller\Content;
 
 use App\Entity\ChapterIntro;
 use App\Entity\IncarnateRace;
+use App\Entity\IncarnateRaceSubrace;
 use App\Repository\IncarnateRaceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -55,7 +56,15 @@ class RaceController extends AbstractController
                 'race'=>$race,
             ]);
         }
-        if(!$race){
+        $subraceRepository = $this->em->getRepository(IncarnateRaceSubrace::class);
+        $subrace = $subraceRepository->findOneBy(['fid'=>$slug]);
+        if($subrace){
+            return $this->render('content/racesubrace.html.twig',[
+                'genericParts' => $this->genericParts,
+                'slug' => $slug,
+                'subrace'=>$subrace,
+            ]);
+        }else{
             throw $this->createNotFoundException('The race: "' . $slug . '" does not exist');
         }
     }

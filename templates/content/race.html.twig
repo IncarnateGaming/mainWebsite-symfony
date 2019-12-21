@@ -4,8 +4,10 @@
     <button class="btn btn-secondary" id="backButton" type="button" aria-label="Navigate back" onclick="window.location.href = '{{ url('inc_races') }}';">Races</button>
 {% endblock %}
 {% block body %}
-    <h2 id="{{ race.fid }}">{{ race.name }}</h2>
-    <div class="d-flex flex-row flex-wrap">
+    <div class="container">
+        <h2 id="{{ race.fid }}">{{ race.name }}</h2>
+    </div>
+    <div class="d-flex flex-row flex-wrap justify-content-center">
     {% for subrace in race.subraces %}
         <a class="border inc-flex-300 d-flex flex-column calm-black" href="{{ path('inc_race',{slug: race.fid }) }}#{{ subrace.fid }}">
             <h3 class="p-2 text-center inc-padding-top">{{ subrace.name }}</h3>
@@ -13,19 +15,23 @@
         </a>
     {% endfor %}
     </div>
-    {{ race.description|raw }}
-    <h3>{{ race.name }} Traits</h3>
-    {% for trait in race.incarnateRaceTraits %}
-        <span class="float-left inc-padding-right"><strong>{{ trait.name }}</strong></span>{{ trait.description|raw }}
-    {% endfor %}
-    {% if race.subraces|length > 0 %}
-    <h4>Subraces</h4>
-        {% for subrace in race.subraces %}
-            <h5 id="{{ subrace.fid }}"><a href="#{{ race.fid }}">{{ subrace.name }}</a></h5>
-            {{ subrace.description|raw }}
-            {% for trait in subrace.incarnateRaceSubraceTraits %}
-                <span class="float-left inc-padding-right"><strong>{{ trait.name }}</strong></span>{{ trait.description|raw }}
-            {% endfor %}
+    <div class="container">
+        {{ race.description|raw }}
+        <h3>{{ race.name }} Traits</h3>
+        {% for trait in race.incarnateRaceTraits %}
+            <span class="float-left inc-padding-right"><strong>{{ trait.name }}</strong></span>{{ trait.description|raw }}
         {% endfor %}
-    {% endif %}
+        {% if race.subraces|length > 0 %}
+        <h4>Subraces</h4>
+            {% for subrace in race.subraces %}
+                <h5 id="{{ subrace.fid }}"><a href="#{{ race.fid }}">{{ subrace.name }}</a>
+                    <span class="inc-pointer" onclick="window.location.href='{{ path('inc_race',{slug: subrace.fid}) }}'"><i class="fas fa-scroll"></i></span>
+                </h5>
+                {{ subrace.description|raw }}
+                {% for trait in subrace.incarnateRaceSubraceTraits %}
+                    <span class="float-left inc-padding-right"><strong>{{ trait.name }}</strong></span>{{ trait.description|raw }}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+    </div>
 {% endblock %}

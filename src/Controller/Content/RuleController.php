@@ -32,6 +32,9 @@ class RuleController extends AbstractController
         return $this->render('content/rules.html.twig',[
             'genericParts' => $this->genericParts,
             'categories'=>$categories,
+            'loop'=>$categories,
+            'intro'=>'',
+            'path'=>'inc_rule',
         ]);
     }
     /**

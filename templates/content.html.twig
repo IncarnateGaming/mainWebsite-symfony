@@ -1,0 +1,15 @@
+{%  extends 'base.html.twig' %}
+{% block title %}Content{% endblock %}
+{% block body %}
+    {% for navPart in genericParts.nav %}
+        {% if navPart.pagePath == 'inc_content' %}
+            <div class="d-flex flex-row flex-wrap justify-content-center">
+                {% for item in navPart.subpages %}
+                    <a class="border inc-flex-300 d-flex flex-column calm-black" href="{{ path(item.pagePath) }}">
+                        <h3 class="p-2 text-center inc-padding-top">{{ item.pageTitle }}</h3>
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

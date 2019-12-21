@@ -24,6 +24,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     "race_subrace"="IncarnateRaceSubrace",
  *     "race_trait"="IncarnateRaceTrait",
  *     "race_subrace_trait"="IncarnateRaceSubraceTrait",
+ *     "skill"="IncarnateSkill",
  *     "table"="IncarnateTable"})
  */
 class IncarnateItem

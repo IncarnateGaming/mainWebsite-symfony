@@ -90,8 +90,8 @@ class AdminController extends AbstractController
     public function importRaces(UGFImportRaces $UGFImporter){
         $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/riddle/';
         $UGFImporter->import();
-        return new Response('Import stopped at races');
-//        return $this->redirect($path);
+//        return new Response('Import stopped at races');
+        return $this->redirect($path);
     }
     /**
      * @Route("/admin/import/riddle/")
@@ -99,8 +99,8 @@ class AdminController extends AbstractController
     public function importRiddles(UGFImportRiddle $UGFImporter){
         $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/skill/';
         $UGFImporter->import();
-        return new Response('Import stopped at riddles');
-//        return $this->redirect($path);
+//        return new Response('Import stopped at riddles');
+        return $this->redirect($path);
     }
     /**
      * @Route("/admin/import/skill/")

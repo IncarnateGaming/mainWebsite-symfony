@@ -70,7 +70,7 @@ class ChapterIntroRepository extends ServiceEntityRepository
     }
     public function arrayOfNonIntroCategories():array{
         $qb = $this->createQueryBuilder('i')
-            ->select('i.category','i.official','i.author');
+            ->select('i.category','i.official','i.author','i.categoryFid');
         $queryResult = $qb->getQuery()->getResult();
 //        dump($queryResult);die;
         $added = '';
@@ -80,11 +80,14 @@ class ChapterIntroRepository extends ServiceEntityRepository
                 $added.=$entry['category'];
                 $entry['sanCat'] = str_replace(' ','-',$entry['category']);
                 $entry['sanCat'] = str_replace(['(',')'],'',$entry['sanCat']);
+                $entry['fid'] = $entry['sanCat'];
                 if('false'===$entry['official'] || ''===$entry['official']){
                     $entry['official']=false;
                 }elseif ('true'===$entry['official']){
                     $entry['official']=true;
                 }
+                $entry['name']=$entry['category'];
+//                dump($entry);die;
                 $result[]=$entry;
             }
         }

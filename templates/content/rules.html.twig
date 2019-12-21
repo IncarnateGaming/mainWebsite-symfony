@@ -1,12 +1,12 @@
-{%  extends 'base.html.twig' %}
+{%  extends 'base_card_list.html.twig' %}
 {% block title %}Rules{% endblock %}
-{% block body %}
-    <div class="d-flex flex-row flex-wrap">
-        {% for category in categories %}
-            <a class="border inc-flex-300 d-flex flex-column calm-black" href="{{ path('inc_rule',{slug: category.sanCat}) }}">
-                <h3 class="p-2 text-center inc-padding-top">{{ category.category }}</h3>
-                <span class="p-2 d-flex flex-row justify-content-center"><span class="p-2"><strong>Official:</strong> {% if category.official %}true{% else %}false{% endif %}</span> <span class="p-2"><strong>Author:</strong> {{ category.author }}</span></span>
-            </a>
-        {% endfor %}
-    </div>
-{% endblock %}
+{#{% block body %}#}
+{#    <div class="d-flex flex-row flex-wrap">#}
+{#        {% for category in categories %}#}
+{#            <a class="border inc-flex-300 d-flex flex-column calm-black" href="{{ path('inc_rule',{slug: category.sanCat}) }}">#}
+{#                <h3 class="p-2 text-center inc-padding-top">{{ category.category }}</h3>#}
+{#                <span class="p-2 d-flex flex-row justify-content-center"><span class="p-2"><strong>Official:</strong> {% if category.official %}true{% else %}false{% endif %}</span> <span class="p-2"><strong>Author:</strong> {{ category.author }}</span></span>#}
+{#            </a>#}
+{#        {% endfor %}#}
+{#    </div>#}
+{#{% endblock %}#}

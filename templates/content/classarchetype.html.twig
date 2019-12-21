@@ -1,11 +1,16 @@
 {%  extends 'base.html.twig' %}
 {% block title %}{{ archetype.name }}{% endblock %}
+{% block backButton %}
+    <button class="btn btn-secondary" id="backButton" type="button" aria-label="Navigate back" onclick="window.location.href = '{{ path('inc_class',{slug: archetype.incarnateClass.fid}) }}';">{{ archetype.incarnateClass.name }}</button>
+{% endblock %}
 {% block body %}
-    <h4 id="{{ archetype.fid }}"><a href="{{ path('inc_class',{'slug':archetype.incarnateClass.fid}) }}#{{ archetype.fid }}">{{ archetype.name }}</a></h4>
-    {{ archetype.description|raw }}
-    {% for trait in archetype.incarnateClassArchetypeTraits %}
-        <h5 id="{{ trait.fid }}">{{ trait.name }}</h5>
-        {{ trait.description|raw }}
-    {% endfor %}
-    {{ archetype.legal|raw }}
+    <div class="container">
+        <h4 id="{{ archetype.fid }}"><a href="{{ path('inc_class',{'slug':archetype.incarnateClass.fid}) }}#{{ archetype.fid }}">{{ archetype.name }}</a></h4>
+        {{ archetype.description|raw }}
+        {% for trait in archetype.incarnateClassArchetypeTraits %}
+            <h5 id="{{ trait.fid }}">{{ trait.name }}</h5>
+            {{ trait.description|raw }}
+        {% endfor %}
+        {{ archetype.legal|raw }}
+    </div>
 {% endblock %}

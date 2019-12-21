@@ -1,4 +1,13 @@
 {%  extends 'base.html.twig' %}
-{% block title %}Skills{% endblock %}
+{% block title %}{{ skill.name }}{% endblock %}
+{% block backButton %}
+    <button class="btn btn-secondary" id="backButton" type="button" aria-label="Navigate back" onclick="window.location.href = '{{ path('inc_skills') }}';">Skills</button>
+{% endblock %}
 {% block body %}
+    <div class="container">
+        <p><strong>Based on:</strong> {{ skill.ability }}</p>
+        {{ skill.description|raw }}
+        <p><strong>From:</strong> {{ skill.author }}</p>
+        <p><strong>Type:</strong> {{ skill.skillType }}</p>
+    </div>
 {% endblock %}

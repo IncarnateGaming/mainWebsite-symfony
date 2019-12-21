@@ -17,8 +17,8 @@
             <link rel="stylesheet" href="{{ asset('style/incBootstrap.css') }}">
         {% endblock %}
     </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-secondary sticky-top" id="navbar">
+    <body class="d-flex flex-column">
+        <nav class="navbar navbar-expand-lg navbar-light bg-secondary inc-sticky-header" id="navbar">
             <a class="navbar-brand text-light" href="/"><img src="{{ asset('assets/images/favicon.ico') }}">Incarnate Gaming</a>
             <button class="btn btn-secondary" id="topButton" type="button" aria-label="Navigate to Top">Top</button>
             {% block backButton %}{% endblock %}
@@ -33,7 +33,7 @@
                     </li>#}
                     {% for item in genericParts.nav  %}
                         <li class="nav-item">
-                        <button class="btn btn-secondary" onclick="window.location.href='{{ url(item.pagePath) }}'"{% if item.subpages is defined %} id="{{ item.pageName }}DropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% endif %}>{{ item.pageTitle }}</button>
+                        <button class="btn btn-secondary"{% if item.subpages is defined %} id="{{ item.pageName }}DropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% else %} onclick="window.location.href='{{ url(item.pagePath) }}'"{% endif %}>{{ item.pageTitle }}</button>
                         {% if item.subpages is defined %}
                             <div class="dropdown-menu" aria-labelledby="{{ item.pageName }}Dropdown">
                                 {% for subitem in item.subpages %}
@@ -46,8 +46,21 @@
                 </ul>
             </div>
         </nav>
-{#        {{ include('parts/nav.html.twig')}}#}
-        {% block body %}{% endblock %}
+        <div class="inc-body inc-flex-grow">
+            {% block body %}{% endblock %}
+        </div>
+        <footer class="bg-secondary inc-flex-auto">
+            <div class="list-unstyled d-flex justify-content-end">
+                <a class="text-light container p-2" href="https://discord.gg/{{ discord }}">Discord</a>
+                <a class="text-light container p-2" href="mailto:{{ email }}">Email</a>
+                <a class="text-light container p-2" href="https://gitlab.com/{{ gitlab }}/issues">GitLab</a>
+                <a class="text-light container p-2" href="https://www.patreon.com/{{ patreon }}">Patreon</a>
+                <a class="text-light container p-2" href="https://www.youtube.com/channel/{{ youtube }}">YouTube</a>
+            </div>
+            <div class="bg-primary">
+                <span class="text-light inc-blockify-center">© 2019 <a class="text-light" href="mailto:{{ email }}">Incarnate Gaming LLC</a></span>
+            </div>
+        </footer>
         {% block javascripts %}
             {#
             <script src="bootstrap-native-master/{{ asset('bootstrap-native-master/assets/js/scripts4.js') }}"></script>
@@ -58,6 +71,5 @@
             <script src="{{asset('packs/js/navFunctions.js')}}"></script>
 
         {% endblock %}
-    {{ include('parts/footer.html.twig') }}
     </body>
 </html>

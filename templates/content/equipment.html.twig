@@ -1,5 +1,20 @@
 {%  extends 'base.html.twig' %}
-{% block title %}Equipment{% endblock %}
+{% block title %}{{ equipment.name }}{% endblock %}
+{% block backButton %}
+    <button class="btn btn-secondary" id="backButton" type="button" aria-label="Navigate back" onclick="window.location.href = '{{ path('inc_equipments') }}';">Equipment</button>
+{% endblock %}
 {% block body %}
+    <div class="container">
+        <h3 id="{{ equipment.fid }}">{{ equipment.name }}</h3>
+        {% if equipment.damage|length > 0 %}
+            <h5>Damages</h5>
+            {% for damages in equipment.damage %}
+                <p>{% if damages[0].formula %}{{ damages[0].formula }}{% endif %}{% if damages[0].modifier %} + {{ damages[0].modifier }}{% endif %}{% if damages[0].type %} {{ damages[0].type }}{% endif %}{% if damages[0].material %} {{ damages[0].material }}{% endif %}</p>
+            {% endfor %}
+        {% endif %}
+        {% if equipment. %}
+        {{ equipment.description|raw }}
+        {% if equipment.legal %}{{ equipment.legal|raw }}{% endif %}
+    </div>
     {{ dump() }}
 {% endblock %}

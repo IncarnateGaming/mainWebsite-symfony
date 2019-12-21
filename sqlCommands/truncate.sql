@@ -1,5 +1,6 @@
 USE incarnate_gaming;
 SHOW TABLES;
+TRUNCATE incarnate_skill;
 TRUNCATE incarnate_riddle;
 TRUNCATE incarnate_race_subrace_trait;
 TRUNCATE incarnate_race_subrace;

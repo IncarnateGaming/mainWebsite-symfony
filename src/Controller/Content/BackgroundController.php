@@ -41,6 +41,7 @@ class BackgroundController extends AbstractController
             'genericParts' => $this->genericParts,
             'loop' => $backgrounds,
             'intro' => $intro,
+            'path'=>'inc_background',
         ]);
     }
     /**

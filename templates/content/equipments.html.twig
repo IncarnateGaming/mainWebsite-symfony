@@ -149,7 +149,7 @@
         <tbody id="inc-table-main-body">
         {% for item in equipment %}
         <tr class="inc-table-main-row">
-            <td data-value="{{ item.name|lower }}" class="inc-main-table-column">{{ item.name }}</td>
+            <td data-value="{{ item.name|lower }}" class="inc-main-table-column"><a href="{{ path('inc_equipment',{slug: item.fid}) }}">{{ item.name }}</a></td>
             <td data-value="{{ item.costSortable }}" class="inc-main-table-column">{{ item.cost }}</td>
             <td data-value="{{ item.weight }}" class="inc-main-table-column">{{ item.weight }}</td>
             <td data-value="{% if item.ac %}{{ item.ac.ac }}{% else %}-1{% endif %}" class="inc-main-table-column">{% if item.ac %}{{ item.ac.ac }}{% if item.ac.mod %} {{ item.ac.mod }}{% endif %}{% endif %}</td>

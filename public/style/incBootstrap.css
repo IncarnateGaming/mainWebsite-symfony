@@ -5,12 +5,24 @@
   --dark:#1F0208;
 }
 
+body {
+  height: 100vh;
+}
+
 .inc-flex-300 {
   flex: 0 0 18rem;
 }
 
 .inc-flex-200 {
   flex: 0 0 12rem;
+}
+
+.inc-flex-auto {
+  flex: 0 0 auto;
+}
+
+.inc-flex-grow {
+  flex: 1;
 }
 
 .inc-padding-top {
@@ -26,6 +38,12 @@
   padding-right: 1rem;
 }
 
+.inc-blockify-center {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
 a.calm-black {
   color: var(--dark);
 }
@@ -39,6 +57,20 @@ a.calm-black {
 .crossReference:hover {
   background-color: var(--primary);
   color: var(--light);
+  cursor: pointer;
+}
+
+nav.inc-sticky-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.inc-body {
+  padding-top: 5.4rem;
+}
+
+.inc-pointer {
   cursor: pointer;
 }
 

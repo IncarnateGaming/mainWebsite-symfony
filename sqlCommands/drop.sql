@@ -1,5 +1,6 @@
 USE incarnate_gaming;
 SHOW TABLES;
+DROP TABLE incarnate_skill;
 DROP TABLE incarnate_riddle;
 DROP TABLE incarnate_race_subrace_trait;
 DROP TABLE incarnate_race_subrace;

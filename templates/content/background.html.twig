@@ -1,5 +1,8 @@
 {%  extends 'base.html.twig' %}
 {% block title %}{{ background.name }}{% endblock %}
+{% block backButton %}
+    <button class="btn btn-secondary" id="backButton" type="button" aria-label="Navigate back" onclick="window.location.href = '{{ url('inc_backgrounds') }}';">Backgrounds</button>
+{% endblock %}
 {% block body %}
     <div class="container">
     <h2>{{ background.name }}</h2>
