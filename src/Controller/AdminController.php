@@ -8,6 +8,7 @@ use App\Service\ImportUGF\UGFImportBackgrounds;
 use App\Service\ImportUGF\UGFImportChapterIntro;
 use App\Service\ImportUGF\UGFImportClasses;
 use App\Service\ImportUGF\UGFImportEquipment;
+use App\Service\ImportUGF\UGFImportFeat;
 use App\Service\ImportUGF\UGFImportMagicProperty;
 use App\Service\ImportUGF\UGFImportNPCs;
 use App\Service\ImportUGF\UGFImportRaces;
@@ -106,9 +107,18 @@ class AdminController extends AbstractController
      * @Route("/admin/import/skill/")
      */
     public function importSkill(UGFImportSkill $UGFImporter){
+        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/feat/';
+        $UGFImporter->import();
+//        return new Response('Import stopped at skills');
+        return $this->redirect($path);
+    }
+    /**
+     * @Route("/admin/import/feat/")
+     */
+    public function importFeat(UGFImportFeat $UGFImporter){
         $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/spell/';
         $UGFImporter->import();
-        return new Response('Import stopped at skills');
+        return new Response('Import stopped at feats');
 //        return $this->redirect($path);
     }
     /**

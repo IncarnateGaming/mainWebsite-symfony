@@ -41,7 +41,7 @@ class UGFImportFunctions
     }
     public function headingText(string $string):string{
         $string = $this->removeLineReturns($string);
-        $string = str_replace('<quoMark/>','"',$string);
+        $string = $this->quoMark($string);
         $string = str_replace('<crossReference','<span class="crossReference"',$string);
         $string = str_replace('</crossReference>','</span>',$string);
         $string = str_replace('<generate','<span class="generate"',$string);
@@ -52,6 +52,10 @@ class UGFImportFunctions
         $string = str_replace(' recurrance="',' data-recurrance="',$string);
         $string = str_replace(' quantity="',' data-quantity="',$string);
         $string = str_replace('</generate>','</span>',$string);
+        return $string;
+    }
+    public function quoMark(string $string):string{
+        $string = str_replace('<quoMark/>','"',$string);
         return $string;
     }
     //Takes either a string or a description simple xml element
@@ -65,7 +69,7 @@ class UGFImportFunctions
         }
         $result = $this->removeLineReturns($result);
         //TODO: handle sound
-        $result = str_replace('<quoMark/>','"',$result);
+        $result = $this->quoMark($result);
         $result = str_replace('<calculate>','<span class="calculate">',$result);
         $result = str_replace('</calculate>','</span>',$result);
         $result = str_replace('<crossReference','<span class="crossReference"',$result);
