@@ -1,6 +1,10 @@
 {%  extends 'base.html.twig' %}
 {% block title %}{{ trait.name }}{% endblock %}
+{% block backButton %}
+    <button class="btn btn-secondary" id="backButton" type="button" aria-label="Navigate back" onclick="window.location.href = '{{ url('inc_class',{slug: trait.incarnateClass.fid}) }}';">{{ trait.incarnateClass.name }}</button>
+{% endblock %}
 {% block body %}
     <h5 id="{{ trait.fid }}"><a href="{{ parentfid }}#{{ trait.fid }}">{{ trait.name }}</a></h5>
     {{ trait.description|raw }}
+    {% if trait.incarnateClass.legal %}<hr/>{{ trait.incarnateClass.legal|raw }}{% endif %}
 {% endblock %}

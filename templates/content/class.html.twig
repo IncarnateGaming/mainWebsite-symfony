@@ -45,9 +45,9 @@
             {% for trait in archetype.incarnateClassArchetypeTraits %}
                 <h5 id="{{ trait.fid }}">{{ trait.name }}</h5>
                 {{ trait.description|raw }}
-            {% endfor %}
-            {{ archetype.legal|raw }}
-        {% endfor %}
-        {{ class.legal|raw }}
+            {% endfor %}{% if archetype.legal %}<hr/>
+            {{ archetype.legal|raw }}{% endif %}
+        {% endfor %}{% if class.legal %}<hr/>
+        {{ class.legal|raw }}{% endif %}
     </div>
 {% endblock %}

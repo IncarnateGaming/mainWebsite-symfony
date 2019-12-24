@@ -35,6 +35,6 @@
             <tr><th scope="col">d6</th><th scope="col">Flaw</th></tr>
             {% for row in background.flaw.tr %}<tr><th scope="row">{{ row.to }}</th><td>{{ row.td.0|p_stripper }}</td></tr>
             {% endfor %}</table><br/>
-    {% endif %}{% if background.legal %}{{ background.legal|raw }}{% endif %}
+    {% endif %}{% if background.legal %}<hr/>{{ background.legal|raw }}{% endif %}
     </div>
 {% endblock %}

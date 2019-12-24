@@ -10,5 +10,6 @@
         {% for trait in subrace.incarnateRaceSubraceTraits %}
             <span class="float-left inc-padding-right"><strong>{{ trait.name }}</strong></span>{{ trait.description|raw }}
         {% endfor %}
+        {% if subrace.legal %}<hr/>{{ subrace.legal|raw }}{% endif %}
     </div>
 {% endblock %}

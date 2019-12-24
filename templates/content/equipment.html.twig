@@ -14,7 +14,7 @@
         {% endif %}
         {% if equipment. %}
         {{ equipment.description|raw }}
-        {% if equipment.legal %}{{ equipment.legal|raw }}{% endif %}
+        {% if equipment.legal %}<hr/>{{ equipment.legal|raw }}{% endif %}
     </div>
     {{ dump() }}
 {% endblock %}

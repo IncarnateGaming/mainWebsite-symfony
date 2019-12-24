@@ -1,4 +1,14 @@
 {%  extends 'base.html.twig' %}
-{% block title %}Feats{% endblock %}
+{% block title %}{{ feat.name }}{% endblock %}
+{% block backButton %}
+    <button class="btn btn-secondary" id="backButton" type="button" aria-label="Navigate back" onclick="window.location.href = '{{ url('inc_feats') }}';">Feats</button>
+{% endblock %}
 {% block body %}
+    <div class="container">
+        <h3 id="{{ feat.fid }}">{{ feat.name }}</h3>
+        {% if feat.prerequisite %}<p><strong>Prerequisite: </strong>{{ feat.prerequisite }}</p>{% endif %}
+        {{ feat.description|raw }}{% if feat.legal %}
+        <hr/>
+        {{ feat.legal|raw }}{% endif %}
+    </div>
 {% endblock %}
