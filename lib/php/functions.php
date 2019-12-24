@@ -7,8 +7,11 @@ function publicFolder(){
 }
 function loadNav(){
     $public = publicFolder();
-    $navPath = str_replace("/public","",$public) . "lib/json/nav.json";
-    //var_dump($navPath);
+    $navPath = str_replace("/public","",$public);
+    if (substr($navPath,-1)!=='/'){
+        $navPath .= '/';
+    }
+    $navPath .= 'lib/json/nav.json';
     $navJson = file_get_contents( $navPath);
     $navArray = json_decode($navJson);
     return $navArray;
@@ -16,7 +19,6 @@ function loadNav(){
 function loadAbout(){
     $public = publicFolder();
     $aboutPath = str_replace("/public","",$public) . "lib/json/about.json";
-    //var_dump($navPath);
     $aboutJson = file_get_contents( $aboutPath);
     $aboutArray = json_decode($aboutJson);
     return $aboutArray;
