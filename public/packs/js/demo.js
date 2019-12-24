@@ -46,6 +46,10 @@ function rollTable(tableID){
 function generate(){
     var data = document.getElementsByClassName("template");
     var found;
+    if(data.length === 0){
+        templateInsert();
+        data = document.getElementsByClassName('template');
+    }
     var dataLength=data.length;
     var regex = /<p>/g;
     var regexStart = /^<p>/;
