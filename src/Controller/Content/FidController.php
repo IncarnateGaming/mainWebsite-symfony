@@ -5,6 +5,7 @@ namespace App\Controller\Content;
 
 
 use App\Entity\IncarnateItem;
+use App\Service\ImportUGF\BaseUGFImporter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,8 +24,9 @@ class FidController extends AbstractController
     /**
      * @Route("/content/fid/{slug}", name="inc_fid")
      */
-    public function fid($slug){
-        $incImportType = require('../src/Service/ImportUGF/ImportTypes.php');
+    public function fid($slug, BaseUGFImporter $baseUGFImporter){
+//        $incImportType = require('../src/Service/ImportUGF/ImportTypes.php');
+        $incImportType = $baseUGFImporter->incImportType;
         $repository = $this->em->getRepository(IncarnateItem::class);
         $item = $repository->findOneBy(['fid'=>$slug]);
         if(!$item){

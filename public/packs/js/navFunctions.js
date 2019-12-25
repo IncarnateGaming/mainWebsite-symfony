@@ -44,7 +44,7 @@ class IncarnateReference{
         const reference = event.target.getAttribute('data-fid');
         console.log(parent,reference);
         const crossReference = parent !== null ? parent+'#' + reference : reference;
-        window.location.href = '/content/fid/'+crossReference;
+        window.location.href = '/index.php/content/fid/'+crossReference;
     }
 }
 window.addEventListener('scroll',NavFunctions.changeNavOnScroll);
