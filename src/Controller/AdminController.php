@@ -116,6 +116,7 @@ class AdminController extends AbstractController
      * @Route("/admin/import/feat/")
      */
     public function importFeat(UGFImportFeat $UGFImporter){
+        dump($_SERVER);die;
         $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/spell/';
         $UGFImporter->import();
         return new Response('Import stopped at feats');
