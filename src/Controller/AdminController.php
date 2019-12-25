@@ -25,18 +25,21 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AdminController extends AbstractController
 {
-//    public function __construct(UGFImporter $UGFImporter)
-//    {
-//        $this->UGFImporter = $UGFImporter;
-////        $this->request = $request;
-//    }
+    public function __construct()
+    {
+        if($_SERVER['HTTP_HOST']){
+            $serverRoute = $_SERVER['HTTP_HOST'] . '/index.php/';
+        }elseif($_SERVER['SYMFONY_DEFAULT_ROUTE_URL']){
+            $serverRoute = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'];
+        }
+        $this->serverRoute = $serverRoute;
+    }
 
     /**
      * @Route("/admin/import/start/", name="inc_import_start")
      */
     public function importStart(UGFImportStart $UGFImporter){
-        dump($_SERVER);die;
-        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/rules/';
+        $path = $this->serverRoute . 'admin/import/rules/';
         $UGFImporter->purge();
         return $this->redirect($path);
 //        return new Response('Import not started');
@@ -45,7 +48,7 @@ class AdminController extends AbstractController
      * @Route("/admin/import/rules/")
      */
     public function importRules(UGFImportChapterIntro $UGFImporter){
-        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/tables/';
+        $path = $this->serverRoute . 'admin/import/tables/';
         $UGFImporter->import();
         return $this->redirect($path);
 //        return new Response('Import stopped at rules');
@@ -55,7 +58,7 @@ class AdminController extends AbstractController
      */
     public function importTables(UGFImportRollableTables $UGFImporter){
         $UGFImporter->import();
-        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/backgrounds/';
+        $path = $this->serverRoute . 'admin/import/backgrounds/';
         return $this->redirect($path);
 //        return new Response('Import stopped at tables');
     }
@@ -63,7 +66,7 @@ class AdminController extends AbstractController
      * @Route("/admin/import/backgrounds/")
      */
     public function importBackgrounds(UGFImportBackgrounds $UGFImporter){
-        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/classes/';
+        $path = $this->serverRoute . 'admin/import/classes/';
         $UGFImporter->import();
         return $this->redirect($path);
 //        return new Response('Import stopped at backgrounds');
@@ -72,7 +75,7 @@ class AdminController extends AbstractController
      * @Route("/admin/import/classes/")
      */
     public function importClasses(UGFImportClasses $UGFImporter){
-        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/equipment/';
+        $path = $this->serverRoute . 'admin/import/equipment/';
         $UGFImporter->import();
         return $this->redirect($path);
 //        return new Response('Import stopped at classes');
@@ -81,7 +84,7 @@ class AdminController extends AbstractController
      * @Route("/admin/import/equipment/")
      */
     public function importEquipment(UGFImportEquipment $UGFImporter){
-        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/race/';
+        $path = $this->serverRoute . 'admin/import/race/';
         $UGFImporter->import();
 //        return new Response('Import stopped at equipment');
         return $this->redirect($path);
@@ -90,7 +93,7 @@ class AdminController extends AbstractController
      * @Route("/admin/import/race/")
      */
     public function importRaces(UGFImportRaces $UGFImporter){
-        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/riddle/';
+        $path = $this->serverRoute . 'admin/import/riddle/';
         $UGFImporter->import();
 //        return new Response('Import stopped at races');
         return $this->redirect($path);
@@ -99,7 +102,7 @@ class AdminController extends AbstractController
      * @Route("/admin/import/riddle/")
      */
     public function importRiddles(UGFImportRiddle $UGFImporter){
-        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/skill/';
+        $path = $this->serverRoute . 'admin/import/skill/';
         $UGFImporter->import();
 //        return new Response('Import stopped at riddles');
         return $this->redirect($path);
@@ -108,7 +111,7 @@ class AdminController extends AbstractController
      * @Route("/admin/import/skill/")
      */
     public function importSkill(UGFImportSkill $UGFImporter){
-        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/feat/';
+        $path = $this->serverRoute . 'admin/import/feat/';
         $UGFImporter->import();
 //        return new Response('Import stopped at skills');
         return $this->redirect($path);
@@ -117,7 +120,7 @@ class AdminController extends AbstractController
      * @Route("/admin/import/feat/")
      */
     public function importFeat(UGFImportFeat $UGFImporter){
-        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/spell/';
+        $path = $this->serverRoute . 'admin/import/spell/';
         $UGFImporter->import();
         return new Response('Import stopped at feats');
 //        return $this->redirect($path);
@@ -126,7 +129,7 @@ class AdminController extends AbstractController
      * @Route("/admin/import/spell/")
      */
     public function importSpell(UGFImportSpell $UGFImporter){
-        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/template/';
+        $path = $this->serverRoute . 'admin/import/template/';
         $UGFImporter->import();
         return new Response('Import stopped at spells');
 //        return $this->redirect($path);
@@ -135,7 +138,7 @@ class AdminController extends AbstractController
      * @Route("/admin/import/template/")
      */
     public function importTemplates(UGFImportTemplate $UGFImporter){
-        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/npc/';
+        $path = $this->serverRoute . 'admin/import/npc/';
         $UGFImporter->import();
         return new Response('Import stopped at templates');
 //        return $this->redirect($path);
@@ -144,7 +147,7 @@ class AdminController extends AbstractController
      * @Route("/admin/import/npc/")
      */
     public function importNPCs(UGFImportNPCs $UGFImporter){
-        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/magicProp/';
+        $path = $this->serverRoute . 'admin/import/magicProp/';
         $UGFImporter->import();
         return new Response('Import stopped at NPCs');
 //        return $this->redirect($path);
@@ -153,7 +156,7 @@ class AdminController extends AbstractController
      * @Route("/admin/import/magicProp/")
      */
     public function importMagicProp(UGFImportMagicProperty $UGFImporter){
-//        $path = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'] . 'admin/import/npc/';
+//        $path = $this->>serverRoute . 'admin/import/npc/';
         $UGFImporter->import();
         return new Response('Import stopped at magic properties');
 //        return $this->redirect($path);
