@@ -18,14 +18,22 @@ function loadNav(){
 }
 function loadAbout(){
     $public = publicFolder();
-    $aboutPath = str_replace("/public","",$public) . "lib/json/about.json";
+    $aboutPath = str_replace("/public","",$public);
+    if(substr($aboutPath,-1)!=='/'){
+        $aboutPath .= '/';
+    }
+    $aboutPath .= 'lib/json/about.json';
     $aboutJson = file_get_contents( $aboutPath);
     $aboutArray = json_decode($aboutJson);
     return $aboutArray;
 }
 function findMobile(){
     $public = publicFolder();
-    $mobilePath = str_replace("/public","",$public) . "vendor/mobiledetect/mobiledetectlib/Mobile_Detect.php";
+    $mobilePath = str_replace("/public","",$public);
+    if(substr($mobilePath,-1)!=='/'){
+        $mobilePath .= '/';
+    }
+    $mobilePath .= 'vendor/mobiledetect/mobiledetectlib/Mobile_Detect.php';
     require_once $mobilePath;
     $detect = new Mobile_Detect;
     $isMobile = $detect->isMobile();
