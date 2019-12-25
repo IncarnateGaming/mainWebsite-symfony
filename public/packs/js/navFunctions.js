@@ -44,6 +44,7 @@ class IncarnateReference{
         const reference = event.target.getAttribute('data-fid');
         console.log(parent,reference);
         const crossReference = parent !== null ? parent+'#' + reference : reference;
+        //TODO add conditional to only do index.php on live server
         window.location.href = '/index.php/content/fid/'+crossReference;
     }
 }
