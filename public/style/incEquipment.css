@@ -289,6 +289,10 @@ nav.inc-sticky-header {
   width: 100%;
 }
 
+div.dropdown-menu {
+  left: inherit;
+}
+
 .inc-body {
   padding-top: 5.4rem;
 }

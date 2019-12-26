@@ -18,6 +18,21 @@
         {% endblock %}
     </head>
     <body class="d-flex flex-column">
+        <div class="inc-body inc-flex-grow">
+            {% block body %}{% endblock %}
+        </div>
+        <footer class="bg-secondary inc-flex-auto">
+            <div class="list-unstyled d-flex justify-content-end">
+                <a class="text-light container p-2" href="https://discord.gg/{{ discord }}" target="_blank">Discord</a>
+                <a class="text-light container p-2" href="mailto:{{ email }}" target="_blank">Email</a>
+                <a class="text-light container p-2" href="https://gitlab.com/{{ gitlab }}/issues" target="_blank">GitLab</a>
+                <a class="text-light container p-2" href="https://www.patreon.com/{{ patreon }}" target="_blank">Patreon</a>
+                <a class="text-light container p-2" href="https://www.youtube.com/channel/{{ youtube }}" target="_blank">YouTube</a>
+            </div>
+            <div class="bg-primary">
+                <span class="text-light inc-blockify-center">© 2019 <a class="text-light" href="mailto:{{ email }}">Incarnate Gaming LLC</a></span>
+            </div>
+        </footer>
         <nav class="navbar navbar-expand-lg navbar-light bg-secondary inc-sticky-header" id="navbar">
             <a class="navbar-brand text-light" href="/"><img src="{{ asset('assets/images/favicon.ico') }}">Incarnate Gaming</a>
             <button class="btn btn-secondary" id="topButton" type="button" aria-label="Navigate to Top">Top</button>
@@ -46,21 +61,6 @@
                 </ul>
             </div>
         </nav>
-        <div class="inc-body inc-flex-grow">
-            {% block body %}{% endblock %}
-        </div>
-        <footer class="bg-secondary inc-flex-auto">
-            <div class="list-unstyled d-flex justify-content-end">
-                <a class="text-light container p-2" href="https://discord.gg/{{ discord }}" target="_blank">Discord</a>
-                <a class="text-light container p-2" href="mailto:{{ email }}" target="_blank">Email</a>
-                <a class="text-light container p-2" href="https://gitlab.com/{{ gitlab }}/issues" target="_blank">GitLab</a>
-                <a class="text-light container p-2" href="https://www.patreon.com/{{ patreon }}" target="_blank">Patreon</a>
-                <a class="text-light container p-2" href="https://www.youtube.com/channel/{{ youtube }}" target="_blank">YouTube</a>
-            </div>
-            <div class="bg-primary">
-                <span class="text-light inc-blockify-center">© 2019 <a class="text-light" href="mailto:{{ email }}">Incarnate Gaming LLC</a></span>
-            </div>
-        </footer>
         {% block javascripts %}
             {#
             <script src="bootstrap-native-master/{{ asset('bootstrap-native-master/assets/js/scripts4.js') }}"></script>
