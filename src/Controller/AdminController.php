@@ -28,7 +28,7 @@ class AdminController extends AbstractController
     public function __construct()
     {
         if($_SERVER['HTTP_HOST']){
-            $serverRoute = 'http://' . $_SERVER['HTTP_HOST'] ;
+            $serverRoute = 'http://' . $_SERVER['HTTP_HOST'] . '/';
         }elseif($_SERVER['SYMFONY_DEFAULT_ROUTE_URL']){
             $serverRoute = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'];
         }
@@ -39,7 +39,6 @@ class AdminController extends AbstractController
      * @Route("/admin/import/start/", name="inc_import_start")
      */
     public function importStart(UGFImportStart $UGFImporter){
-//        dump($this->serverRoute,$_SERVER);die;
         $path = $this->serverRoute . 'admin/import/rules/';
         $UGFImporter->purge();
         return $this->redirect($path);
