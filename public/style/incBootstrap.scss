@@ -12,12 +12,12 @@ $theme-colors: (
         "warning":#d93f34,
         "info":#3E044D,
         "light":#feffe2,
-        "dark":#1F0208
+        "dark":#000000
 );
 :root{
   --primary:#3E044D;
   --secondary:#5d046e;
-  --dark:#1F0208;
+  --dark:#000000;
 }
 body{
   height:100vh;
@@ -86,6 +86,12 @@ nav.inc-sticky-header{
 //Pointers
 .inc-pointer{
   cursor: pointer;
+}
+//Carousel
+.incarnate-video iframe{
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
 }
 // Bootstrap and its default variables
 @import "../bootstrap-4.0.0/scss/bootstrap.scss";
