@@ -24,6 +24,7 @@ class AppExtension extends AbstractExtension
             new TwigFilter('array_convert', [$this, 'processArrayConvert'], ['is_safe' => ['html']]),
             new TwigFilter('array_convert_simple', [$this, 'processArrayConvertSimple']),
             new TwigFilter('p_stripper', [$this, 'pStripper']),
+            new TwigFilter('index_stripper', [$this, 'indexStripper']),
         ];
     }
     public function assembleCrossReference(array $value, int $target){
@@ -59,6 +60,9 @@ class AppExtension extends AbstractExtension
     }
     public function pStripper($value){
         return str_replace(['<p>','</p>'],'',$value);
+    }
+    public function indexStripper($value){
+        return str_replace('/index.php','',$value);
     }
 
 //    public function getFilters(): array

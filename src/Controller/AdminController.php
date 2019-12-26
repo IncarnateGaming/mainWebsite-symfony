@@ -28,7 +28,7 @@ class AdminController extends AbstractController
     public function __construct()
     {
         if($_SERVER['HTTP_HOST']){
-            $serverRoute = $_SERVER['HTTP_HOST'] ;
+            $serverRoute = 'http://' . $_SERVER['HTTP_HOST'] ;
         }elseif($_SERVER['SYMFONY_DEFAULT_ROUTE_URL']){
             $serverRoute = $_SERVER['SYMFONY_DEFAULT_ROUTE_URL'];
         }
