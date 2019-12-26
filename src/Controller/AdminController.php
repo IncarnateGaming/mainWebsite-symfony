@@ -39,7 +39,7 @@ class AdminController extends AbstractController
      * @Route("/admin/import/start/", name="inc_import_start")
      */
     public function importStart(UGFImportStart $UGFImporter){
-        dump($this->serverRoute,$_SERVER);die;
+//        dump($this->serverRoute,$_SERVER);die;
         $path = $this->serverRoute . 'admin/import/rules/';
         $UGFImporter->purge();
         return $this->redirect($path);
