@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block title %}Orientation{% endblock %}
+{% block body %}
+    <div class="container">
+        <p>This is a temporary page to learn how orientation works on mobile devices to assist in better experience. Expect it to vanish soon.</p>
+        <h1 id="currentOrientation"></h1>
+    </div>
+    <script>
+        function orientationChange(){
+            document.getElementById('currentOrientation').innerHTML = screen.orientation.angle;
+        }
+        window.addEventListener('orientationchange',orientationChange);
+    </script>
+{% endblock %}

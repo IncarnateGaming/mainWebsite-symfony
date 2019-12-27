@@ -83,6 +83,11 @@
 				"pagePath": "inc_templates",
 				"pageTitle": "Template",
 				"pageName": "templates"
+			},
+			{
+				"pagePath": "inc_orientation",
+				"pageTitle": "Orientation",
+				"pageName": "orientation"
 			}
 		]
 	},
