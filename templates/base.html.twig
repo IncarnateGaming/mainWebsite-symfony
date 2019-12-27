@@ -71,5 +71,8 @@
             <script src="{{asset('packs/js/navFunctions.js')}}"></script>
 
         {% endblock %}
+        {% block twigVariables %}<div id="incarnate-twig-variables" data-email="{{ email }}" data-discord="{{ discord }}" data-patreon="{{ patreon }}" data-gitlab="{{ gitlab }}" data-youtube="{{ youtube }}" data-cookies="{{ cookies }}"></div>{% endblock %}
+        {% block policyAccept %}<script src="{{ asset('packs/js/policyAccept.js') }}"></script>{% endblock %}
+        {% block analytics %}{% endblock %}
     </body>
 </html>

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block title %}Reject Policy{% endblock title %}
+{% block stylesheets %}{% endblock %}
+{% block policyAccept %}{% endblock %}
+{% block analytics %}{% endblock %}
+{% block body %}
+    <div class="container">
+        <p>Thank you for taking time to read <a href="{{ path('app_policy_policy_website_page') }}">our policy</a> and decide it was not for you. Unfortunately, our website has embedded content from YouTube, FontAwesome and other sources which use third party cookies we cannot currently turn off.</p>
+        <p>Long term we plan on making a version that turns off these third party resources, however we have not figured out how to deploy such a version as there would be no way to know who wants to opt into the simplified page. Remembering user preferences is what cookies were designed for and without permission to use them it is very difficult to provide the same level of customer support.</p>
+        <button class="btn btn-primary incarnate-remove-cookies">Remove Cookies</button>
+        <div id="postScriptInsert"></div>
+    </div>
+    <script src="{{ asset('packs/js/policyReject.js') }}"></script>
+{% endblock %}

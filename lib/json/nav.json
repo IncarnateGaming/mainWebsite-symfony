@@ -117,6 +117,11 @@
 				"pageName": "iec"
 			},
 			{
+				"pagePath": "inc_policy_reject",
+				"pageTitle": "Reject Policy",
+				"pageName": "reject"
+			},
+			{
 				"pagePath": "inc_policy",
 				"pageTitle": "Website Policy",
 				"pageName": "website"

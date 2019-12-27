@@ -56,4 +56,15 @@ class PolicyController extends AbstractController
             'genericParts' => $genericParts,
         ]);
     }
+    /**
+     * @Route("/policy/reject/", name="inc_policy_reject")
+     */
+    public function policy_reject()
+    {
+        require '../lib/php/functions.php';
+        $genericParts = genericParts();
+        return $this->render('policy/policyReject.html.twig',[
+            'genericParts' => $genericParts,
+        ]);
+    }
 }
