@@ -27,12 +27,12 @@ class IncarnatePolicyAccept{
     }
     static makeBanner(){
         var banner = document.createElement('div');
-        banner.setAttribute('class','incarnate-policy-banner');
+        banner.setAttribute('class','incarnate-policy-banner d-flex flex-row');
         banner.innerHTML = `
             <p>We use cookies to ensure that we give you the best experience on our website. If you continue to use this site we will assume that you are happy with it.</p>
-            <button class="accept btn btn-secondary">Ok</button>
-            <button class="reject btn btn-secondary">No</button>
-            <button class="policy btn btn-secondary">Privacy Policy</button>
+            <button class="accept btn btn-secondary p-2">Ok</button>
+            <button class="reject btn btn-secondary p-2">No</button>
+            <button class="policy btn btn-secondary p-2">Privacy Policy</button>
         `;
         banner.getElementsByClassName('accept')[0].addEventListener('click',this.acceptPolicy);
         banner.getElementsByClassName('reject')[0].addEventListener('click',this.rejectPolicy);

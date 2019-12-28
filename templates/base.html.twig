@@ -37,24 +37,24 @@
                 <span class="text-light inc-blockify-center">© 2019 <a class="text-light" href="mailto:{{ email }}">Incarnate Gaming LLC</a></span>
             </div>
         </footer>
-        <nav class="navbar navbar-expand-lg navbar-light bg-secondary inc-sticky-header" id="navbar">
-            <a class="navbar-brand text-light" href="/"><img src="{{ asset('assets/images/favicon.ico') }}">Incarnate Gaming</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary inc-sticky-header" id="navbar">
+            <a id="incarnate-logo" class="navbar-brand text-light" href="/"><img src="{{ asset('assets/images/favicon.ico') }}">Incarnate Gaming</a>
             <button class="btn btn-secondary" id="topButton" type="button" aria-label="Navigate to Top">Top</button>
             {% block backButton %}{% endblock %}
-            <button class="navbar-toggler bg-primary text-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler bg-secondary text-light ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse overflow-auto" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     {#<li class="nav-item active">
                         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                     </li>#}
                     {% for item in genericParts.nav  %}
                         <li class="nav-item">
-                        <button class="btn btn-secondary"{% if item.subpages is defined %} id="{{ item.pageName }}DropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% else %} onclick="window.location.href='{{ path(item.pagePath)|index_stripper }}'"{% endif %}>{{ item.pageTitle }}</button>
+                        <button class="btn btn-primary"{% if item.subpages is defined %} id="{{ item.pageName }}DropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% else %} onclick="window.location.href='{{ path(item.pagePath)|index_stripper }}'"{% endif %}>{{ item.pageTitle }}</button>
                         {% if item.subpages is defined %}
-                            <div class="dropdown-menu" aria-labelledby="{{ item.pageName }}Dropdown">
+                            <div class="dropdown-menu overflow-auto" aria-labelledby="{{ item.pageName }}Dropdown">
                                 {% for subitem in item.subpages %}
                                     <a class="dropdown-item text-primary" href="{{ path(subitem.pagePath)|index_stripper }}">{{ subitem.pageTitle }}</a>
                                 {% endfor %}

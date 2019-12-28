@@ -1,4 +1,5 @@
 const htmlTop = document.getElementById('inc-top-html');
+const incLogo = document.getElementById('incarnate-logo');
 class IncarnateMobile{
     static orientationChange(){
         // console.log(screen.orientation.angle);
@@ -10,14 +11,18 @@ class IncarnateMobile{
     }
     static orientHorizontal(){
         htmlTop.style.fontSize='4vh';
+        incLogo.style.display='block';
         [].forEach.call(IncarnateMobile.getBanners(), banner=>{
-            banner.style.flexDirection='row';
+            banner.classList.add('flex-row');
+            banner.classList.remove('flex-column');
         });
     }
     static orientVertical(){
         htmlTop.style.fontSize = '2vh';
+        incLogo.style.display='none';
         [].forEach.call(IncarnateMobile.getBanners(), banner=>{
-            banner.style.flexDirection='column';
+            banner.classList.add('flex-column');
+            banner.classList.remove('flex-row');
         });
     }
     static getBanners(){

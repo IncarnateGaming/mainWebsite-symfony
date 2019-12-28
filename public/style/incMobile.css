@@ -100,27 +100,23 @@ div.dropdown-menu {
 }
 
 .incarnate-policy-banner {
-  position: sticky;
+  position: fixed;
   padding-top: 0.2em;
   padding-bottom: 0.2rem;
   background-color: #3E044D;
   width: 100%;
-  display: flex;
-  flex-direction: row;
   bottom: 0;
 }
 
 .incarnate-policy-banner p {
   color: #feffe2;
   padding-bottom: 0;
-  flex: 1;
   margin-top: auto;
   margin-bottom: auto;
   margin-left: 1rem;
 }
 
 .incarnate-policy-banner button {
-  flex: 0 0 5rem;
   margin: 0.5rem;
 }
 
