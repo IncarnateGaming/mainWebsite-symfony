@@ -25,10 +25,10 @@ class EquipmentController extends AbstractController
      * @Route("/content/equipment/", name="inc_equipments")
      */
     public function equipments(){
-        $equipmentRepository = $this->em->getRepository(IncarnateEquipment::class);
+//        $equipmentRepository = $this->em->getRepository(IncarnateEquipment::class);
         require_once '../lib/php/functions.php';
 //        $equipment = findInRepository($slug,$equipmentRepository);
-        $equipment = $equipmentRepository->findAll();
+//        $equipment = $equipmentRepository->findAll();
 //        $equipment = array();
 //        $equipment[]=$equipmentRepository->findOneBy(['fid'=>'xCbq1QFW5K0WytH1']);
 //        $equipment[]=$equipmentRepository->findOneBy(['fid'=>'CSSWPLq2MaQZAkvg']);
@@ -37,12 +37,12 @@ class EquipmentController extends AbstractController
 //        $equipment[]=$equipmentRepository->findOneBy(['fid'=>'y3SpRQ8AgAbbUDKo']);
 //        $equipment[]=$equipmentRepository->findOneBy(['fid'=>'xiAJYXJHCSPxJgOy']);
 //        dump($equipment);die;
-        if(!$equipment){
-            throw $this->createNotFoundException('No equipment found');
-        }
+//        if(!$equipment){
+//            throw $this->createNotFoundException('No equipment found');
+//        }
         return $this->render('content/equipments.html.twig',[
             'genericParts' => $this->genericParts,
-            'equipment'=>$equipment,
+//            'equipment'=>$equipment,
         ]);
     }
     /**

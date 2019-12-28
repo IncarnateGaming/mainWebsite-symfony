@@ -83,6 +83,9 @@ nav.inc-sticky-header{
 div.dropdown-menu{
   left:inherit;
 }
+.navbar-nav .dropdown-menu{
+  position:relative;
+}
 .inc-body{
   padding-top:5.4rem;
 }
