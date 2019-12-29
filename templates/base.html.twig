@@ -65,6 +65,8 @@
                 </ul>
             </div>
         </nav>
+        {% block twigVariables %}<div id="incarnate-twig-variables" data-email="{{ email }}" data-discord="{{ discord }}" data-patreon="{{ patreon }}" data-gitlab="{{ gitlab }}" data-youtube="{{ youtube }}" data-cookies="{{ cookies }}"></div>{% endblock %}
+        {% block policyAccept %}<script src="{{ asset('packs/js/policyAccept.js') }}"></script>{% endblock %}
         {% block javascripts %}
             {#
             <script src="bootstrap-native-master/{{ asset('bootstrap-native-master/assets/js/scripts4.js') }}"></script>
@@ -73,13 +75,8 @@
             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
             <script src="{{asset('packs/js/navFunctions.js')}}"></script>
-
+            <script src="{{ asset('packs/js/orientation.js') }}"></script>
         {% endblock %}
-        {% block twigVariables %}<div id="incarnate-twig-variables" data-email="{{ email }}" data-discord="{{ discord }}" data-patreon="{{ patreon }}" data-gitlab="{{ gitlab }}" data-youtube="{{ youtube }}" data-cookies="{{ cookies }}"></div>{% endblock %}
-        {% block policyAccept %}<script src="{{ asset('packs/js/policyAccept.js') }}"></script>{% endblock %}
         {% block analytics %}{% endblock %}
-        {% if genericParts.mobileArray.mobile %}
-            <script src="{{ asset('packs/js/mobile.js') }}"></script>
-        {% endif %}
     </body>
 </html>

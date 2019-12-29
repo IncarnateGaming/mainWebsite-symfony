@@ -5,7 +5,7 @@
     {{ genericParts.about.general.mission|raw }}
     {% for person in genericParts.about.people %}
         <h3>{{ person.name }}{% if person.callsign %} ({{ person.callsign }}){% endif %}</h3>
-        <p>{{ person.bio }}</p>{% if person.contact %}
+        <p>{{ person.bio|raw }}</p>{% if person.contact %}
         <h5>Contact</h5>{% if person.contact.email %}
         <p><strong>Email:</strong> {{ person.contact.email }}</p>{% endif %}{% if person.contact.discord %}
         <p><strong>Discord (<a href="{{ person.contact.discord.server.invite }}" target="_blank">{{ person.contact.discord.server.name }}</a>):</strong> {{ person.contact.discord.name }}</p>{% endif %}

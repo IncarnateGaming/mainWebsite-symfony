@@ -25,7 +25,11 @@ class AppExtension extends AbstractExtension
             new TwigFilter('array_convert_simple', [$this, 'processArrayConvertSimple']),
             new TwigFilter('p_stripper', [$this, 'pStripper']),
             new TwigFilter('index_stripper', [$this, 'indexStripper']),
+            new TwigFilter('email_space_sanitizer', [$this, 'emailSpaceSanitizer']),
         ];
+    }
+    public function emailSpaceSanitizer(string $string):string{
+        return str_replace(' ','%20',$string);
     }
     public function assembleCrossReference(array $value, int $target){
         return '<span type="crossReference" data-fid="' . $value[$target]['fid'] . '" data-UGFLinkReference="' . $value[$target]['ugf'] . '">' . $value[$target]['name'] . '</span>';

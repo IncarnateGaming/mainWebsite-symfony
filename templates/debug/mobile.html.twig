@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block title %}Mobile{% endblock %}
+{% block body %}
+    <div class="container">
+        <h2>Mobile: {% if genericParts.mobileArray.mobile %}true{% else %}false{% endif %}</h2>
+        <h3>Tablet: {% if genericParts.mobileArray.tablet %}true{% else %}false{% endif %}</h3>
+        <p>If your device is a phone then mobile should be true and tablet should be false. If your device is a tablet then both mobile and tablet should be true. If your device is a computer then both mobile and tablet should be false.</p>
+        <p>If we have not properly identified your environment please send us an email at <a href="mailto:{{ email }}?Subject=Mobile%20Detection%20Error&body=Hi%20ProNobis!%0AYour%20website%20is%20not%20correctly%20detecting%20my%20device.%20Here%20is%20the%20information%20you%20wanted:%0A1)%20Type%20of%20Device%20=%20%20%20%20%20%20%20%20%20%20%20%20(phone,%20tablet,%20computer,%20etc.)%0A2)%20Operating%20System%20=%20%0A3)%20Browser%20=%20%0A4)%20User%20Agent%20=%20{{ userAgent|email_space_sanitizer }}%0A%0AThank%20you%20for%20looking%20into%20this!%0ABlessings,%0A">{{ email }}</a> including 1) the type of your device (phone, tablet, computer, etc.) 2) operating system 3) browser and 4) the following data:</p>
+        <p class="bg-primary text-light p-2">{{ userAgent }}</p>
+    </div>
+{% endblock %}

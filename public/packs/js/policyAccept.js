@@ -27,7 +27,7 @@ class IncarnatePolicyAccept{
     }
     static makeBanner(){
         var banner = document.createElement('div');
-        banner.setAttribute('class','incarnate-policy-banner d-flex flex-row');
+        banner.setAttribute('class','incarnate-policy-banner d-flex flex-column');
         banner.innerHTML = `
             <p>We use cookies to ensure that we give you the best experience on our website. If you continue to use this site we will assume that you are happy with it.</p>
             <button class="accept btn btn-secondary p-2">Ok</button>
