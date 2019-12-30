@@ -2,11 +2,17 @@
 {% block title %}Orientation{% endblock %}
 {% block body %}
     <h2>Orientation: <span id="incarnate-orientation"></span></h2>
+    <h2>Width: <span id="incarnate-width"></span></h2>
+    <h2>Height: <span id="incarnate-height"></span></h2>
     <script>
         const orientation = document.getElementById('incarnate-orientation');
+        const incWidth = document.getElementById('incarnate-width');
+        const incHeight = document.getElementById('incarnate-height');
         class IncarnateOrientationCheck{
             static set(){
                 orientation.innerHTML = screen.orientation.angle;
+                incWidth.innerHTML = window.innerWidth;
+                incHeight.innerHTML = window.innerHeight;
             }
         }
         IncarnateOrientationCheck.set();
