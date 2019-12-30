@@ -6,7 +6,7 @@ class IncarnateOrientation{
         IncarnateOrientation.orientationChange();
     }
     static async orientationChange(){
-        await IncarnateReference.incarnateDelay(500);
+        await IncarnateReference.incarnateDelay(5000);
         if(window.innerHeight > window.innerWidth){
             IncarnateOrientation.orientVertical();
         }else if(window.innerHeight < window.innerWidth){
