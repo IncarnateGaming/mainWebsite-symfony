@@ -4,7 +4,6 @@
     <button class="btn btn-secondary" id="backButton" type="button" aria-label="Navigate back" onclick="window.location.href = '{{ url('inc_backgrounds') }}';">Backgrounds</button>
 {% endblock %}
 {% block body %}
-    <div class="container">
     <h2>{{ background.name }}</h2>
     <p>{{ background.description|raw }}</p>
     <p>{% if background.skillProf|length > 0 %}
@@ -36,5 +35,4 @@
             {% for row in background.flaw.tr %}<tr><th scope="row">{{ row.to }}</th><td>{{ row.td.0|p_stripper }}</td></tr>
             {% endfor %}</table><br/>
     {% endif %}{% if background.legal %}<hr/>{{ background.legal|raw }}{% endif %}
-    </div>
 {% endblock %}

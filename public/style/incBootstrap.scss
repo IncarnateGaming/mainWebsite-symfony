@@ -100,5 +100,6 @@ div.dropdown-menu{
   margin-right: auto;
 }
 // Bootstrap and its default variables
+@import 'incContainer.scss';
 @import 'incPolicyAccept.scss';
 @import "../bootstrap-4.0.0/scss/bootstrap.scss";

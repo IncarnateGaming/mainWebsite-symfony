@@ -1,17 +1,15 @@
 {% extends 'base.html.twig' %}
 {% block title %}Orientation{% endblock %}
 {% block body %}
-<div class="container">
     <h2>Orientation: <span id="incarnate-orientation"></span></h2>
-</div>
-<script>
-    const orientation = document.getElementById('incarnate-orientation');
-    class IncarnateOrientationCheck{
-        static set(){
-            orientation.innerHTML = screen.orientation.angle;
+    <script>
+        const orientation = document.getElementById('incarnate-orientation');
+        class IncarnateOrientationCheck{
+            static set(){
+                orientation.innerHTML = screen.orientation.angle;
+            }
         }
-    }
-    IncarnateOrientationCheck.set();
-    window.addEventListener('orientationchange',IncarnateOrientationCheck.set);
-</script>
+        IncarnateOrientationCheck.set();
+        window.addEventListener('orientationchange',IncarnateOrientationCheck.set);
+    </script>
 {% endblock %}

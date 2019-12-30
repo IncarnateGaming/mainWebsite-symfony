@@ -1,13 +1,11 @@
 {%  extends 'base.html.twig' %}
 {% block title %}{{ riddle.name }}{% endblock %}
 {% block body %}
-    <div class="container">
-        {{ riddle.description|raw }}
-        <button id="riddle-answer-button" type="button" class="btn btn-primary">Answer</button>
-        <button id="random-riddle" type="button" class="btn btn-primary">Random Riddle</button>
-        <div id="riddle-answer" style="display:none">
-            {{ riddle.answer|raw }}
-        </div>
-        <script src="{{ asset('packs/js/riddle.js') }}"></script>
+    {{ riddle.description|raw }}
+    <button id="riddle-answer-button" type="button" class="btn btn-primary">Answer</button>
+    <button id="random-riddle" type="button" class="btn btn-primary">Random Riddle</button>
+    <div id="riddle-answer" style="display:none">
+        {{ riddle.answer|raw }}
     </div>
+    <script src="{{ asset('packs/js/riddle.js') }}"></script>
 {% endblock %}

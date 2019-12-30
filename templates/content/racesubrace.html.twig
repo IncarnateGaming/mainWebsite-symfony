@@ -4,12 +4,10 @@
     <button class="btn btn-secondary" id="backButton" type="button" aria-label="Navigate back" onclick="window.location.href = '{{ path('inc_race',{slug: subrace.race.fid}) }}';">{{ subrace.race.name }}</button>
 {% endblock %}
 {% block body %}
-    <div class="container">
-        <h5 id="{{ subrace.fid }}"><a href="{{ path('inc_race',{slug: subrace.race.fid}) }}">{{ subrace.name }}</a></h5>
-        {{ subrace.description|raw }}
-        {% for trait in subrace.incarnateRaceSubraceTraits %}
-            <span class="float-left inc-padding-right"><strong>{{ trait.name }}</strong></span>{{ trait.description|raw }}
-        {% endfor %}
-        {% if subrace.legal %}<hr/>{{ subrace.legal|raw }}{% endif %}
-    </div>
+    <h5 id="{{ subrace.fid }}"><a href="{{ path('inc_race',{slug: subrace.race.fid}) }}">{{ subrace.name }}</a></h5>
+    {{ subrace.description|raw }}
+    {% for trait in subrace.incarnateRaceSubraceTraits %}
+        <span class="float-left inc-padding-right"><strong>{{ trait.name }}</strong></span>{{ trait.description|raw }}
+    {% endfor %}
+    {% if subrace.legal %}<hr/>{{ subrace.legal|raw }}{% endif %}
 {% endblock %}

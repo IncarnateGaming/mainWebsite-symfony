@@ -4,13 +4,11 @@
     <button class="btn btn-secondary" id="backButton" type="button" aria-label="Navigate back" onclick="window.location.href = '{{ path('inc_class',{slug: archetype.incarnateClass.fid}) }}';">{{ archetype.incarnateClass.name }}</button>
 {% endblock %}
 {% block body %}
-    <div class="container">
-        <h4 id="{{ archetype.fid }}"><a href="{{ path('inc_class',{'slug':archetype.incarnateClass.fid}) }}#{{ archetype.fid }}">{{ archetype.name }}</a></h4>
-        {{ archetype.description|raw }}
-        {% for trait in archetype.incarnateClassArchetypeTraits %}
-            <h5 id="{{ trait.fid }}">{{ trait.name }}</h5>
-            {{ trait.description|raw }}
-        {% endfor %}{% if archetype.legal %}<hr/>
-        {{ archetype.legal|raw }}{% endif %}
-    </div>
+    <h4 id="{{ archetype.fid }}"><a href="{{ path('inc_class',{'slug':archetype.incarnateClass.fid}) }}#{{ archetype.fid }}">{{ archetype.name }}</a></h4>
+    {{ archetype.description|raw }}
+    {% for trait in archetype.incarnateClassArchetypeTraits %}
+        <h5 id="{{ trait.fid }}">{{ trait.name }}</h5>
+        {{ trait.description|raw }}
+    {% endfor %}{% if archetype.legal %}<hr/>
+    {{ archetype.legal|raw }}{% endif %}
 {% endblock %}

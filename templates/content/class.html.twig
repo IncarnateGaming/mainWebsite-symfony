@@ -12,42 +12,40 @@
             </a>
         {% endfor %}
     </div>
-    <div class="container">
-        <h2 id="{{ class.fid }}">{{ class.name }}</h2>
-        <h3>Class Features</h3>
-        <p>As a {{ class.name }}, you gain the following class features.</p>
-        <h4>Hit Points</h4>
-        <p><strong>Hig Dice:</strong> {{ class.hitpoints.hitDice }}</p>
-        <p><strong>Hit Points at 1st Level:</strong> {{ class.hitpoints.hitPointsAt1stLevel }}</p>
-        <p><strong>Hit Points at Higher Levels:</strong> {{ class.hitpoints.hitPointsAtHigherLevels }}</p>
-        <h4>Proficiencies</h4>
-        <p><strong>Armor:</strong>{{ class.proficiencies.armor }}</p>
-        <p><strong>Weapons:</strong> {{ class.proficiencies.weapons }}</p>
-        <p><strong>Tools:</strong> {{ class.proficiencies.tools }}</p>
-        <p><strong>Saving Throws:</strong> {{ class.proficiencies.savingThrows }}</p>
-        <p><strong>Skills:</strong> {{ class.proficiencies.skills|raw }}</p>
-        <h4>Equipment</h4>
-        <p>You start with the following equipment, in addition to the equipment granted by your background:</p>
-        <ul>{{ class.equipment.description|raw }}</ul>
-        <h5>The {{ class.name }}</h5>
-        <table class="table table-striped">{{ class.leveltable|raw }}</table>
-        {% for trait in class.incarnateClassTraits %}
-            <h4 id="{{ trait.fid }}">{{ trait.name }}</h4>
+    <h2 id="{{ class.fid }}">{{ class.name }}</h2>
+    <h3>Class Features</h3>
+    <p>As a {{ class.name }}, you gain the following class features.</p>
+    <h4>Hit Points</h4>
+    <p><strong>Hig Dice:</strong> {{ class.hitpoints.hitDice }}</p>
+    <p><strong>Hit Points at 1st Level:</strong> {{ class.hitpoints.hitPointsAt1stLevel }}</p>
+    <p><strong>Hit Points at Higher Levels:</strong> {{ class.hitpoints.hitPointsAtHigherLevels }}</p>
+    <h4>Proficiencies</h4>
+    <p><strong>Armor:</strong>{{ class.proficiencies.armor }}</p>
+    <p><strong>Weapons:</strong> {{ class.proficiencies.weapons }}</p>
+    <p><strong>Tools:</strong> {{ class.proficiencies.tools }}</p>
+    <p><strong>Saving Throws:</strong> {{ class.proficiencies.savingThrows }}</p>
+    <p><strong>Skills:</strong> {{ class.proficiencies.skills|raw }}</p>
+    <h4>Equipment</h4>
+    <p>You start with the following equipment, in addition to the equipment granted by your background:</p>
+    <ul>{{ class.equipment.description|raw }}</ul>
+    <h5>The {{ class.name }}</h5>
+    <table class="table table-striped">{{ class.leveltable|raw }}</table>
+    {% for trait in class.incarnateClassTraits %}
+        <h4 id="{{ trait.fid }}">{{ trait.name }}</h4>
+        {{ trait.description|raw }}
+    {% endfor %}
+    <h3>{{ class.archetypeInfo.namePlural }}</h3>
+    {{ class.archetypeInfo.description|raw }}
+    {% for archetype in class.incarnateClassArchetypes %}
+        <h4 id="{{ archetype.fid }}"><a href="#{{ class.id }}">{{ archetype.name }}</a>
+            <span class="inc-pointer" onclick="window.location.href='{{ path('inc_class',{slug: archetype.fid}) }}'"><i class="fas fa-scroll"></i></span>
+        </h4>
+        {{ archetype.description|raw }}
+        {% for trait in archetype.incarnateClassArchetypeTraits %}
+            <h5 id="{{ trait.fid }}">{{ trait.name }}</h5>
             {{ trait.description|raw }}
-        {% endfor %}
-        <h3>{{ class.archetypeInfo.namePlural }}</h3>
-        {{ class.archetypeInfo.description|raw }}
-        {% for archetype in class.incarnateClassArchetypes %}
-            <h4 id="{{ archetype.fid }}"><a href="#{{ class.id }}">{{ archetype.name }}</a>
-                <span class="inc-pointer" onclick="window.location.href='{{ path('inc_class',{slug: archetype.fid}) }}'"><i class="fas fa-scroll"></i></span>
-            </h4>
-            {{ archetype.description|raw }}
-            {% for trait in archetype.incarnateClassArchetypeTraits %}
-                <h5 id="{{ trait.fid }}">{{ trait.name }}</h5>
-                {{ trait.description|raw }}
-            {% endfor %}{% if archetype.legal %}<hr/>
-            {{ archetype.legal|raw }}{% endif %}
-        {% endfor %}{% if class.legal %}<hr/>
-        {{ class.legal|raw }}{% endif %}
-    </div>
+        {% endfor %}{% if archetype.legal %}<hr/>
+        {{ archetype.legal|raw }}{% endif %}
+    {% endfor %}{% if class.legal %}<hr/>
+    {{ class.legal|raw }}{% endif %}
 {% endblock %}

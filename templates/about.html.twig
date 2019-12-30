@@ -1,7 +1,6 @@
 {%  extends 'base.html.twig' %}
 {% block title %}About{% endblock %}
 {% block body %}
-    <div class="container">
     {{ genericParts.about.general.mission|raw }}
     {% for person in genericParts.about.people %}
         <h3>{{ person.name }}{% if person.callsign %} ({{ person.callsign }}){% endif %}</h3>
@@ -11,5 +10,4 @@
         <p><strong>Discord (<a href="{{ person.contact.discord.server.invite }}" target="_blank">{{ person.contact.discord.server.name }}</a>):</strong> {{ person.contact.discord.name }}</p>{% endif %}
         {% endif %}
     {% endfor %}
-    </div>
 {% endblock %}
