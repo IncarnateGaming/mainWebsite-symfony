@@ -39,11 +39,6 @@
         </footer>
         <nav class="navbar navbar-expand-lg navbar-light bg-primary inc-sticky-header" id="navbar">
             <a id="incarnate-logo" class="navbar-brand text-light" href="/"><img src="{{ asset('assets/images/favicon.ico') }}">Incarnate Gaming</a>
-            <button class="btn btn-secondary" id="topButton" type="button" aria-label="Navigate to Top">Top</button>
-            {% block backButton %}{% endblock %}
-            <button class="navbar-toggler bg-secondary text-light ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
             <div class="collapse navbar-collapse overflow-auto" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
@@ -64,6 +59,11 @@
                         </li>{% endfor %}
                 </ul>
             </div>
+            <button class="btn btn-secondary m-2" id="topButton" type="button" aria-label="Navigate to Top">Top</button>
+            {% block backButton %}{% endblock %}
+            <button class="navbar-toggler bg-secondary text-light ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </nav>
         {% block twigVariables %}<div id="incarnate-twig-variables" data-email="{{ email }}" data-discord="{{ discord }}" data-patreon="{{ patreon }}" data-gitlab="{{ gitlab }}" data-youtube="{{ youtube }}" data-cookies="{{ cookies }}"></div>{% endblock %}
         {% block policyAccept %}<script src="{{ asset('packs/js/policyAccept.js') }}"></script>{% endblock %}
