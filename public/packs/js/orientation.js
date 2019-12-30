@@ -15,9 +15,9 @@ class IncarnateOrientation{
     }
     static orientHorizontal(){
         incLogo.style.display='block';
-        if(screen.orientation.angle === 90 || screen.orientation.angle === 270){
+        // if(screen.orientation.angle === 90 || screen.orientation.angle === 270){
             htmlTop.style.fontSize='3vh';
-        }
+        // }
         [].forEach.call(IncarnateOrientation.getBanners(), banner=>{
             banner.classList.add('flex-row');
             banner.classList.remove('flex-column');
