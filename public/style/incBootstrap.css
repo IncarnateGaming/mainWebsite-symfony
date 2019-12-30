@@ -99,6 +99,11 @@ div.dropdown-menu {
   margin-left: auto;
   margin-right: auto;
   overflow-x: scroll;
+  -ms-overflow-style: none;
+}
+
+.inc-indentation::-webkit-scrollbar {
+  display: none;
 }
 
 .mobile .inc-indentation {
