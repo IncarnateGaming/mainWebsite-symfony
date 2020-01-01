@@ -134,6 +134,10 @@ function generate(){
         }
         while (found===true);
     }
+    const crossReferences = document.getElementsByClassName('crossReference');
+    [].forEach.call(crossReferences,reference=>{
+        reference.addEventListener('click',IncarnateReference.crossReference);
+    });
 };
 function incarnateRoll(dice) {
     var numDice = 0, sizeDice= 0, modType="", modifier= 0, calculation= 0;

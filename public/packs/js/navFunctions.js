@@ -40,17 +40,14 @@ class IncarnateReference{
         return new Promise(resolve => setTimeout(resolve, ms));
     }
     static crossReference(event){
+        console.log(event);
         const parent = event.target.getAttribute('data-fidparent');
         const reference = event.target.getAttribute('data-fid');
-        console.log(parent,reference);
-        const crossReference = parent !== null ? parent+'#' + reference : reference;
+        console.log(reference);
+        const crossReference = (parent !== null && parent !== "") ? parent+'#' + reference : reference;
         window.location.href = '/content/fid/'+crossReference;
     }
 }
 window.addEventListener('scroll',NavFunctions.changeNavOnScroll);
 document.getElementById('topButton').addEventListener('click',NavFunctions.toTop);
 NavFunctions.hideTop();
-const crossReferences = document.getElementsByClassName('crossReference');
-[].forEach.call(crossReferences,reference=>{
-    reference.addEventListener('click',IncarnateReference.crossReference);
-});

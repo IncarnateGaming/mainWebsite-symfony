@@ -44,8 +44,11 @@ class FeatController extends AbstractController
      */
     public function feat($slug){
         $featRepository = $this->em->getRepository(IncarnateFeat::class);
-        $feat=$featRepository->findOneBy(['fid'=>$slug]);
-//        $feat = findInRepository($slug,$featRepository);
+//        $feat=$featRepository->findOneBy(['fid'=>$slug]);
+        $feat = findInRepository($slug,$featRepository);
+        if (!$feat){
+            throw $this->createNotFoundException('The feat: "' . $slug . '" does not exist');
+        }
         return $this->render('content/feat.html.twig',[
             'genericParts' => $this->genericParts,
             'slug' => $slug,

@@ -26,6 +26,7 @@ class AppExtension extends AbstractExtension
             new TwigFilter('p_stripper', [$this, 'pStripper']),
             new TwigFilter('index_stripper', [$this, 'indexStripper']),
             new TwigFilter('email_space_sanitizer', [$this, 'emailSpaceSanitizer']),
+            new TwigFilter('table_display_to_crossreferences',[$this,'tableDisplayToCrossReferences']),
         ];
     }
     public function emailSpaceSanitizer(string $string):string{
@@ -33,6 +34,9 @@ class AppExtension extends AbstractExtension
     }
     public function assembleCrossReference(array $value, int $target){
         return '<span type="crossReference" data-fid="' . $value[$target]['fid'] . '" data-UGFLinkReference="' . $value[$target]['ugf'] . '">' . $value[$target]['name'] . '</span>';
+    }
+    public function tableDisplayToCrossReferences(string $string):string{
+        return $string;
     }
     public function processArrayConvert($value){
         $result = "";

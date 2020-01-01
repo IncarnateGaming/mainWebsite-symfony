@@ -59,7 +59,7 @@ class UGFImportEquipment extends BaseUGFImporter
         foreach ($this->ugf->chapters->itemChapter->items->item as $item){
             $new = new IncarnateEquipment();
             $ac = array(
-                'ac'=>$item->itemArmorClass->__toString(),
+                'ac'=>intval($item->itemArmorClass->__toString()),
             );
             if($item->itemArmorClass['dexterityModifier']){
                 $ac['mod']=$item->itemArmorClass['dexterityModifier']->__toString();

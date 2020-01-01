@@ -1,216 +1,216 @@
-.table.hide-name tr td:nth-child(1) {
+.table.show-name tr td:nth-child(1) {
   display: none;
 }
 
-.table.hide-name tr th:nth-child(1) {
+.table.show-name tr th:nth-child(1) {
   display: none;
 }
 
-.table.hide-value tr td:nth-child(2) {
+.table.show-value tr td:nth-child(2) {
   display: none;
 }
 
-.table.hide-value tr th:nth-child(2) {
+.table.show-value tr th:nth-child(2) {
   display: none;
 }
 
-.table.hide-weight tr td:nth-child(3) {
+.table.show-weight tr td:nth-child(3) {
   display: none;
 }
 
-.table.hide-weight tr th:nth-child(3) {
+.table.show-weight tr th:nth-child(3) {
   display: none;
 }
 
-.table.hide-ac tr td:nth-child(4) {
+.table.show-ac tr td:nth-child(4) {
   display: none;
 }
 
-.table.hide-ac tr th:nth-child(4) {
+.table.show-ac tr th:nth-child(4) {
   display: none;
 }
 
-.table.hide-damage tr td:nth-child(5) {
+.table.show-damage tr td:nth-child(5) {
   display: none;
 }
 
-.table.hide-damage tr th:nth-child(5) {
+.table.show-damage tr th:nth-child(5) {
   display: none;
 }
 
-.table.hide-range tr td:nth-child(6) {
+.table.show-range tr td:nth-child(6) {
   display: none;
 }
 
-.table.hide-range tr th:nth-child(6) {
+.table.show-range tr th:nth-child(6) {
   display: none;
 }
 
-.table.hide-properties tr td:nth-child(7) {
+.table.show-properties tr td:nth-child(7) {
   display: none;
 }
 
-.table.hide-properties tr th:nth-child(7) {
+.table.show-properties tr th:nth-child(7) {
   display: none;
 }
 
-.table.hide-gmOnly tr td:nth-child(8) {
+.table.show-gmOnly tr td:nth-child(8) {
   display: none;
 }
 
-.table.hide-gmOnly tr th:nth-child(8) {
+.table.show-gmOnly tr th:nth-child(8) {
   display: none;
 }
 
-.table.hide-magical tr td:nth-child(9) {
+.table.show-magical tr td:nth-child(9) {
   display: none;
 }
 
-.table.hide-magical tr th:nth-child(9) {
+.table.show-magical tr th:nth-child(9) {
   display: none;
 }
 
-.table.hide-mundane tr td:nth-child(10) {
+.table.show-mundane tr td:nth-child(10) {
   display: none;
 }
 
-.table.hide-mundane tr th:nth-child(10) {
+.table.show-mundane tr th:nth-child(10) {
   display: none;
 }
 
-.table.hide-carrying tr td:nth-child(11) {
+.table.show-carrying tr td:nth-child(11) {
   display: none;
 }
 
-.table.hide-carrying tr th:nth-child(11) {
+.table.show-carrying tr th:nth-child(11) {
   display: none;
 }
 
-.table.hide-holding tr td:nth-child(12) {
+.table.show-holding tr td:nth-child(12) {
   display: none;
 }
 
-.table.hide-holding tr th:nth-child(12) {
+.table.show-holding tr th:nth-child(12) {
   display: none;
 }
 
-.table.hide-level tr td:nth-child(13) {
+.table.show-level tr td:nth-child(13) {
   display: none;
 }
 
-.table.hide-level tr th:nth-child(13) {
+.table.show-level tr th:nth-child(13) {
   display: none;
 }
 
-.table.hide-consumable tr td:nth-child(14) {
+.table.show-consumable tr td:nth-child(14) {
   display: none;
 }
 
-.table.hide-consumable tr th:nth-child(14) {
+.table.show-consumable tr th:nth-child(14) {
   display: none;
 }
 
-.table.hide-offense tr td:nth-child(15) {
+.table.show-offense tr td:nth-child(15) {
   display: none;
 }
 
-.table.hide-offense tr th:nth-child(15) {
+.table.show-offense tr th:nth-child(15) {
   display: none;
 }
 
-.table.hide-speed tr td:nth-child(16) {
+.table.show-speed tr td:nth-child(16) {
   display: none;
 }
 
-.table.hide-speed tr th:nth-child(16) {
+.table.show-speed tr th:nth-child(16) {
   display: none;
 }
 
-.table.hide-stealth tr td:nth-child(17) {
+.table.show-stealth tr td:nth-child(17) {
   display: none;
 }
 
-.table.hide-stealth tr th:nth-child(17) {
+.table.show-stealth tr th:nth-child(17) {
   display: none;
 }
 
-.table.hide-strength tr td:nth-child(18) {
+.table.show-strength tr td:nth-child(18) {
   display: none;
 }
 
-.table.hide-strength tr th:nth-child(18) {
+.table.show-strength tr th:nth-child(18) {
   display: none;
 }
 
-.table.hide-type tr td:nth-child(19) {
+.table.show-type tr td:nth-child(19) {
   display: none;
 }
 
-.table.hide-type tr th:nth-child(19) {
+.table.show-type tr th:nth-child(19) {
   display: none;
 }
 
-.table.hide-subtype tr td:nth-child(20) {
+.table.show-subtype tr td:nth-child(20) {
   display: none;
 }
 
-.table.hide-subtype tr th:nth-child(20) {
+.table.show-subtype tr th:nth-child(20) {
   display: none;
 }
 
-.table.hide-rarity tr td:nth-child(21) {
+.table.show-rarity tr td:nth-child(21) {
   display: none;
 }
 
-.table.hide-rarity tr th:nth-child(21) {
+.table.show-rarity tr th:nth-child(21) {
   display: none;
 }
 
-.table.hide-fid tr td:nth-child(22) {
+.table.show-fid tr td:nth-child(22) {
   display: none;
 }
 
-.table.hide-fid tr th:nth-child(22) {
+.table.show-fid tr th:nth-child(22) {
   display: none;
 }
 
-.table.hide-description tr td:nth-child(23) {
+.table.show-description tr td:nth-child(23) {
   display: none;
 }
 
-.table.hide-description tr th:nth-child(23) {
+.table.show-description tr th:nth-child(23) {
   display: none;
 }
 
-.table.hide-author tr td:nth-child(24) {
+.table.show-author tr td:nth-child(24) {
   display: none;
 }
 
-.table.hide-author tr th:nth-child(24) {
+.table.show-author tr th:nth-child(24) {
   display: none;
 }
 
-.table.hide-official tr td:nth-child(25) {
+.table.show-official tr td:nth-child(25) {
   display: none;
 }
 
-.table.hide-official tr th:nth-child(25) {
+.table.show-official tr th:nth-child(25) {
   display: none;
 }
 
-.table.hide-legal tr td:nth-child(26) {
+.table.show-legal tr td:nth-child(26) {
   display: none;
 }
 
-.table.hide-legal tr th:nth-child(26) {
+.table.show-legal tr th:nth-child(26) {
   display: none;
 }
 
-.table.hide-id tr td:nth-child(27) {
+.table.show-id tr td:nth-child(27) {
   display: none;
 }
 
-.table.hide-id tr th:nth-child(27) {
+.table.show-id tr th:nth-child(27) {
   display: none;
 }
 

@@ -9,4 +9,5 @@ twig:
         patreon: 'incarnategaming'
         gitlab: 'incarnate-foundry-mods/issue-tracking'
         youtube: 'UC4mUHQC49lUqAf1Uvekmx-w'
-        cookies: '/docs/incarnate/'
+    paths:
+        '%kernel.project_dir%/vendor/knplabs/knp-paginator-bundle/templates': KnpPaginator

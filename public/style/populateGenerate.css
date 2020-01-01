@@ -1,0 +1,15 @@
+.populate, .generate {
+  color: var(--primary);
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.populate:hover, .generate:hover {
+  background-color: var(--primary);
+  color: var(--light);
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=populateGenerate.css.map */

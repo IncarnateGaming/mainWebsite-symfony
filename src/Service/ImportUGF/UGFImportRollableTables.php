@@ -19,14 +19,16 @@ class UGFImportRollableTables extends BaseUGFImporter
             );
             $replaceArray = array('<td>','</td>',"\t","\n","\r",'<th>','</th>');
             foreach ($row->td as $column){
-                $formatString = $column->asXML();
-                $formatString = str_replace($replaceArray,"",$formatString);
-                $newRow['td'][] = $formatString;
+                $newRow['td'][] = $this->functions->formatParagraphs($column);
+//                $formatString = $column->asXML();
+//                $formatString = str_replace($replaceArray,"",$formatString);
+//                $newRow['td'][] = $formatString;
             }
             foreach ($row->th as $column){
-                $formatString = $column->asXML();
-                $formatString = str_replace($replaceArray,"",$formatString);
-                $newRow['td'][] = $formatString;
+                $newRow['td'][] = $this->functions->formatParagraphs($column);
+//                $formatString = $column->asXML();
+//                $formatString = str_replace($replaceArray,"",$formatString);
+//                $newRow['td'][] = $formatString;
             }
             $rowArray[] = $newRow;
         }

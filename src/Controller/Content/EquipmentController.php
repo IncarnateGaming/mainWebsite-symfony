@@ -4,8 +4,11 @@
 namespace App\Controller\Content;
 
 use App\Entity\IncarnateEquipment;
+use App\Repository\IncarnateEquipmentRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class EquipmentController extends AbstractController
@@ -24,7 +27,24 @@ class EquipmentController extends AbstractController
     /**
      * @Route("/content/equipment/", name="inc_equipments")
      */
-    public function equipments(){
+    public function equipments(IncarnateEquipmentRepository $equipmentRepository ,Request $request, PaginatorInterface $paginator){
+        $term = $request->query->get('q');
+        $page = $request->query->getInt('page',1);
+        $minValue = $request->query->getInt('minValue',-500);
+        $maxValue = $request->query->getInt('maxValue',1000000000);
+//        dump($minValue,$maxValue);die;
+
+        $queryBuilder = $equipmentRepository->findAllWithSearchQuery($term,null);
+//        if ($minValue !== -500 || $maxValue !== 1000000000 ){
+//        $queryBuilder = $equipmentRepository->findAllWithValueQuery($minValue,$maxValue,$queryBuilder);
+//        }
+
+        $pagination = $paginator->paginate(
+            $queryBuilder,
+            $page,
+            30
+        );
+//        dump($equipment);die;
 //        $equipmentRepository = $this->em->getRepository(IncarnateEquipment::class);
         require_once '../lib/php/functions.php';
 //        $equipment = findInRepository($slug,$equipmentRepository);
@@ -37,12 +57,12 @@ class EquipmentController extends AbstractController
 //        $equipment[]=$equipmentRepository->findOneBy(['fid'=>'y3SpRQ8AgAbbUDKo']);
 //        $equipment[]=$equipmentRepository->findOneBy(['fid'=>'xiAJYXJHCSPxJgOy']);
 //        dump($equipment);die;
-//        if(!$equipment){
-//            throw $this->createNotFoundException('No equipment found');
-//        }
+        if(!$pagination){
+            throw $this->createNotFoundException('No equipment found');
+        }
         return $this->render('content/equipments.html.twig',[
             'genericParts' => $this->genericParts,
-//            'equipment'=>$equipment,
+            'pagination'=>$pagination,
         ]);
     }
     /**

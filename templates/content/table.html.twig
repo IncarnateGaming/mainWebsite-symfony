@@ -1,5 +1,51 @@
 {%  extends 'base.html.twig' %}
-{% block title %}Tables{% endblock %}
+{% block title %}{{ table.name }}{% endblock %}
+{% block boostrapStyle %}
+{{ parent() }}
+    <link rel="stylesheet" href="{{ asset('style/calculate.css') }}">
+{% endblock %}
+{% block backButton %}
+    <button class="btn btn-secondary" id="backButton" type="button" aria-label="Navigate back" onclick="window.location.href = '{{ url('inc_tables') }}';">Tables</button>
+{% endblock %}
 {% block body %}
-    <h1>Coming Soon!</h1>
+    <h2>{{ table.name }} <span class="calculate" id="masterRoll"></span></h2>
+    <table class="table table-striped" id="mainTable">
+        <tr><th>From</th><th>To</th><th></th></tr>
+        {% for row in table.tr %}
+            <tr>{% if row.to == row.from %}<th colspan="2" class="toColumn">{{ row.to }}</th>{% else %}<th class="fromColumn">{{ row.from }}</th><th class="toColumn">{{ row.to }}</th>{% endif %}{% for column in row.td %}<td>{{ column|raw }}</td>{% endfor %}</tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+    <script src="{{ asset('packs/js/populate.js') }}"></script>
+    <script src="{{ asset('packs/js/generate.js') }}"></script>
+    <script src="{{ asset('packs/js/IncarnateRoll.js') }}"></script>
+    <script src="{{ asset('packs/js/incarnateCalculateAlert.js') }}"></script>
+    <script>
+        var minValue = 1000000000, maxValue = 0;
+        const toColumns = document.getElementsByClassName('toColumn');
+        var fromColumns = document.getElementsByClassName('fromColumn');
+        if (fromColumns.length == 0){
+            fromColumns = toColumns;
+        }
+        [].forEach.call(fromColumns, column=>{
+            if(Number(column.innerHTML) < minValue){
+                minValue = Number(column.innerHTML);
+            }
+        });
+        [].forEach.call(toColumns, column=>{
+            if(Number(column.innerHTML) > maxValue){
+                maxValue = Number(column.innerHTML);
+            }
+        });
+        const masterRoll = document.getElementById('masterRoll');
+        var rollString = '';
+        if (minValue = 1){
+            rollString = '1d' + maxValue;
+        }else{
+            rollString = '1d' + maxValue + '-' + minValue-1;
+        }
+        masterRoll.innerHTML = rollString;
+    </script>
 {% endblock %}

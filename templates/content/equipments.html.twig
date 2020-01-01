@@ -1,187 +1,220 @@
 {%  extends 'base.html.twig' %}
-{#{% block boostrapStyle %}#}
-{#    <link rel="stylesheet" href="{{ asset('style/incEquipment.css') }}">#}
-{#{% endblock %}#}
+{% block boostrapStyle %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('style/incEquipment.css') }}">
+{% endblock %}
 {% block title %}Equipment{% endblock %}
 {% block body %}
-{#    <div id="columnFilters" class="d-flex flex-row flex-wrap inc-padding-sides">#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="nameColumn" name="hide-name" checked>#}
-{#            <label class="form-check-label" for="nameColumn">Name</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="valueColumn" name="hide-value" checked>#}
-{#            <label class="form-check-label" for="valueColumn">Value</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="weightColumn" name="hide-weight" checked>#}
-{#            <label class="form-check-label" for="weightColumn">Weight</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="armorClassColumn" name="hide-ac">#}
-{#            <label class="form-check-label" for="armorClassColumn">Armor Class</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="damageColumn" name="hide-damage">#}
-{#            <label class="form-check-label" for="damageColumn">Damage</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="rangeColumn" name="hide-range">#}
-{#            <label class="form-check-label" for="rangeColumn">Range</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="propertiesColumn" name="hide-properties">#}
-{#            <label class="form-check-label" for="propertiesColumn">Properties</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="gmOnlyColumn" name="hide-gmOnly">#}
-{#            <label class="form-check-label" for="gmOnlyColumn">GM Only</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="magicalColumn" name="hide-magical">#}
-{#            <label class="form-check-label" for="magicalColumn">Magical</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="mundaneColumn" name="hide-mundane">#}
-{#            <label class="form-check-label" for="mundaneColumn">Mundane</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="carryingCapacityColumn" name="hide-carrying">#}
-{#            <label class="form-check-label" for="carryingCapacityColumn">Carrying Capacity</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="holdingCapacityColumn" name="hide-holding">#}
-{#            <label class="form-check-label" for="holdingCapacityColumn">Holding Capacity</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="recommendedLevelColumn" name="hide-level">#}
-{#            <label class="form-check-label" for="recommendedLevelColumn">Recommended Level</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="consumableColumn" name="hide-consumable">#}
-{#            <label class="form-check-label" for="consumableColumn">Consumable</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="offensiveBonusColumn" name="hide-offense">#}
-{#            <label class="form-check-label" for="offensiveBonusColumn">Offensive Bonus</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="speedColumn" name="hide-speed">#}
-{#            <label class="form-check-label" for="speedColumn">Speed</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="stealthColumn" name="hide-stealth">#}
-{#            <label class="form-check-label" for="stealthColumn">Stealth</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="strengthColumn" name="hide-strength">#}
-{#            <label class="form-check-label" for="strengthColumn">Strength Requirement</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="typeColumn" name="hide-type">#}
-{#            <label class="form-check-label" for="typeColumn">Type</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="subtypeColumn" name="hide-subtype">#}
-{#            <label class="form-check-label" for="subtypeColumn">Subtype</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="rarityColumn" name="hide-rarity">#}
-{#            <label class="form-check-label" for="rarityColumn">Rarity</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="fidColumn" name="hide-fid">#}
-{#            <label class="form-check-label" for="fidColumn">FID</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="descriptionColumn" name="hide-description">#}
-{#            <label class="form-check-label" for="descriptionColumn">Description</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="authorColumn" name="hide-author">#}
-{#            <label class="form-check-label" for="authorColumn">Author</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="officialColumn" name="hide-official">#}
-{#            <label class="form-check-label" for="officialColumn">Official</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="legalColumn" name="hide-legal">#}
-{#            <label class="form-check-label" for="legalColumn">Legal</label>#}
-{#        </div>#}
-{#        <div class="form-check inc-flex-200">#}
-{#            <input type="checkbox" class="form-check-input inc-column-toggle" id="idColumn" name="hide-id">#}
-{#            <label class="form-check-label" for="idColumn">ID</label>#}
-{#        </div>#}
-{#    </div>#}
-{#    <table id="equipmentTable" class="table table-striped hide-ac hide-damage hide-range hide-properties hide-gmOnly hide-magical hide-mundane hide-carrying hide-holding hide-level hide-consumable hide-offense hide-speed hide-stealth hide-strength hide-type hide-subtype hide-rarity hide-fid hide-description hide-author hide-official hide-legal hide-id">#}
-{#        <thead>#}
-{#            <tr>#}
-{#                <th scope="col" name="0" data-type="string">Name</th>#}
-{#                <th scope="col" name="1" data-type="float">Value</th>#}
-{#                <th scope="col" name="2" data-type="float">Weight</th>#}
-{#                <th scope="col" name="3" data-type="float">AC</th>#}
-{#                <th scope="col" name="4" data-type="string">Damage</th>#}
-{#                <th scope="col" name="5" data-type="string">Item Range</th>#}
-{#                <th scope="col" name="6" data-type="string">Properties</th>#}
-{#                <th scope="col" name="7" data-type="boolean">GM Only</th>#}
-{#                <th scope="col" name="8" data-type="boolean">Magical</th>#}
-{#                <th scope="col" name="9" data-type="boolean">Mundane</th>#}
-{#                <th scope="col" name="10" data-type="string">Carrying Capacity</th>#}
-{#                <th scope="col" name="11" data-type="string">Holding Capacity</th>#}
-{#                <th scope="col" name="12" data-type="float">Recommended Level</th>#}
-{#                <th scope="col" name="13" data-type="boolean">Consumable</th>#}
-{#                <th scope="col" name="14" data-type="float">Offense Bonus</th>#}
-{#                <th scope="col" name="15" data-type="string">Speed</th>#}
-{#                <th scope="col" name="16" data-type="string">Stealth</th>#}
-{#                <th scope="col" name="17" data-type="string">Strength Requirement</th>#}
-{#                <th scope="col" name="18" data-type="string">Type</th>#}
-{#                <th scope="col" name="19" data-type="string">Subtype</th>#}
-{#                <th scope="col" name="20" data-type="string">Rarity</th>#}
-{#                <th scope="col" name="21" data-type="string">Fid</th>#}
-{#                <th scope="col" name="22" data-type="string">Description</th>#}
-{#                <th scope="col" name="23" data-type="string">Author</th>#}
-{#                <th scope="col" name="24" data-type="string">Official</th>#}
-{#                <th scope="col" name="25" data-type="string">Legal</th>#}
-{#                <th scope="col" name="26" data-type="float">id</th>#}
-{#            </tr>#}
-{#        </thead>#}
-{#        <tbody id="inc-table-main-body">#}
-{#        {% for item in equipment %}#}
-{#        <tr class="inc-table-main-row">#}
-{#            <td data-value="{{ item.name|lower }}" class="inc-main-table-column"><a href="{{ path('inc_equipment',{slug: item.fid}) }}">{{ item.name }}</a></td>#}
-{#            <td data-value="{{ item.costSortable }}" class="inc-main-table-column">{{ item.cost }}</td>#}
-{#            <td data-value="{{ item.weight }}" class="inc-main-table-column">{{ item.weight }}</td>#}
-{#            <td data-value="{% if item.ac %}{{ item.ac.ac }}{% else %}-1{% endif %}" class="inc-main-table-column">{% if item.ac %}{{ item.ac.ac }}{% if item.ac.mod %} {{ item.ac.mod }}{% endif %}{% endif %}</td>#}
-{#            <td data-value="{% if item.damage|length > 0 %}-1{% else %}-1{% endif %}" class="inc-main-table-column">#}
-{#                {% for line in item.damage %}{% if line.formula %}{{ line.formula }}{% endif %}{% if line.modifier %} + {{ line.modifier }}{% endif %}{% if line.ability %} + {{ line.ability }}{% endif %}{% if line.proficiency %} + prof{% endif %}{% if line.type %} {{ line.type }}{% endif %}{% if line.material %} {{ line.material }}{% endif %}{% endfor %}#}
-{#            </td>#}
-{#            <td data-value="{% if item.itemrange %}{{ item.itemrange }}{% else %}-1{% endif %}" class="inc-main-table-column">{% if item.itemrange %}{{ item.itemrange }}{% endif %}</td>#}
-{#            <td data-value="{% if item.properties %}{{ item.properties }}{% else %}-1{% endif %}" class="inc-main-table-column">{% if item.properties %}{{ item.properties|raw }}{% endif %}</td>#}
-{#            <td data-value="{% if item.gmonly %}true{% else %}false{% endif %}" class="inc-main-table-column">{% if item.gmonly %}true{% else %}false{% endif %}</td>#}
-{#            <td data-value="{% if item.magical %}true{% else %}false{% endif %}" class="inc-main-table-column">{% if item.magical %}true{% else %}false{% endif %}</td>#}
-{#            <td data-value="{% if item.mundane %}true{% else %}false{% endif %}" class="inc-main-table-column">{% if item.mundane %}true{% else %}false{% endif %}</td>#}
-{#            <td data-value="{%  if item.carryingcapacity %}{{  item.carryingcapacity }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.carryingcapacity %}{{ item.carryingcapacity }}{% endif %}</td>#}
-{#            <td data-value="{%  if item.holdingcapacity %}{{  item.holdingcapacity }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.holdingcapacity %}{{ item.holdingcapacity }}{% endif %}</td>#}
-{#            <td data-value="{% if item.recommendedlevel %}{{ item.recommendedlevel }}{% else %}-1{% endif %}" class="inc-main-table-column">{% if item.recommendedlevel %}{{ item.recommendedlevel }}{% endif %}</td>#}
-{#            <td data-value="{%  if item.consumable %}true{%  else %}false{%  endif %}" class="inc-main-table-column">{% if item.consumable %}true{% else %}false{% endif %}</td>#}
-{#            <td data-value="{%  if item.offensebonus %}{{  item.offensebonus }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.offensebonus %}{{ item.offensebonus }}{% endif %}</td>#}
-{#            <td data-value="{%  if item.speed %}{{  item.speed }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.speed %}{{ item.speed }}{% endif %}</td>#}
-{#            <td data-value="{%  if item.stealth %}{{  item.stealth }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.stealth %}{{ item.stealth }}{% endif %}</td>#}
-{#            <td data-value="{%  if item.strengthrequirement %}{{  item.strengthrequirement }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.strengthrequirement %}{{ item.strengthrequirement }}{% endif %}</td>#}
-{#            <td data-value="{%  if item.equipmentType %}{{  item.equipmentType }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.equipmentType %}{{ item.equipmentType }}{% endif %}</td>#}
-{#            <td data-value="{%  if item.subtype %}{{  item.subtype }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.subtype %}{{ item.subtype }}{% endif %}</td>#}
-{#            <td data-value="{%  if item.rarity %}{{  item.rarity.level }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.rarity %}{{ item.rarity.level }}{% endif %}</td>#}
-{#            <td data-value="{{ item.fid }}" class="inc-main-table-column">{{ item.fid }}</td>#}
-{#            <td data-value="{%  if item.description %}{{  item.description }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.description %}{{ item.description|raw }}{% endif %}</td>#}
-{#            <td data-value="{%  if item.author %}{{  item.author }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.author %}{{ item.author }}{% endif %}</td>#}
-{#            <td data-value="{{ item.official }}" class="inc-main-table-column">{{ item.official }}</td>#}
-{#            <td data-value="{%  if item.legal %}{{  item.legal }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.legal %}{{ item.legal }}{% endif %}</td>#}
-{#            <td data-value="{{ item.id }}" class="inc-main-table-column">{{ item.id }}</td>#}
-{#        </tr>#}
-{#        {% endfor %}#}
-{#        </tbody>#}
-{#    </table>#}
-{#    <script src="{{asset('packs/js/equipment.js')}}"></script>#}
-    <h2>Coming Soon!</h2>
+    <form>
+        <div class="input-group mb-3">
+            <input type="text" name="q" class="form-control" placeholder="Search..." value="{{ app.request.query.get('q') }}">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-outline-secondary"><span class="fas fa-search"></span></button>
+            </div>
+        </div>
+        <div class="advanced-options">
+            <div class="input-group">
+                <input type="number" name="minValue" class="form-control" value="{% if app.request.query.get('minValue') != 0%}{{ app.request.query.get('minValue') }}{% else %}-500{% endif %}">
+                <div class="input-group-append">Minimum Value</div>
+            </div>
+            <div class="input-group">
+                <input type="number" name="maxValue" class="form-control" value="{% if app.request.query.get('maxValue') != 0 %}{{ app.request.query.get('maxValue') }}{% else %}1000000000{% endif %}">
+                <div class="input-group-append">Maximum Value</div>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Example select</label>
+                <select class="form-control" id="exampleFormControlSelect1" name="test">
+                    <option value="1"{% if app.request.query.get('test') == 1 %} selected{% endif %}>1</option>
+                    <option value="2"{% if app.request.query.get('test') == 2 %} selected{% endif %}>2</option>
+                    <option value="3"{% if app.request.query.get('test') == 3 %} selected{% endif %}>3</option>
+                    <option value="4"{% if app.request.query.get('test') == 4 %} selected{% endif %}>4</option>
+                    <option value="5"{% if app.request.query.get('test') == 5 %} selected{% endif %}>5</option>
+                </select>
+            </div>
+        </div>
+        <div id="columnFilters" class="d-flex flex-row flex-wrap inc-padding-sides">
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="nameColumn" name="show-name" checked>
+                <label class="form-check-label" for="nameColumn">Name</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="valueColumn" name="show-value" checked>
+                <label class="form-check-label" for="valueColumn">Value</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="weightColumn" name="show-weight" checked>
+                <label class="form-check-label" for="weightColumn">Weight</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="armorClassColumn" name="show-ac" {% if app.request.query.get('show-ac') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="armorClassColumn">Armor Class</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="damageColumn" name="show-damage" {% if app.request.query.get('show-damage') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="damageColumn">Damage</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="rangeColumn" name="show-range" {% if app.request.query.get('show-range') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="rangeColumn">Range</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="propertiesColumn" name="show-properties" {% if app.request.query.get('show-properties') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="propertiesColumn">Properties</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="gmOnlyColumn" name="show-gmOnly" {% if app.request.query.get('show-gmOnly') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="gmOnlyColumn">GM Only</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="magicalColumn" name="show-magical" {% if app.request.query.get('show-magical') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="magicalColumn">Magical</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="mundaneColumn" name="show-mundane" {% if app.request.query.get('show-mundane') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="mundaneColumn">Mundane</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="carryingCapacityColumn" name="show-carrying" {% if app.request.query.get('show-carrying') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="carryingCapacityColumn">Carrying Capacity</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="holdingCapacityColumn" name="show-holding" {% if app.request.query.get('show-holding') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="holdingCapacityColumn">Holding Capacity</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="recommendedLevelColumn" name="show-level" {% if app.request.query.get('show-level') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="recommendedLevelColumn">Recommended Level</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="consumableColumn" name="show-consumable" {% if app.request.query.get('show-consumable') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="consumableColumn">Consumable</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="offensiveBonusColumn" name="show-offense" {% if app.request.query.get('show-offense') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="offensiveBonusColumn">Offensive Bonus</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="speedColumn" name="show-speed" {% if app.request.query.get('show-speed') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="speedColumn">Speed</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="stealthColumn" name="show-stealth" {% if app.request.query.get('show-stealth') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="stealthColumn">Stealth</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="strengthColumn" name="show-strength" {% if app.request.query.get('show-strength') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="strengthColumn">Strength Requirement</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="typeColumn" name="show-type" {% if app.request.query.get('show-type') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="typeColumn">Type</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="subtypeColumn" name="show-subtype" {% if app.request.query.get('show-subtype') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="subtypeColumn">Subtype</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="rarityColumn" name="show-rarity" {% if app.request.query.get('show-rarity') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="rarityColumn">Rarity</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="fidColumn" name="show-fid" {% if app.request.query.get('show-fid') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="fidColumn">FID</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="descriptionColumn" name="show-description" {% if app.request.query.get('show-description') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="descriptionColumn">Description</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="authorColumn" name="show-author" {% if app.request.query.get('show-author') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="authorColumn">Author</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="officialColumn" name="show-official" {% if app.request.query.get('show-official') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="officialColumn">Official</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="legalColumn" name="show-legal" {% if app.request.query.get('show-legal') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="legalColumn">Legal</label>
+            </div>
+            <div class="form-check inc-flex-200">
+                <input type="checkbox" class="form-check-input inc-column-toggle" id="idColumn" name="show-id" {% if app.request.query.get('show-id') == 'on' %}checked{% endif %}>
+                <label class="form-check-label" for="idColumn">ID</label>
+            </div>
+        </div>
+    </form>
+    <h3>Showing 30 of {{ pagination.getTotalItemCount }} results</h3>
+    <table id="equipmentTable" class="table table-striped {% if app.request.query.get('show-ac') != 'on' %}show-ac{% endif %} {% if app.request.query.get('show-damage') != 'on' %}show-damage{% endif %} {% if app.request.query.get('show-range') !='on' %}show-range{% endif %} {% if app.request.query.get('show-properties') != 'on' %}show-properties{% endif %} {% if app.request.query.get('show-gmOnly') != 'on' %}show-gmOnly{% endif %} {% if app.request.query.get('show-magical') != 'on' %}show-magical{% endif %} {% if app.request.query.get('show-mundane') != 'on' %}show-mundane{% endif %} {% if app.request.query.get('show-carrying') != 'on' %}show-carrying{% endif %} {% if app.request.query.get('show-holding') != 'on' %}show-holding{% endif %} {% if app.request.query.get('show-level') != 'on' %}show-level{% endif %} {% if app.request.query.get('show-consumable') != 'on' %}show-consumable{% endif %} {% if app.request.query.get('show-offense') != 'on' %}show-offense{% endif %} {% if app.request.query.get('show-speed') != 'on' %}show-speed{% endif %} {% if app.request.query.get('show-stealth') != 'on' %}show-stealth{% endif %} {% if app.request.query.get('show-strength') != 'on' %}show-strength{% endif %} {% if app.request.query.get('show-type') != 'on' %}show-type{% endif %} {% if app.request.query.get('show-subtype') != 'on' %}show-subtype{% endif %} {% if app.request.query.get('show-rarity') != 'on' %}show-rarity{% endif %} {% if app.request.query.get('show-fid') != 'on' %}show-fid{% endif %} {% if app.request.query.get('show-description') != 'on' %}show-description{% endif %} {% if app.request.query.get('show-author') != 'on' %}show-author{% endif %} {% if app.request.query.get('show-official') != 'on' %}show-official{% endif %} {% if app.request.query.get('show-legal') != 'on' %}show-legal{% endif %} {% if app.request.query.get('show-id') != 'on' %}show-id{% endif %}">
+        <thead>
+            <tr>
+                <th scope="col" name="0" data-type="string">Name</th>
+                <th scope="col" name="1" data-type="float">Value</th>
+                <th scope="col" name="2" data-type="float">Weight</th>
+                <th scope="col" name="3" data-type="float">AC</th>
+                <th scope="col" name="4" data-type="string">Damage</th>
+                <th scope="col" name="5" data-type="string">Item Range</th>
+                <th scope="col" name="6" data-type="string">Properties</th>
+                <th scope="col" name="7" data-type="boolean">GM Only</th>
+                <th scope="col" name="8" data-type="boolean">Magical</th>
+                <th scope="col" name="9" data-type="boolean">Mundane</th>
+                <th scope="col" name="10" data-type="string">Carrying Capacity</th>
+                <th scope="col" name="11" data-type="string">Holding Capacity</th>
+                <th scope="col" name="12" data-type="float">Recommended Level</th>
+                <th scope="col" name="13" data-type="boolean">Consumable</th>
+                <th scope="col" name="14" data-type="float">Offense Bonus</th>
+                <th scope="col" name="15" data-type="string">Speed</th>
+                <th scope="col" name="16" data-type="string">Stealth</th>
+                <th scope="col" name="17" data-type="string">Strength Requirement</th>
+                <th scope="col" name="18" data-type="string">Type</th>
+                <th scope="col" name="19" data-type="string">Subtype</th>
+                <th scope="col" name="20" data-type="string">Rarity</th>
+                <th scope="col" name="21" data-type="string">Fid</th>
+                <th scope="col" name="22" data-type="string">Description</th>
+                <th scope="col" name="23" data-type="string">Author</th>
+                <th scope="col" name="24" data-type="string">Official</th>
+                <th scope="col" name="25" data-type="string">Legal</th>
+                <th scope="col" name="26" data-type="float">id</th>
+            </tr>
+        </thead>
+        <tbody id="inc-table-main-body">
+        {% for item in pagination %}
+        <tr class="inc-table-main-row">
+            <td data-value="{{ item.name|lower }}" class="inc-main-table-column"><a href="{{ path('inc_equipment',{slug: item.fid}) }}">{{ item.name }}</a></td>
+            <td data-value="{{ item.costSortable }}" class="inc-main-table-column">{{ item.cost }}</td>
+            <td data-value="{{ item.weight }}" class="inc-main-table-column">{{ item.weight }}</td>
+            <td data-value="{% if item.ac %}{{ item.ac.ac }}{% else %}-1{% endif %}" class="inc-main-table-column">{% if item.ac %}{{ item.ac.ac }}{% if item.ac.mod %} {{ item.ac.mod }}{% endif %}{% endif %}</td>
+            <td data-value="{% if item.damage|length > 0 %}-1{% else %}-1{% endif %}" class="inc-main-table-column">
+                {% for line in item.damage %}{% if line.formula is defined %}{{ line.formula }}{% endif %}{% if line.modifier is defined %} + {{ line.modifier }}{% endif %}{% if line.ability is defined %} + {{ line.ability }}{% endif %}{% if line.proficiency is defined %} + prof{% endif %}{% if line.type is defined %} {{ line.type }}{% endif %}{% if line.material is defined %} {{ line.material }}{% endif %}{% endfor %}
+            </td>
+            <td data-value="{% if item.itemrange %}{{ item.itemrange }}{% else %}-1{% endif %}" class="inc-main-table-column">{% if item.itemrange %}{{ item.itemrange }}{% endif %}</td>
+            <td data-value="{% if item.properties %}{{ item.properties }}{% else %}-1{% endif %}" class="inc-main-table-column">{% if item.properties %}{{ item.properties|raw }}{% endif %}</td>
+            <td data-value="{% if item.gmonly %}true{% else %}false{% endif %}" class="inc-main-table-column">{% if item.gmonly %}true{% else %}false{% endif %}</td>
+            <td data-value="{% if item.magical %}true{% else %}false{% endif %}" class="inc-main-table-column">{% if item.magical %}true{% else %}false{% endif %}</td>
+            <td data-value="{% if item.mundane %}true{% else %}false{% endif %}" class="inc-main-table-column">{% if item.mundane %}true{% else %}false{% endif %}</td>
+            <td data-value="{%  if item.carryingcapacity %}{{  item.carryingcapacity }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.carryingcapacity %}{{ item.carryingcapacity }}{% endif %}</td>
+            <td data-value="{%  if item.holdingcapacity %}{{  item.holdingcapacity }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.holdingcapacity %}{{ item.holdingcapacity }}{% endif %}</td>
+            <td data-value="{% if item.recommendedlevel %}{{ item.recommendedlevel }}{% else %}-1{% endif %}" class="inc-main-table-column">{% if item.recommendedlevel %}{{ item.recommendedlevel }}{% endif %}</td>
+            <td data-value="{%  if item.consumable %}true{%  else %}false{%  endif %}" class="inc-main-table-column">{% if item.consumable %}true{% else %}false{% endif %}</td>
+            <td data-value="{%  if item.offensebonus %}{{  item.offensebonus }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.offensebonus %}{{ item.offensebonus }}{% endif %}</td>
+            <td data-value="{%  if item.speed %}{{  item.speed }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.speed %}{{ item.speed }}{% endif %}</td>
+            <td data-value="{%  if item.stealth %}{{  item.stealth }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.stealth %}{{ item.stealth }}{% endif %}</td>
+            <td data-value="{%  if item.strengthrequirement %}{{  item.strengthrequirement }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.strengthrequirement %}{{ item.strengthrequirement }}{% endif %}</td>
+            <td data-value="{%  if item.equipmentType %}{{  item.equipmentType }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.equipmentType %}{{ item.equipmentType }}{% endif %}</td>
+            <td data-value="{%  if item.subtype %}{{  item.subtype }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.subtype %}{{ item.subtype }}{% endif %}</td>
+            <td data-value="{%  if item.rarity %}{{  item.rarity.level }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.rarity %}{{ item.rarity.level }}{% endif %}</td>
+            <td data-value="{{ item.fid }}" class="inc-main-table-column">{{ item.fid }}</td>
+            <td data-value="{%  if item.description %}{{  item.description }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.description %}{{ item.description|raw }}{% endif %}</td>
+            <td data-value="{%  if item.author %}{{  item.author }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.author %}{{ item.author }}{% endif %}</td>
+            <td data-value="{{ item.official }}" class="inc-main-table-column">{{ item.official }}</td>
+            <td data-value="{%  if item.legal %}{{  item.legal }}{% else %}-1{%  endif %}" class="inc-main-table-column">{% if item.legal %}{{ item.legal }}{% endif %}</td>
+            <td data-value="{{ item.id }}" class="inc-main-table-column">{{ item.id }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="navigation">
+        {{  knp_pagination_render(pagination) }}
+    </div>
+    <script src="{{asset('packs/js/equipment.js')}}"></script>
+{#    <h2>Coming Soon!</h2>#}
 {% endblock %}
