@@ -16,7 +16,7 @@
     {{ race.description|raw }}
     <h3>{{ race.name }} Traits</h3>
     {% for trait in race.incarnateRaceTraits %}
-        <span class="float-left inc-padding-right"><strong>{{ trait.name }}</strong></span>{{ trait.description|raw }}
+        <span class="float-left inc-padding-right" id="{{ trait.fid }}"><strong>{{ trait.name }}</strong></span>{{ trait.description|raw }}
     {% endfor %}
     {% if race.subraces|length > 0 %}
     <h4>Subraces</h4>
@@ -26,7 +26,7 @@
             </h5>
             {{ subrace.description|raw }}
             {% for trait in subrace.incarnateRaceSubraceTraits %}
-                <span class="float-left inc-padding-right"><strong>{{ trait.name }}</strong></span>{{ trait.description|raw }}
+                <span class="float-left inc-padding-right" id="{{ trait.fid }}"><strong>{{ trait.name }}</strong></span>{{ trait.description|raw }}
             {% endfor %}
             {% if subrace.legal %}<hr/>{{ subrace.legal|raw }}{% endif %}
         {% endfor %}

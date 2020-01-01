@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ trait.name }}{% endblock %}
+{% block backButton %}
+    <button class="btn btn-secondary" id="backButton" type="button" aria-label="Navigate back" onclick="window.location.href = '{{ url('inc_race',{slug: trait.subrace.fid}) }}';">{{ trait.subrace.name }}</button>
+{% endblock %}
+{% block body %}
+    <h3>{{ trait.name }}</h3>
+    {{ trait.description|raw }}
+{% endblock %}
