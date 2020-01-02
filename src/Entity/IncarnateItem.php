@@ -19,13 +19,24 @@ use Doctrine\ORM\Mapping as ORM;
  *     "equipment_pack"="IncarnateEquipmentPack",
  *     "feat"="IncarnateFeat",
  *     "item"="IncarnateItem",
+ *     "building"="IncarnateLoreBuildings",
+ *     "citizen"="IncarnateLoreCitizen",
+ *     "city"="IncarnateLoreCity",
+ *     "country"="IncarnateLoreCountry",
+ *     "district"="IncarnateLoreDistrict",
+ *     "plane"="IncarnateLorePlane",
+ *     "planet"="IncarnateLorePlanet",
+ *     "poi"="IncarnateLorePointOfInterest",
+ *     "state"="IncarnateLoreState",
+ *     "subpoi"="IncarnateLoreSubpoint",
  *     "riddle"="IncarnateRiddle",
  *     "race"="IncarnateRace",
  *     "race_subrace"="IncarnateRaceSubrace",
  *     "race_trait"="IncarnateRaceTrait",
  *     "race_subrace_trait"="IncarnateRaceSubraceTrait",
  *     "skill"="IncarnateSkill",
- *     "table"="IncarnateTable"})
+ *     "table"="IncarnateTable"
+ * })
  */
 class IncarnateItem
 {

@@ -1,5 +1,15 @@
 USE incarnate_gaming;
 SHOW TABLES;
+TRUNCATE incarnate_lore_citizen;
+TRUNCATE incarnate_lore_subpoint;
+TRUNCATE incarnate_lore_point_of_interest;
+TRUNCATE incarnate_lore_buildings;
+TRUNCATE incarnate_lore_district;
+TRUNCATE incarnate_lore_city;
+TRUNCATE incarnate_lore_state;
+TRUNCATE incarnate_lore_country;
+TRUNCATE incarnate_lore_planet;
+TRUNCATE incarnate_lore_plane;
 TRUNCATE incarnate_skill;
 TRUNCATE incarnate_riddle;
 TRUNCATE incarnate_race_subrace_trait;

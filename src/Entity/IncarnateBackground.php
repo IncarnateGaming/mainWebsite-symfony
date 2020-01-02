@@ -73,6 +73,11 @@ class IncarnateBackground extends IncarnateItem
      */
     private $flaw;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\IncarnateLoreCitizen", mappedBy="background")
+     */
+    private $incarnateLoreCitizens;
+
     public function __construct()
     {
         $this->incarnateBackgroundFeatures = new ArrayCollection();
@@ -80,6 +85,7 @@ class IncarnateBackground extends IncarnateItem
         $this->ideal = new ArrayCollection();
         $this->bond = new ArrayCollection();
         $this->flaw = new ArrayCollection();
+        $this->incarnateLoreCitizens = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -241,6 +247,37 @@ class IncarnateBackground extends IncarnateItem
     public function setFlaw(?IncarnateTable $flaw): self
     {
         $this->flaw = $flaw;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|IncarnateLoreCitizen[]
+     */
+    public function getIncarnateLoreCitizens(): Collection
+    {
+        return $this->incarnateLoreCitizens;
+    }
+
+    public function addIncarnateLoreCitizen(IncarnateLoreCitizen $incarnateLoreCitizen): self
+    {
+        if (!$this->incarnateLoreCitizens->contains($incarnateLoreCitizen)) {
+            $this->incarnateLoreCitizens[] = $incarnateLoreCitizen;
+            $incarnateLoreCitizen->setBackground($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIncarnateLoreCitizen(IncarnateLoreCitizen $incarnateLoreCitizen): self
+    {
+        if ($this->incarnateLoreCitizens->contains($incarnateLoreCitizen)) {
+            $this->incarnateLoreCitizens->removeElement($incarnateLoreCitizen);
+            // set the owning side to null (unless already changed)
+            if ($incarnateLoreCitizen->getBackground() === $this) {
+                $incarnateLoreCitizen->setBackground(null);
+            }
+        }
 
         return $this;
     }

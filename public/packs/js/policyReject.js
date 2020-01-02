@@ -25,8 +25,15 @@ class IncarnatePolicyReject{
         }
         document.getElementById('postScriptInsert').innerHTML = response.innerHTML;
     }
+    static checkCookies(){
+         const response = document.createElement('p');
+         if (document.cookie === ''){
+             response.innerHTML = 'There are currently no Incarnate Cookies.';
+         }else{
+             response.innerHTML = '<strong>Your Incarnate Cookies are: </strong>' + document.cookie;
+         }
+         document.getElementById('check-cookie-results').innerHTML = response.outerHTML;
+    }
 }
-var buttons = document.getElementsByClassName('incarnate-remove-cookies');
-[].forEach.call(buttons, button=>{
-    button.addEventListener('click',IncarnatePolicyReject.removeCookies);
-})
+document.getElementById('incarnate-remove-cookies').addEventListener('click',IncarnatePolicyReject.removeCookies);
+document.getElementById('incarnate-check-cookies').addEventListener('click',IncarnatePolicyReject.checkCookies);

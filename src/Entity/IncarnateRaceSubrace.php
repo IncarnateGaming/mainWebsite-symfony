@@ -79,9 +79,15 @@ class IncarnateRaceSubrace extends IncarnateItem
      */
     private $race;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\IncarnateLoreCitizen", mappedBy="subrace")
+     */
+    private $incarnateLoreCitizens;
+
     public function __construct()
     {
         $this->incarnateRaceSubraceTraits = new ArrayCollection();
+        $this->incarnateLoreCitizens = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -248,6 +254,37 @@ class IncarnateRaceSubrace extends IncarnateItem
     public function setRace(?IncarnateRace $race): self
     {
         $this->race = $race;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|IncarnateLoreCitizen[]
+     */
+    public function getIncarnateLoreCitizens(): Collection
+    {
+        return $this->incarnateLoreCitizens;
+    }
+
+    public function addIncarnateLoreCitizen(IncarnateLoreCitizen $incarnateLoreCitizen): self
+    {
+        if (!$this->incarnateLoreCitizens->contains($incarnateLoreCitizen)) {
+            $this->incarnateLoreCitizens[] = $incarnateLoreCitizen;
+            $incarnateLoreCitizen->setSubrace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIncarnateLoreCitizen(IncarnateLoreCitizen $incarnateLoreCitizen): self
+    {
+        if ($this->incarnateLoreCitizens->contains($incarnateLoreCitizen)) {
+            $this->incarnateLoreCitizens->removeElement($incarnateLoreCitizen);
+            // set the owning side to null (unless already changed)
+            if ($incarnateLoreCitizen->getSubrace() === $this) {
+                $incarnateLoreCitizen->setSubrace(null);
+            }
+        }
 
         return $this;
     }

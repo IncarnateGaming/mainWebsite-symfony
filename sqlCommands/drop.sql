@@ -1,5 +1,15 @@
 USE incarnate_gaming;
 SHOW TABLES;
+DROP TABLE incarnate_lore_citizen;
+DROP TABLE incarnate_lore_subpoint;
+DROP TABLE incarnate_lore_point_of_interest;
+DROP TABLE incarnate_lore_buildings;
+DROP TABLE incarnate_lore_district;
+DROP TABLE incarnate_lore_city;
+DROP TABLE incarnate_lore_state;
+DROP TABLE incarnate_lore_country;
+DROP TABLE incarnate_lore_planet;
+DROP TABLE incarnate_lore_plane;
 DROP TABLE incarnate_skill;
 DROP TABLE incarnate_riddle;
 DROP TABLE incarnate_race_subrace_trait;

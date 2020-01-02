@@ -9,6 +9,7 @@ use App\Service\ImportUGF\UGFImportChapterIntro;
 use App\Service\ImportUGF\UGFImportClasses;
 use App\Service\ImportUGF\UGFImportEquipment;
 use App\Service\ImportUGF\UGFImportFeat;
+use App\Service\ImportUGF\UGFImportLore;
 use App\Service\ImportUGF\UGFImportMagicProperty;
 use App\Service\ImportUGF\UGFImportNPCs;
 use App\Service\ImportUGF\UGFImportRaces;
@@ -35,6 +36,8 @@ class AdminController extends AbstractController
         $this->serverRoute = $serverRoute;
     }
 
+//    Mass Delete
+
     /**
      * @Route("/admin/import/start/", name="inc_import_start")
      */
@@ -44,6 +47,9 @@ class AdminController extends AbstractController
         return $this->redirect($path);
 //        return new Response('Import not started');
     }
+
+//    Foundational Elements
+
     /**
      * @Route("/admin/import/rules/")
      */
@@ -62,6 +68,9 @@ class AdminController extends AbstractController
         return $this->redirect($path);
 //        return new Response('Import stopped at tables');
     }
+
+//    Content Based Elements
+
     /**
      * @Route("/admin/import/backgrounds/")
      */
@@ -156,9 +165,21 @@ class AdminController extends AbstractController
      * @Route("/admin/import/magicProp/")
      */
     public function importMagicProp(UGFImportMagicProperty $UGFImporter){
-//        $path = $this->>serverRoute . 'admin/import/npc/';
+//        $path = $this->>serverRoute . 'admin/import/lore/';
         $UGFImporter->import();
         return new Response('Import stopped at magic properties');
+//        return $this->redirect($path);
+    }
+
+//    Final Elements
+
+    /**
+     * @Route("/admin/import/lore/")
+     */
+    public function importLore(UGFImportLore $UGFImporter){
+//        $path = $this->>serverRoute . 'admin/import/npc/';
+        $UGFImporter->import();
+        return new Response('Import completed.');
 //        return $this->redirect($path);
     }
 }
