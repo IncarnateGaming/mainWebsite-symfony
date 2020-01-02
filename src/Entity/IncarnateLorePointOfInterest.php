@@ -58,6 +58,11 @@ class IncarnateLorePointOfInterest extends IncarnateItem
      */
     private $incarnateLoreBuildings;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\IncarnateLorePlane", inversedBy="incarnateLorePointOfInterests")
+     */
+    private $incarnateLorePlane;
+
     public function __construct()
     {
         $this->incarnateLoreSubpoints = new ArrayCollection();
@@ -179,6 +184,18 @@ class IncarnateLorePointOfInterest extends IncarnateItem
     public function setIncarnateLoreBuildings(?IncarnateLoreBuildings $incarnateLoreBuildings): self
     {
         $this->incarnateLoreBuildings = $incarnateLoreBuildings;
+
+        return $this;
+    }
+
+    public function getIncarnateLorePlane(): ?IncarnateLorePlane
+    {
+        return $this->incarnateLorePlane;
+    }
+
+    public function setIncarnateLorePlane(?IncarnateLorePlane $incarnateLorePlane): self
+    {
+        $this->incarnateLorePlane = $incarnateLorePlane;
 
         return $this;
     }

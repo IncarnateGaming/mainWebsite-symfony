@@ -28,9 +28,15 @@ class IncarnateLorePlane extends IncarnateItem
      */
     private $incarnateLorePlanets;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\IncarnateLorePointOfInterest", mappedBy="incarnateLorePlane")
+     */
+    private $incarnateLorePointOfInterests;
+
     public function __construct()
     {
         $this->incarnateLorePlanets = new ArrayCollection();
+        $this->incarnateLorePointOfInterests = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -75,6 +81,37 @@ class IncarnateLorePlane extends IncarnateItem
             // set the owning side to null (unless already changed)
             if ($incarnateLorePlanet->getIncarnateLorePlane() === $this) {
                 $incarnateLorePlanet->setIncarnateLorePlane(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|IncarnateLorePointOfInterest[]
+     */
+    public function getIncarnateLorePointOfInterests(): Collection
+    {
+        return $this->incarnateLorePointOfInterests;
+    }
+
+    public function addIncarnateLorePointOfInterest(IncarnateLorePointOfInterest $incarnateLorePointOfInterest): self
+    {
+        if (!$this->incarnateLorePointOfInterests->contains($incarnateLorePointOfInterest)) {
+            $this->incarnateLorePointOfInterests[] = $incarnateLorePointOfInterest;
+            $incarnateLorePointOfInterest->setIncarnateLorePlane($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIncarnateLorePointOfInterest(IncarnateLorePointOfInterest $incarnateLorePointOfInterest): self
+    {
+        if ($this->incarnateLorePointOfInterests->contains($incarnateLorePointOfInterest)) {
+            $this->incarnateLorePointOfInterests->removeElement($incarnateLorePointOfInterest);
+            // set the owning side to null (unless already changed)
+            if ($incarnateLorePointOfInterest->getIncarnateLorePlane() === $this) {
+                $incarnateLorePointOfInterest->setIncarnateLorePlane(null);
             }
         }
 
