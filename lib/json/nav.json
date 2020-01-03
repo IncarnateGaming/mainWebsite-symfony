@@ -35,16 +35,6 @@
 				"pageName": "feats"
 			},
 			{
-				"pagePath": "inc_magic_properties",
-				"pageTitle": "Magical Properties",
-				"pageName": "magicalproperties"
-			},
-			{
-				"pagePath": "inc_npcs",
-				"pageTitle": "NPCs",
-				"pageName": "npcs"
-			},
-			{
 				"pagePath": "inc_lores",
 				"pageTitle": "Lore",
 				"pageName": "lore"
@@ -70,19 +60,9 @@
 				"pageName": "skills"
 			},
 			{
-				"pagePath": "inc_spells",
-				"pageTitle": "Spells",
-				"pageName": "spells"
-			},
-			{
 				"pagePath": "inc_tables",
 				"pageTitle": "Tables",
 				"pageName": "tables"
-			},
-			{
-				"pagePath": "inc_templates",
-				"pageTitle": "Template",
-				"pageName": "templates"
 			}
 		]
 	},

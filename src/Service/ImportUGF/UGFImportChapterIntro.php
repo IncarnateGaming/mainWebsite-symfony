@@ -149,7 +149,7 @@ class UGFImportChapterIntro extends BaseUGFImporter
         $this->prepareChapterIntro($this->ugf->chapters->PlayerQuickSheet,'Player Quick Sheet');
         $this->prepareChapterIntro($this->ugf->chapters->backgroundChapter->backgroundsIntroduction,'Background Intro');
         $this->prepareChapterIntro($this->ugf->chapters->classChapter->classIntroduction,'Class Intro');
-        $this->prepareChapterIntro($this->ugf->chapters->featChapter->featIntroduction,'Feat Intro');
+        $this->prepareChapterIntro($this->ugf->chapters->featChapter->featsIntroduction,'Feat Intro');
         $this->prepareChapterIntro($this->ugf->chapters->itemChapter->itemsIntroduction,'Equipment Intro');
         $this->prepareChapterIntro($this->ugf->chapters->magicitemTemplatesChapter->magicItemTemplatesIntroduction,'Magical Properties Intro');
         $this->prepareChapterIntro($this->ugf->chapters->npcChapter->npcsIntroduction,'NPC Intro');

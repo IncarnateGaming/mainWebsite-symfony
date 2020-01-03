@@ -16,7 +16,7 @@ class IncarnateOrientation{
     static orientHorizontal(){
         incLogo.style.display='block';
         if(screen.orientation.angle === 90 || screen.orientation.angle === 270){
-            htmlTop.style.fontSize='3vh';
+            // htmlTop.style.fontSize='3vh';
         }
         [].forEach.call(IncarnateOrientation.getBanners(), banner=>{
             banner.classList.add('flex-row');
@@ -27,7 +27,7 @@ class IncarnateOrientation{
         htmlTop.classList.add('mobile');
         incLogo.style.display = 'none';
         if(screen.orientation.angle ===0 || screen.orientation.angle===180) {
-            htmlTop.style.fontSize = '1.7vh';
+            // htmlTop.style.fontSize = '1.7vh';
         }
         [].forEach.call(IncarnateOrientation.getBanners(), banner=>{
             banner.classList.add('flex-column');

@@ -6,6 +6,8 @@ namespace App\Controller\Content;
 
 use App\Entity\ChapterIntro;
 use App\Entity\IncarnateFeat;
+use App\Repository\ChapterIntroRepository;
+use App\Repository\IncarnateFeatRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,11 +29,13 @@ class FeatController extends AbstractController
     /**
      * @Route("/content/feat/", name="inc_feats")
      */
-    public function feats(){
-        $featRepository = $this->em->getRepository(IncarnateFeat::class);
-        $feats = $featRepository->findAll();
-        $chapterRepository = $this->em->getRepository(ChapterIntro::class);
-        $intro = $chapterRepository->buildParagraphsByCategory('Feat Intro');
+    public function feats(IncarnateFeatRepository $incarnateFeatRepository, ChapterIntroRepository $chapterIntroRepository){
+//        $featRepository = $this->em->getRepository(IncarnateFeat::class);
+//        $feats = $featRepository->findAll();
+//        $chapterRepository = $this->em->getRepository(ChapterIntro::class);
+//        $intro = $chapterRepository->buildParagraphsByCategory('Feat Intro');
+        $feats = $incarnateFeatRepository->findAll();
+        $intro = $chapterIntroRepository->buildParagraphsByCategory('Feat Intro');
         return $this->render('content/feats.html.twig',[
             'genericParts' => $this->genericParts,
             'loop'=>$feats,
