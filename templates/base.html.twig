@@ -21,12 +21,12 @@
     <body class="d-flex flex-column">
         <div class="inc-body inc-flex-grow">
             {% block body_indentation %}
-            <div class="inc-indentation mt-3">
+            <div class="inc-indentation mt-2">
                 {% block body %}{% endblock %}
             </div>
             {% endblock %}
         </div>
-        <footer class="bg-secondary inc-flex-auto">
+        <footer class="bg-secondary d-flex flex-column">
             <div class="list-unstyled d-flex justify-content-end">
                 <a class="text-light container p-2" href="https://discord.gg/{{ discord }}" target="_blank">Discord</a>
                 <a class="text-light container p-2" href="mailto:{{ email }}" target="_blank">Email</a>
@@ -34,7 +34,7 @@
                 <a class="text-light container p-2" href="https://www.patreon.com/{{ patreon }}" target="_blank">Patreon</a>
                 <a class="text-light container p-2" href="https://www.youtube.com/channel/{{ youtube }}" target="_blank">YouTube</a>
             </div>
-            <div class="bg-primary">
+            <div class="bg-primary pb-2">
                 <span class="text-light inc-blockify-center">© 2019 <a class="text-light" href="mailto:{{ email }}">Incarnate Gaming LLC</a></span>
             </div>
         </footer>
