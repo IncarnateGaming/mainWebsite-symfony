@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 
 use App\Service\ImportUGF\UGFImportBackgrounds;
@@ -24,7 +24,7 @@ use App\Service\UGFImporter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminController extends AbstractController
+class ImportController extends AbstractController
 {
     public function __construct()
     {
