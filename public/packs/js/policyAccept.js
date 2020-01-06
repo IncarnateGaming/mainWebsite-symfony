@@ -4,27 +4,6 @@ class IncarnatePolicyAccept{
         const twigVariables = document.getElementById('incarnate-twig-variables');
         cookiePath=twigVariables.getAttribute('data-cookies');
     }
-    static setCookie(cname, cvalue, exdays) {
-        var d = new Date();
-        d.setTime(d.getTime() + (exdays*24*60*60*1000));
-        var expires = "expires="+ d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + '; path=/';
-    }
-     static getCookie(cname) {
-        var name = cname + "=";
-        var decodedCookie = decodeURIComponent(document.cookie);
-        var ca = decodedCookie.split(';');
-        for(var i = 0; i <ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return "";
-    }
     static makeBanner(){
         var banner = document.createElement('div');
         banner.setAttribute('class','incarnate-policy-banner d-flex flex-column');
@@ -42,7 +21,7 @@ class IncarnatePolicyAccept{
         return banner;
     }
     static acceptPolicy(){
-        IncarnatePolicyAccept.setCookie('policyAccept','true',30);
+        IncarnateCookies.setCookie('policyAccept','true',30);
         const policyBanners = document.getElementsByClassName('incarnate-policy-banner');
         [].forEach.call(policyBanners, banner=>{
             banner.remove();
@@ -56,7 +35,7 @@ class IncarnatePolicyAccept{
     }
 }
 IncarnatePolicyAccept.setup();
-if(IncarnatePolicyAccept.getCookie('policyAccept')!== 'true'){
+if(IncarnateCookies.getCookie('policyAccept')!== 'true'){
     const body = document.getElementsByTagName('body')[0];
     body.append(IncarnatePolicyAccept.makeBanner());
 }
