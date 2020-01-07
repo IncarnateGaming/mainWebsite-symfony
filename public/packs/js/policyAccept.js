@@ -21,11 +21,12 @@ class IncarnatePolicyAccept{
         return banner;
     }
     static acceptPolicy(){
-        IncarnateCookies.setCookie('policyAccept','true',30);
         const policyBanners = document.getElementsByClassName('incarnate-policy-banner');
         [].forEach.call(policyBanners, banner=>{
             banner.remove();
         });
+        IncarnateCookies.setCookie('policyAccept','true',30);
+        IncarnateHooks.callAll('policyAccept');
     }
     static rejectPolicy(){
         window.location.href='/policy/reject';
