@@ -9,10 +9,13 @@ use App\Entity\IncarnateSkill;
 class UGFImportSkill extends BaseUGFImporter
 {
     public function import(){
+//        $skillRepository->deleteAll()->getQuery()->execute();
         $skillRepository = $this->em->getRepository(IncarnateSkill::class);
-        $skillRepository->deleteAll()->getQuery()->execute();
         foreach ($this->ugf->chapters->skillsChapter->skills->skill as $skill) {
-            $new = new IncarnateSkill();
+            $new = $skillRepository->findOneBy(['fid'=>$skill['FID']]);
+            if(!$new){
+                $new = new IncarnateSkill();
+            }
 //            $new->setLegal();
             $new->setOfficial($skill->officialContent->__toString()=='true'?true:false);
             $new->setAuthor($skill->author->__toString());

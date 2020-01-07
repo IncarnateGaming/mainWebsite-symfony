@@ -9,10 +9,13 @@ use App\Entity\IncarnateFeat;
 class UGFImportFeat extends BaseUGFImporter
 {
     public function import(){
+//        $featRepository->deleteAll();
         $featRepository = $this->em->getRepository(IncarnateFeat::class);
-        $featRepository->deleteAll();
         foreach ($this->ugf->chapters->featChapter->feats->feat as $feat){
-            $new = new IncarnateFeat();
+            $new = $featRepository->findOneBy(['fid'=>$feat['FID']]);
+            if(!$new){
+                $new = new IncarnateFeat();
+            }
             $new->setFid($feat['FID']);
             $new->setType($this->incImportType['feat']);
             $new->setDescription($this->functions->formatParagraphs($feat->featDescription));

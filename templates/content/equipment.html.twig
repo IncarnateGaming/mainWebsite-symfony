@@ -1,7 +1,7 @@
 {%  extends 'base.html.twig' %}
 {% block title %}{{ equipment.name }}{% endblock %}
 {% block backButton %}
-    <button class="btn btn-secondary" id="backButton" type="button" aria-label="Navigate back" onclick="window.location.href = '{{ path('inc_equipments') }}';">Equipment</button>
+    <button class="btn btn-secondary m-2" id="backButton" type="button" aria-label="Navigate back" onclick="window.location.href = '{{ path('inc_equipments') }}';">Equipment</button>
 {% endblock %}
 {% block body %}
     <h3 id="{{ equipment.fid }}">{{ equipment.name }}</h3>

@@ -88,7 +88,10 @@ class UGFImportChapterIntro extends BaseUGFImporter
             $top='';
         }
         foreach ($chapter->sections->section1 as $sec1) {
-            $new = new ChapterIntro();
+            $new = $this->em->getRepository(ChapterIntro::class)->findOneBy(['fid'=>$sec1['FID']]);
+            if(!$new) {
+                $new = new ChapterIntro();
+            }
             $sections = $this->assembleSections($sec1,$top);
             if($category) {
                 $new->setCategory($category);
@@ -127,7 +130,10 @@ class UGFImportChapterIntro extends BaseUGFImporter
     }
     public function makeChapterCategories(\SimpleXMLElement $chapters){
         foreach ($chapters as $chapter){
-            $new = new IncarnateItem();
+            $new = $this->em->getRepository(IncarnateItem::class)->findOneBy(['fid'=>$chapter['FID']]);
+            if(!$new) {
+                $new = new IncarnateItem();
+            }
             $new->setDescription('');
             $new->setLegal('');
             $author = $chapter->officialContent->__toString() === 'true' ? 'SRD' : 'ProNobis';

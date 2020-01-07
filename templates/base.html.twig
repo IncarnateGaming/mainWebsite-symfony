@@ -39,7 +39,7 @@
             </div>
         </footer>
         <nav class="navbar navbar-expand-lg navbar-light bg-primary inc-sticky-header" id="navbar">
-            <a id="incarnate-logo" class="navbar-brand text-light" href="/"><img src="{{ asset('assets/images/favicon.ico') }}">Incarnate Gaming</a>
+            <a id="incarnate-logo" class="navbar-brand text-light" href="/"><img src="{{ asset('assets/images/favicon-white-64x64.png') }}">Incarnate Gaming</a>
             <button class="navbar-toggler bg-secondary text-light ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -50,7 +50,7 @@
                     </li>#}
                     {% for item in genericParts.nav  %}
                         <li class="nav-item">
-                        <button class="btn btn-primary"{% if item.subpages is defined %} id="{{ item.pageName }}DropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% else %} onclick="window.location.href='{{ path(item.pagePath)|index_stripper }}'"{% endif %}>{{ item.pageTitle }}</button>
+                        <button class="btn btn-primary m-2"{% if item.subpages is defined %} id="{{ item.pageName }}DropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% else %} onclick="window.location.href='{{ path(item.pagePath)|index_stripper }}'"{% endif %}>{{ item.pageTitle }}</button>
                         {% if item.subpages is defined %}
                             <div class="dropdown-menu overflow-auto" aria-labelledby="{{ item.pageName }}Dropdown">
                                 {% for subitem in item.subpages %}
@@ -61,7 +61,7 @@
                         {% endif %}
                         </li>
                     {% endfor %}
-                    <button class="btn btn-secondary mr-2" id="topButton" type="button" aria-label="Navigate to Top">Top</button>
+                    <button class="btn btn-secondary m-2" id="topButton" type="button" aria-label="Navigate to Top">Top</button>
                     {% block backButton %}{% endblock %}
                 </ul>
             </div>

@@ -7,17 +7,26 @@ namespace App\Service\ImportUGF;
 use App\Entity\IncarnateBackground;
 use App\Entity\IncarnateBackgroundFeature;
 use App\Entity\IncarnateTable;
+use Doctrine\ORM\EntityManagerInterface;
 
 class UGFImportBackgrounds extends BaseUGFImporter
 {
+    public function __construct(EntityManagerInterface $em, UGFImportFunctions $functions)
+    {
+        parent::__construct($em, $functions);
+    }
+
     public function import(){
         $backgrounds = $this->ugf->chapters->backgroundChapter->backgrounds;
-        $backgroundFeatureRepository = $this->em->getRepository(IncarnateBackgroundFeature::class);
-        $backgroundFeatureRepository->deleteAll()->getQuery()->execute();
-        $repository = $this->em->getRepository(IncarnateBackground::class);
-        $repository->deleteAll()->getQuery()->execute();
+//        $backgroundFeatureRepository = $this->em->getRepository(IncarnateBackgroundFeature::class);
+//        $backgroundFeatureRepository->deleteAll()->getQuery()->execute();
+//        $repository->deleteAll()->getQuery()->execute();
+        $incarnateBackgroundRepository = $this->em->getRepository(IncarnateBackground::class);
         foreach ($backgrounds->children() as $background){
-            $back = new IncarnateBackground();
+            $back = $incarnateBackgroundRepository->findOneBy(['fid'=>$background['FID']]);
+            if(!$back) {
+                $back = new IncarnateBackground();
+            }
             $back->setAuthor($background->backgroundAuthor);
             $description = $this->functions->formatParagraphs($background->backgroundDescription);
             $back->setDescription($description);
@@ -103,7 +112,10 @@ class UGFImportBackgrounds extends BaseUGFImporter
         return true;
     }
     public function importBackgroundFeature(\SimpleXMLElement $background,IncarnateBackground $backgroundEntity){
-        $backFeat = new IncarnateBackgroundFeature();
+        $backFeat = $this->em->getRepository(IncarnateBackgroundFeature::class)->findOneBy(['fid'=>$background->backgroundFeature['FID']]);
+        if(!$backFeat) {
+            $backFeat = new IncarnateBackgroundFeature();
+        }
         $backFeat->setAuthor($background->backgroundAuthor);
         $description = $this->functions->formatParagraphs($background->backgroundFeature->backgroundFeatureDescription);
         $backFeat->setDescription($description);

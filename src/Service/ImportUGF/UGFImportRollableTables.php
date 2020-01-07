@@ -35,7 +35,10 @@ class UGFImportRollableTables extends BaseUGFImporter
         return $rowArray;
     }
     public function prepareTable(\SimpleXMLElement $table, string $author='ProNobis',string $official='false',string $legal=null){
-        $new = new IncarnateTable();
+        $new = $this->em->getRepository(IncarnateTable::class)->findOneBy(['fid'=>$table['FID']]);
+        if(!$new){
+            $new = new IncarnateTable();
+        }
         $new->setAuthor($author);
         if ($table->chapterTableDescription){
             $description = $this->functions->formatParagraphs($table->chapterTableDescription);
@@ -70,7 +73,7 @@ class UGFImportRollableTables extends BaseUGFImporter
     }
     public function import(){
         $repository = $this->em->getRepository(IncarnateTable::class);
-        $repository->deleteAll()->getQuery()->execute();
+//        $repository->deleteAll()->getQuery()->execute();
         $backgrounds = $this->ugf->chapters->backgroundChapter->backgrounds;
         foreach ($backgrounds->children() as $background){
             $this->prepareTable($background->backgroundSuggestedCharacteristics->backgroundPersonality);

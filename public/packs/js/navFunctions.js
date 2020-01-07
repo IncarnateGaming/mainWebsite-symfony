@@ -18,11 +18,11 @@ class NavFunctions{
             return true;
         }
         incScrolling = true;
-        if(incLastKnownScroll<window.scrollY && window.scrollY>1000){
+        if(incLastKnownScroll<window.scrollY && window.scrollY>500){
             NavFunctions.hideNav();
         }else{
             NavFunctions.showNav();
-            if(window.scrollY>2000){
+            if(window.scrollY>500){
                 NavFunctions.showTop();
             }else{
                 NavFunctions.hideTop();

@@ -1,6 +1,7 @@
 class IncarnatePolicyReject{
      static deleteCookies(cookies,response){
         Object.keys(cookies).forEach(cookie=>{
+            console.log(cookie);
             document.cookie = cookie + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         });
     }

@@ -18,18 +18,22 @@ use App\Entity\IncarnateLoreSubpoint;
 class UGFImportLore extends BaseUGFImporter
 {
     public function import(){
-        $this->em->getRepository(IncarnateLoreCitizen::class)->deleteAll()->getQuery()->execute();
-        $this->em->getRepository(IncarnateLoreSubpoint::class)->deleteAll()->getQuery()->execute();
-        $this->em->getRepository(IncarnateLorePointOfInterest::class)->deleteAll()->getQuery()->execute();
-        $this->em->getRepository(IncarnateLoreBuildings::class)->deleteAll()->getQuery()->execute();
-        $this->em->getRepository(IncarnateLoreDistrict::class)->deleteAll()->getQuery()->execute();
-        $this->em->getRepository(IncarnateLoreCity::class)->deleteAll()->getQuery()->execute();
-        $this->em->getRepository(IncarnateLoreState::class)->deleteAll()->getQuery()->execute();
-        $this->em->getRepository(IncarnateLoreCountry::class)->deleteAll()->getQuery()->execute();
-        $this->em->getRepository(IncarnateLorePlanet::class)->deleteAll()->getQuery()->execute();
-        $this->em->getRepository(IncarnateLorePlane::class)->deleteAll()->getQuery()->execute();
+//        $this->em->getRepository(IncarnateLoreCitizen::class)->deleteAll()->getQuery()->execute();
+//        $this->em->getRepository(IncarnateLoreSubpoint::class)->deleteAll()->getQuery()->execute();
+//        $this->em->getRepository(IncarnateLorePointOfInterest::class)->deleteAll()->getQuery()->execute();
+//        $this->em->getRepository(IncarnateLoreBuildings::class)->deleteAll()->getQuery()->execute();
+//        $this->em->getRepository(IncarnateLoreDistrict::class)->deleteAll()->getQuery()->execute();
+//        $this->em->getRepository(IncarnateLoreCity::class)->deleteAll()->getQuery()->execute();
+//        $this->em->getRepository(IncarnateLoreState::class)->deleteAll()->getQuery()->execute();
+//        $this->em->getRepository(IncarnateLoreCountry::class)->deleteAll()->getQuery()->execute();
+//        $this->em->getRepository(IncarnateLorePlanet::class)->deleteAll()->getQuery()->execute();
+//        $this->em->getRepository(IncarnateLorePlane::class)->deleteAll()->getQuery()->execute();
+        $incarnateLorePlaneRepository = $this->em->getRepository(IncarnateLorePlane::class);
         foreach ($this->ugf->chapters->planeChapter->planes->plane as $plane){
-            $new = new IncarnateLorePlane();
+            $new = $incarnateLorePlaneRepository->findOneBy(['fid'=>$plane['FID']]);
+            if(!$new){
+                $new = new IncarnateLorePlane();
+            }
             $new->setOfficial('false');
             $new->setAuthor($plane->author->__toString());
             $new->setUgfid($plane['UGF']);
@@ -54,8 +58,12 @@ class UGFImportLore extends BaseUGFImporter
     }
     public function setupPlanets(IncarnateLorePlane $incarnateLorePlane, \SimpleXMLElement $plane){
         if($plane->planets) {
+            $incarnateLorePlanetRepository = $this->em->getRepository(IncarnateLorePlanet::class);
             foreach ($plane->planets->planet as $planet) {
-                $incarnateLorePlanet = new IncarnateLorePlanet();
+                $incarnateLorePlanet = $incarnateLorePlanetRepository->findOneBy(['fid'=>$planet['FID']]);
+                if(!$incarnateLorePlanet){
+                    $incarnateLorePlanet = new IncarnateLorePlanet();
+                }
                 $incarnateLorePlanet->setAuthor($planet->author->__toString());
                 $incarnateLorePlanet->setDescription($this->functions->formatParagraphs($planet->description));
                 $incarnateLorePlanet->setFid($planet['FID']);
@@ -81,8 +89,12 @@ class UGFImportLore extends BaseUGFImporter
     }
     public function setupCountry(IncarnateLorePlanet $incarnateLorePlanet, \SimpleXMLElement $planet){
         if($planet->countries){
+            $incarnateLoreCountryRepository = $this->em->getRepository(IncarnateLoreCountry::class);
             foreach ($planet->countries->country as $country){
-                $incarnateLoreCountry = new IncarnateLoreCountry();
+                $incarnateLoreCountry = $incarnateLoreCountryRepository->findOneBy(['fid'=>$country['FID']]);
+                if(!$incarnateLoreCountry){
+                    $incarnateLoreCountry = new IncarnateLoreCountry();
+                }
                 $incarnateLoreCountry->setAuthor($country->author->__toString());
                 $incarnateLoreCountry->setDescription($this->functions->formatParagraphs($country->description));
                 $incarnateLoreCountry->setFid($country['FID']);
@@ -108,8 +120,12 @@ class UGFImportLore extends BaseUGFImporter
     }
     public function setupState(IncarnateLoreCountry $incarnateLoreCountry, \SimpleXMLElement $country){
         if($country->states){
+            $incarnateLoreStateRepository = $this->em->getRepository(IncarnateLoreState::class);
             foreach ($country->states->state as $state){
-                $incarnateLoreState = new IncarnateLoreState();
+                $incarnateLoreState = $incarnateLoreStateRepository->findOneBy(['fid'=>$state['FID']]);
+                if(!$incarnateLoreState){
+                    $incarnateLoreState = new IncarnateLoreState();
+                }
                 $incarnateLoreState->setAuthor($state->author->__toString());
                 $incarnateLoreState->setDescription($this->functions->formatParagraphs($state->description));
                 $incarnateLoreState->setFid($state['FID']);
@@ -135,8 +151,12 @@ class UGFImportLore extends BaseUGFImporter
     }
     public function setupCity(IncarnateLoreState $incarnateLoreState,\SimpleXMLElement $state){
         if($state->cities){
+            $incarnateLoreCityRepository = $this->em->getRepository(IncarnateLoreCity::class);
             foreach ($state->cities->city as $city){
-                $incarnateLoreCity = new IncarnateLoreCity();
+                $incarnateLoreCity = $incarnateLoreCityRepository->findOneBy(['fid'=>$city['FID']]);
+                if(!$incarnateLoreCity){
+                    $incarnateLoreCity = new IncarnateLoreCity();
+                }
                 $incarnateLoreCity->setAuthor($city->author->__toString());
                 $incarnateLoreCity->setDescription($this->functions->formatParagraphs($city->description));
                 $incarnateLoreCity->setFid($city['FID']);
@@ -162,8 +182,12 @@ class UGFImportLore extends BaseUGFImporter
     }
     public function setupDistrict(IncarnateLoreCity $incarnateLoreCity, \SimpleXMLElement $city){
         if($city->districts){
+            $incarnateLoreDistrictRepository = $this->em->getRepository(IncarnateLoreDistrict::class);
             foreach($city->districts->district as $district){
-                $incarnateLoreDistrict = new IncarnateLoreDistrict();
+                $incarnateLoreDistrict = $incarnateLoreDistrictRepository->findOneBy(['fid'=>$district['FID']]);
+                if(!$incarnateLoreDistrict){
+                    $incarnateLoreDistrict = new IncarnateLoreDistrict();
+                }
                 $incarnateLoreDistrict->setAuthor($district->author->__toString());
                 $incarnateLoreDistrict->setDescription($this->functions->formatParagraphs($district->description));
                 $incarnateLoreDistrict->setFid($district['FID']);
@@ -189,8 +213,12 @@ class UGFImportLore extends BaseUGFImporter
     }
     public function setupBuilding(IncarnateLoreDistrict $incarnateLoreDistrict, \SimpleXMLElement $district){
         if($district->buildings){
+            $incarnateLoreBuildingRepository = $this->em->getRepository(IncarnateLoreBuildings::class);
             foreach ($district->buildings->building as $building){
-                $incarnateLoreBuilding = new IncarnateLoreBuildings();
+                $incarnateLoreBuilding = $incarnateLoreBuildingRepository->findOneBy(['fid'=>$building['FID']]);
+                if(!$incarnateLoreBuilding){
+                    $incarnateLoreBuilding = new IncarnateLoreBuildings();
+                }
                 $incarnateLoreBuilding->setAuthor($building->author->__toString());
                 $incarnateLoreBuilding->setDescription($this->functions->formatParagraphs($building->description));
                 $incarnateLoreBuilding->setFid($building['FID']);
@@ -223,7 +251,10 @@ class UGFImportLore extends BaseUGFImporter
         }
     }
     public function setupPOI(\SimpleXMLElement $simpleXMLElement):IncarnateLorePointOfInterest{
-        $new = new IncarnateLorePointOfInterest();
+        $new = $this->em->getRepository(IncarnateLorePointOfInterest::class)->findOneBy(['fid'=>$simpleXMLElement['FID']]);
+        if(!$new){
+            $new = new IncarnateLorePointOfInterest();
+        }
         $new->setAuthor($simpleXMLElement->author->__toString());
         $new->setDescription($this->functions->formatParagraphs($simpleXMLElement->description));
         $new->setFid($simpleXMLElement['FID']);
@@ -248,8 +279,12 @@ class UGFImportLore extends BaseUGFImporter
     }
     public function setupSubPOI(\SimpleXMLElement $pointOfInterest, IncarnateLorePointOfInterest $incarnateLorePointOfInterest){
         if($pointOfInterest->subPoints){
+            $incarnateSubpointRepository = $this->em->getRepository(IncarnateLoreSubpoint::class);
             foreach ($pointOfInterest->subPoints->subPoint as $subpoi){
-                $new = new IncarnateLoreSubpoint();
+                $new = $incarnateSubpointRepository->findOneBy(['fid'=>$subpoi['FID']]);
+                if(!$new){
+                    $new = new IncarnateLoreSubpoint();
+                }
                 $new->setAuthor($subpoi->author->__toString());
                 $new->setDescription($this->functions->formatParagraphs($subpoi->description));
                 if(''!== $subpoi->map->__toString()) {

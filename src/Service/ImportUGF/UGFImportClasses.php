@@ -11,82 +11,21 @@ use App\Entity\IncarnateClassTrait;
 
 class UGFImportClasses extends BaseUGFImporter
 {
-    //Takes either (\SimpleXMLElement $trait, IncarnateClassTrait $new, IncarnateClass $parent)
-    //or (\SimpleXMLElement $trait, IncarnateClassArchetypeTrait $new, IncarnateClassArchetype $parent)
-    public function classTraitSharedParts(\SimpleXMLElement $trait,$new,$parent):bool{
-        $new->setAuthor($parent->getAuthor());
-        $new->setDescription($this->functions->formatParagraphs($trait->classTraitDescription));
-        $new->setFid($trait['FID']);
-        $new->setLegal($parent->getLegal());
-        $new->setLevel(intval($trait->classTraitLevel));
-        $new->setName($trait->classTraitName);
-        $new->setOfficial($parent->getOfficial());
-        return true;
-    }
-    public function assembleArchetypeTraits(\SimpleXMLElement $traits,IncarnateClassArchetype $parent):bool{
-        foreach ($traits as $trait){
-            $new = new IncarnateClassArchetypeTrait();
-            $new->setType($this->incImportType['classArchetypeTrait']);
-            $new->setUgfid($trait['classArchtypeTraitID']);
-            $new->setIncarnateClassArchetype($parent);
-            $this->classTraitSharedParts($trait,$new,$parent);
-            $this->em->persist($new);
-        }
-        return true;
-    }
-    public function  assembleClassTraits(\SimpleXMLElement $traits,IncarnateClass $parent):bool{
-        foreach ($traits as $trait){
-            $new = new IncarnateClassTrait();
-            $new->setType($this->incImportType['classTrait']);
-            $new->setUgfid($trait['classTraitID']);
-            $new->setIncarnateClass($parent);
-            //TODO get specialization choice working
-            if($trait->classSpecializationChoice && 'true'==$trait->classSpecializationChoice->__toString()){
-                $new->setSpecializationChoice(1);
-            }
-            else{
-                $new->setSpecializationChoice(0);
-            }
-            $this->classTraitSharedParts($trait,$new,$parent);
-            $this->em->persist($new);
-        }
-        return true;
-    }
-    public function assembleArchetypes(\SimpleXMLElement $archetypes,IncarnateClass $class):bool {
-        foreach ($archetypes as $archetype){
-            $new = new IncarnateClassArchetype();
-            $new->setAuthor($archetype->author);
-            $new->setDescription($this->functions->formatParagraphs($archetype->classArchetypeDescription));
-//            $new->setEquipment();
-            $new->setFid($archetype['FID']);
-            if($archetype->classArchetypeLegal){
-                $legal = $this->functions->formatParagraphs($archetype->classArchetypeLegal);
-            }else{
-                $legal=$class->getLegal();
-            }
-            $new->setLegal($legal);
-            $new->setName($archetype->classArchetypeName);
-            $new->setOfficial($archetype->officialContent);
-            $new->setType($this->incImportType['classArchetype']);
-            $new->setUgfid($archetype['classArchtypeID']);
-            $new->setIncarnateClass($class);
-            $this->assembleArchetypeTraits($archetype->classArchetypeTraits->classArchetypeTrait,$new,$legal);
-            $this->em->persist($new);
-        }
-        return true;
-    }
     public function import(){
-        $classArchetypeTraitRepository = $this->em->getRepository(IncarnateClassArchetypeTrait::class);
-        $classArchetypeTraitRepository->deleteAll()->getQuery()->execute();
-        $classArchetypeRepository = $this->em->getRepository(IncarnateClassArchetype::class);
-        $classArchetypeRepository->deleteAll()->getQuery()->execute();
-        $classTraitRepository = $this->em->getRepository(IncarnateClassTrait::class);
-        $classTraitRepository->deleteAll()->getQuery()->execute();
-        $classRepository = $this->em->getRepository(IncarnateClass::class);
-        $classRepository->deleteAll()->getQuery()->execute();
+//        $classArchetypeTraitRepository = $this->em->getRepository(IncarnateClassArchetypeTrait::class);
+//        $classArchetypeTraitRepository->deleteAll()->getQuery()->execute();
+//        $classArchetypeRepository = $this->em->getRepository(IncarnateClassArchetype::class);
+//        $classArchetypeRepository->deleteAll()->getQuery()->execute();
+//        $classTraitRepository = $this->em->getRepository(IncarnateClassTrait::class);
+//        $classTraitRepository->deleteAll()->getQuery()->execute();
+//        $classRepository->deleteAll()->getQuery()->execute();
         $ugfClasses = $this->ugf->chapters->classChapter->classes->class;
+        $classRepository = $this->em->getRepository(IncarnateClass::class);
         foreach ($ugfClasses as $class){
-            $new = new IncarnateClass();
+            $new = $classRepository->findOneBy(['fid'=>$class['FID']]);
+            if(!$new){
+                $new = new IncarnateClass();
+            }
             $archetypeInfo = array(
                 'description'=>$this->functions->formatParagraphs($class->classArchetypes->archetypeDescription),
                 'namePlural'=>$class->classArchetypes->archetypeName['plural']->__toString(),
@@ -154,6 +93,82 @@ class UGFImportClasses extends BaseUGFImporter
             $this->em->persist($new);
         }
         $this->em->flush();
+        return true;
+    }
+    //Takes either (\SimpleXMLElement $trait, IncarnateClassTrait $new, IncarnateClass $parent)
+    //or (\SimpleXMLElement $trait, IncarnateClassArchetypeTrait $new, IncarnateClassArchetype $parent)
+    public function classTraitSharedParts(\SimpleXMLElement $trait,$new,$parent):bool{
+        $new->setAuthor($parent->getAuthor());
+        $new->setDescription($this->functions->formatParagraphs($trait->classTraitDescription));
+        $new->setFid($trait['FID']);
+        $new->setLegal($parent->getLegal());
+        $new->setLevel(intval($trait->classTraitLevel));
+        $new->setName($trait->classTraitName);
+        $new->setOfficial($parent->getOfficial());
+        return true;
+    }
+    public function assembleArchetypeTraits(\SimpleXMLElement $traits,IncarnateClassArchetype $parent):bool{
+        $incarnateClassArchetypeTraitRepository = $this->em->getRepository(IncarnateClassArchetypeTrait::class);
+        foreach ($traits as $trait){
+            $new = $incarnateClassArchetypeTraitRepository->findOneBy(['fid'=>$trait['FID']]);
+            if(!$new) {
+                $new = new IncarnateClassArchetypeTrait();
+            }
+            $new->setType($this->incImportType['classArchetypeTrait']);
+            $new->setUgfid($trait['classArchtypeTraitID']);
+            $new->setIncarnateClassArchetype($parent);
+            $this->classTraitSharedParts($trait,$new,$parent);
+            $this->em->persist($new);
+        }
+        return true;
+    }
+    public function  assembleClassTraits(\SimpleXMLElement $traits,IncarnateClass $parent):bool{
+        $incarnateClassTraitRepository = $this->em->getRepository(IncarnateClassTrait::class);
+        foreach ($traits as $trait){
+            $new = $incarnateClassTraitRepository->findOneBy(['fid'=>$trait['FID']]);
+            if(!$new) {
+                $new = new IncarnateClassTrait();
+            }
+            $new->setType($this->incImportType['classTrait']);
+            $new->setUgfid($trait['classTraitID']);
+            $new->setIncarnateClass($parent);
+            //TODO get specialization choice working
+            if($trait->classSpecializationChoice && 'true'==$trait->classSpecializationChoice->__toString()){
+                $new->setSpecializationChoice(1);
+            }
+            else{
+                $new->setSpecializationChoice(0);
+            }
+            $this->classTraitSharedParts($trait,$new,$parent);
+            $this->em->persist($new);
+        }
+        return true;
+    }
+    public function assembleArchetypes(\SimpleXMLElement $archetypes,IncarnateClass $class):bool {
+        $incarnateArchetypeRepository = $this->em->getRepository(IncarnateClassArchetype::class);
+        foreach ($archetypes as $archetype){
+            $new = $incarnateArchetypeRepository->findOneBy(['fid'=>$archetype['FID']]);
+            if(!$new) {
+                $new = new IncarnateClassArchetype();
+            }
+            $new->setAuthor($archetype->author);
+            $new->setDescription($this->functions->formatParagraphs($archetype->classArchetypeDescription));
+//            $new->setEquipment();
+            $new->setFid($archetype['FID']);
+            if($archetype->classArchetypeLegal){
+                $legal = $this->functions->formatParagraphs($archetype->classArchetypeLegal);
+            }else{
+                $legal=$class->getLegal();
+            }
+            $new->setLegal($legal);
+            $new->setName($archetype->classArchetypeName);
+            $new->setOfficial($archetype->officialContent);
+            $new->setType($this->incImportType['classArchetype']);
+            $new->setUgfid($archetype['classArchtypeID']);
+            $new->setIncarnateClass($class);
+            $this->assembleArchetypeTraits($archetype->classArchetypeTraits->classArchetypeTrait,$new,$legal);
+            $this->em->persist($new);
+        }
         return true;
     }
 }

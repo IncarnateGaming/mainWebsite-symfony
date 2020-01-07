@@ -8,56 +8,14 @@ use App\Entity\IncarnateEquipment;
 
 class UGFImportEquipment extends BaseUGFImporter
 {
-    public function higherLevelDamageXMLFormat(\SimpleXMLElement $higherLevels):array {
-        $higherLevelArray=array(
-            'type'=>$higherLevels->higherType->__toString(),
-            'formula'=>$higherLevels->higherFormula->__toString(),
-        );
-        if($higherLevels->higherAbility){
-            $higherLevelArray['ability']=$higherLevels->higherAbility->__toString();
-        }
-        if($higherLevels->higherModifier){
-            $higherLevelArray['modifier']=intval($higherLevels->higherModifier->__toString());
-        }
-        return $higherLevelArray;
-    }
-    public function damagesXMLFormat(\SimpleXMLElement $damagesXML):array {
-        $result = array();
-        foreach ($damagesXML->damage as $damage){
-            $newDamage = array();
-            if($damage->ability){
-                $newDamage['ability']=$damage->ability->__toString();
-            }
-            if($damage->criticalDice){
-                $newDamage['criticalDice']=intval($damage->criticalDice->__toString());
-            }
-            if($damage->formula){
-                $newDamage['formula']=$damage->formula->__toString();
-            }
-            if($damage->damageMaterial){
-                $newDamage['material']=$damage->damageMaterial->__toString();
-            }
-            if($damage->damageType){
-                $newDamage['type']=$damage->damageType->__toString();
-            }
-            if($damage->higherLevelDamage){
-                $newDamage['higherLevels']=$this->higherLevelDamageXMLFormat($damage->higherLevelDamage);
-            }
-            if($damage->modifier){
-                $newDamage['modifier']=intval($damage->modifier->__toString());
-            }
-            if($damage->proficiency){
-                $newDamage['proficiency']=$damage->proficiency->__toString() === 'true' ? true : false;
-            }
-            $result[]=$newDamage;
-        }
-        return  $result;
-    }
     public function import(){
+//        $equipmentRepository->deleteAll()->getQuery()->execute();
         $equipmentRepository = $this->em->getRepository(IncarnateEquipment::class);
-        $equipmentRepository->deleteAll()->getQuery()->execute();
         foreach ($this->ugf->chapters->itemChapter->items->item as $item){
-            $new = new IncarnateEquipment();
+            $new = $equipmentRepository->findOneBy(['fid'=>$item['FID']]);
+            if(!$new){
+                $new = new IncarnateEquipment();
+            }
             $ac = array(
                 'ac'=>intval($item->itemArmorClass->__toString()),
             );
@@ -142,5 +100,50 @@ class UGFImportEquipment extends BaseUGFImporter
             $this->em->persist($new);
         }
         $this->em->flush();
+    }
+    public function higherLevelDamageXMLFormat(\SimpleXMLElement $higherLevels):array {
+        $higherLevelArray=array(
+            'type'=>$higherLevels->higherType->__toString(),
+            'formula'=>$higherLevels->higherFormula->__toString(),
+        );
+        if($higherLevels->higherAbility){
+            $higherLevelArray['ability']=$higherLevels->higherAbility->__toString();
+        }
+        if($higherLevels->higherModifier){
+            $higherLevelArray['modifier']=intval($higherLevels->higherModifier->__toString());
+        }
+        return $higherLevelArray;
+    }
+    public function damagesXMLFormat(\SimpleXMLElement $damagesXML):array {
+        $result = array();
+        foreach ($damagesXML->damage as $damage){
+            $newDamage = array();
+            if($damage->ability){
+                $newDamage['ability']=$damage->ability->__toString();
+            }
+            if($damage->criticalDice){
+                $newDamage['criticalDice']=intval($damage->criticalDice->__toString());
+            }
+            if($damage->formula){
+                $newDamage['formula']=$damage->formula->__toString();
+            }
+            if($damage->damageMaterial){
+                $newDamage['material']=$damage->damageMaterial->__toString();
+            }
+            if($damage->damageType){
+                $newDamage['type']=$damage->damageType->__toString();
+            }
+            if($damage->higherLevelDamage){
+                $newDamage['higherLevels']=$this->higherLevelDamageXMLFormat($damage->higherLevelDamage);
+            }
+            if($damage->modifier){
+                $newDamage['modifier']=intval($damage->modifier->__toString());
+            }
+            if($damage->proficiency){
+                $newDamage['proficiency']=$damage->proficiency->__toString() === 'true' ? true : false;
+            }
+            $result[]=$newDamage;
+        }
+        return  $result;
     }
 }

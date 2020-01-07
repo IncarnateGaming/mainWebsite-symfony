@@ -13,17 +13,20 @@ use App\Entity\IncarnateTable;
 class UGFImportRaces extends BaseUGFImporter
 {
     public function import(){
-        $subraceTraitRepository = $this->em->getRepository(IncarnateRaceSubraceTrait::class);
-        $subraceTraitRepository->deleteAll()->getQuery()->execute();
-        $subraceRepository = $this->em->getRepository(IncarnateRaceSubrace::class);
-        $subraceRepository->deleteAll()->getQuery()->execute();
-        $raceTraitRepository = $this->em->getRepository(IncarnateRaceTrait::class);
-        $raceTraitRepository->deleteAll()->getQuery()->execute();
-        $raceRepository = $this->em->getRepository(IncarnateRace::class);
-        $raceRepository->deleteAll()->getQuery()->execute();
+//        $subraceTraitRepository = $this->em->getRepository(IncarnateRaceSubraceTrait::class);
+//        $subraceTraitRepository->deleteAll()->getQuery()->execute();
+//        $subraceRepository = $this->em->getRepository(IncarnateRaceSubrace::class);
+//        $subraceRepository->deleteAll()->getQuery()->execute();
+//        $raceTraitRepository = $this->em->getRepository(IncarnateRaceTrait::class);
+//        $raceTraitRepository->deleteAll()->getQuery()->execute();
+//        $raceRepository->deleteAll()->getQuery()->execute();
 //        dump($this->incImportType);die;
+        $raceRepository = $this->em->getRepository(IncarnateRace::class);
         foreach ($this->ugf->chapters->racesChapter->races->race as $race) {
-            $new = new IncarnateRace();
+            $new = $raceRepository->findOneBy(['fid'=>$race['FID']]);
+            if(!$new){
+                $new = new IncarnateRace();
+            }
             $new->setAuthor($race->author->__toString());
             $new->setDarkvision(intval($race->raceTraits->darkvision->__toString()));
             $new->setDescription($this->functions->formatParagraphs($race->raceDescription));
@@ -123,8 +126,12 @@ class UGFImportRaces extends BaseUGFImporter
     }
     public function assembleRaceTraits(\SimpleXMLElement $traits, IncarnateRace $race)
     {
+        $incarnateRaceTraitRepository = $this->em->getRepository(IncarnateRaceTrait::class);
         forEach($traits as $trait){
-            $new = new IncarnateRaceTrait();
+            $new = $incarnateRaceTraitRepository->findOneBy(['fid'=>$trait['FID']]);
+            if(!$new){
+                $new = new IncarnateRaceTrait();
+            }
             $new->setType($this->incImportType['raceTrait']);
             $new->setLegal($race->getLegal());
             $new->setDescription($this->functions->formatParagraphs($trait->raceTraitDescription));
@@ -139,8 +146,12 @@ class UGFImportRaces extends BaseUGFImporter
         return true;
     }
     public function assembleSubraces(\SimpleXMLElement $subraces, IncarnateRace $race){
+        $incarnateSubraceRepository = $this->em->getRepository(IncarnateRaceSubrace::class);
         forEach($subraces as $subrace) {
-            $new = new IncarnateRaceSubrace();
+            $new = $incarnateSubraceRepository->findOneBy(['fid'=>$subrace['FID']]);
+            if(!$new){
+                $new = new IncarnateRaceSubrace();
+            }
             $new->setAuthor($subrace->author->__toString());
             $new->setDarkvision(intval($subrace->subraceTraits->darkvision->__toString())+$race->getDarkvision());
             $new->setDescription($this->functions->formatParagraphs($subrace->subraceDescription));
@@ -214,8 +225,12 @@ class UGFImportRaces extends BaseUGFImporter
         return true;
     }
     public function assembleSubraceTraits(\SimpleXMLElement $traits,IncarnateRaceSubrace $subrace){
+        $incarnateRaceSubraceTraitRepository = $this->em->getRepository(IncarnateRaceSubraceTrait::class);
         foreach ($traits as $trait){
-            $new = new IncarnateRaceSubraceTrait();
+            $new = $incarnateRaceSubraceTraitRepository->findOneBy(['fid'=>$trait['FID']]);
+            if(!$new){
+                $new = new IncarnateRaceSubraceTrait();
+            }
             $new->setAuthor($subrace->getAuthor());
             $new->setDescription($this->functions->formatParagraphs($trait->subraceTraitDescription));
             $new->setFid($trait['FID']);

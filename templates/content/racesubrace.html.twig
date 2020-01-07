@@ -1,7 +1,7 @@
 {%  extends 'base.html.twig' %}
 {% block title %}{{ subrace.name }}{% endblock %}
 {% block backButton %}
-    <button class="btn btn-secondary" id="backButton" type="button" aria-label="Navigate back" onclick="window.location.href = '{{ path('inc_race',{slug: subrace.race.fid}) }}';">{{ subrace.race.name }}</button>
+    <button class="btn btn-secondary m-2" id="backButton" type="button" aria-label="Navigate back" onclick="window.location.href = '{{ path('inc_race',{slug: subrace.race.fid}) }}';">{{ subrace.race.name }}</button>
 {% endblock %}
 {% block body %}
     <h5 id="{{ subrace.fid }}"><a href="{{ path('inc_race',{slug: subrace.race.fid}) }}">{{ subrace.name }}</a></h5>
