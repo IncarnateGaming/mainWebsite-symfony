@@ -83,8 +83,8 @@ class AccountController extends BaseController
 
     /**
      * @Route("/account/permissions",name="inc_account_permission")
+     * @IsGranted("ROLE_ADMIN")
      */
-//     * @IsGranted("ROLE_ADMIN")
     public function adjustPermissions(){
         return $this->render('account/permissions.html.twig',[
             'genericParts'=>$this->genericParts,
