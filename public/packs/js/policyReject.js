@@ -3,6 +3,8 @@ class IncarnatePolicyReject{
         Object.keys(cookies).forEach(cookie=>{
             document.cookie = cookie + '=; path=/; Domain=.incarnategamingllc.com; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
         });
+        //TODO remove following line after february 7, 2020 that removes old policy accept cookie;
+         document.cookie = 'policyAccept; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
     }
     static async getCookieList(){
         const rawFetch = await fetch('/packs/json/cookies.json');
