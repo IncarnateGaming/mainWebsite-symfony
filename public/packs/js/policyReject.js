@@ -6,8 +6,16 @@ class IncarnatePolicyReject{
         });
     }
     static async getCookieList(){
-        const rawFetch = await fetch('/packs/json/cookies.json');
-        const cookies = await rawFetch.json();
+        // const rawFetch = await fetch('/packs/json/cookies.json');
+        const cookies = 
+            {
+                "policyAccept":"Boolean",
+                "REMEMBERME": "String",
+                "PHPSESSID": "String",
+                "_gat_gtag_UA_155417623_1": "Integer",
+                "_gid": "String",
+                "_ga": "String"
+            };
         return cookies;
     }
     static async removeCookies(){
