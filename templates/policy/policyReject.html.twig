@@ -4,8 +4,8 @@
 {% block analytics %}{% endblock %}
 {% block body %}
     <div class="container">
-        <p>Thank you for taking time to read <a href="{{ path('app_policy_policy_website_page') }}">our policy</a> and decide it was not for you. Unfortunately, our website has embedded content from YouTube, FontAwesome and other sources which use third party cookies we cannot currently turn off.</p>
-        <p>Long term we plan on making a version that turns off these third party resources, however we have not figured out how to deploy such a version as there would be no way to know who wants to opt into the simplified page. Remembering user preferences is what cookies were designed for and without permission to use them it is very difficult to provide the same level of customer support.</p>
+        <p>Thank you for taking time to read <a href="{{ path('app_policy_policy_website_page') }}">our policy</a> and decide it was not for you. Unfortunately, our website has embedded content from YouTube, FontAwesome and other sources which use third party cookies. We are setup so that these third party resources are automatically turned off unless you opt-in to cookie usage.</p>
+        <p>We understand that you may not want to allow for tracking or third party cookies, but may still want the convenience of turning off the accept banner on every page. We have included a button below that will allow you to opt into storing a single reject cookie that will disable the banner but not allow any third party cookies to run. We have also provided buttons that make it easy to check the cookies stored by this website and to delete them (barring technical difficulties).</p>
         <button class="btn btn-primary mb-2" id="incarnate-check-cookies">Check Cookies</button>
         <div id="check-cookie-results"></div>
         <button class="btn btn-primary mb-2" id="incarnate-remove-cookies">Remove Cookies</button>
