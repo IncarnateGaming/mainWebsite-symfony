@@ -2,20 +2,12 @@ class IncarnatePolicyReject{
      static deleteCookies(cookies,response){
         Object.keys(cookies).forEach(cookie=>{
             console.log(cookie);
-            document.cookie = cookie + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            document.cookie = cookie + '=; path=/; Domain=.incarnategamingllc.com; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
         });
     }
     static async getCookieList(){
-        // const rawFetch = await fetch('/packs/json/cookies.json');
-        const cookies = 
-            {
-                "policyAccept":"Boolean",
-                "REMEMBERME": "String",
-                "PHPSESSID": "String",
-                "_gat_gtag_UA_155417623_1": "Integer",
-                "_gid": "String",
-                "_ga": "String"
-            };
+        const rawFetch = await fetch('/packs/json/cookies.json');
+        const cookies = await rawFetch.json();
         return cookies;
     }
     static async removeCookies(){
