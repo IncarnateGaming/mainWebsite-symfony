@@ -5,9 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" type="image/x-icon">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-            <script src="https://kit.fontawesome.com/6f58c46118.js" crossorigin="anonymous"></script>
-        {% endblock %}
         {% block boostrapStyle %}
             {#
             <script src="text/javascript" src="https://cdn.jsdelivr.net/gh/thednp/minifill@0.0.4/dist/minifill.min.js"> </script>
@@ -17,9 +14,19 @@
             #}
             <link rel="stylesheet" href="{{ asset('style/incBootstrap.css') }}">
         {% endblock %}
+        <script src="{{ asset('packs/js/cookies.js') }}"></script>
+        <script src="{{ asset('packs/js/hooks.js') }}"></script>
+        {% block stylesheets %}
+            <script src="{{ asset('packs/js/fontawesome.js') }}"></script>
+        {% endblock %}
     </head>
     <body class="d-flex flex-column">
         <div class="inc-body inc-flex-grow">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
             {% block body_indentation %}
             <div class="inc-indentation mt-2">
                 {% block body %}{% endblock %}
@@ -71,12 +78,10 @@
             {#
             <script src="bootstrap-native-master/{{ asset('bootstrap-native-master/assets/js/scripts4.js') }}"></script>
             #}
-            <script src="{{ asset('packs/js/cookies.js') }}"></script>
             {% block policyAccept %}<script src="{{ asset('packs/js/policyAccept.js') }}"></script>{% endblock %}
             <script src="{{asset('packs/js/navFunctions.js')}}"></script>
             <script src="{{ asset('packs/js/orientation.js') }}"></script>
             <script src="{{ asset('packs/js/crossReference.js') }}"></script>
-            <script src="{{ asset('packs/js/hooks.js') }}"></script>
             <script src="{{ asset('packs/js/analytics.js') }}"></script>
             <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

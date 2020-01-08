@@ -11,3 +11,5 @@ twig:
         youtube: 'UC4mUHQC49lUqAf1Uvekmx-w'
     paths:
         '%kernel.project_dir%/vendor/knplabs/knp-paginator-bundle/templates': KnpPaginator
+    form_themes:
+        - 'bootstrap_4_layout.html.twig'
