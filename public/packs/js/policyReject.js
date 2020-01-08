@@ -36,6 +36,10 @@ class IncarnatePolicyReject{
          }
          document.getElementById('check-cookie-results').innerHTML = response.outerHTML;
     }
+    static addRejectCookie(){
+        IncarnateCookies.setCookie('policyAccept','false',30);
+    }
 }
 document.getElementById('incarnate-remove-cookies').addEventListener('click',IncarnatePolicyReject.removeCookies);
 document.getElementById('incarnate-check-cookies').addEventListener('click',IncarnatePolicyReject.checkCookies);
+document.getElementById('incarnate-set-reject-cookie').addEventListener('click',IncarnatePolicyReject.addRejectCookie);

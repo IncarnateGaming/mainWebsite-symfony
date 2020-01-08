@@ -36,7 +36,7 @@ class IncarnatePolicyAccept{
     }
 }
 IncarnatePolicyAccept.setup();
-if(IncarnateCookies.getCookie('policyAccept')!== 'true'){
+if(IncarnateCookies.getCookie('policyAccept')!== 'true' && IncarnateCookies.getCookie('policyAccept')!=='false'){
     const body = document.getElementsByTagName('body')[0];
     body.append(IncarnatePolicyAccept.makeBanner());
 }
