@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ChangePermissionsType;
 use App\Form\NewAccountFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -35,14 +36,6 @@ class AccountController extends BaseController
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
-//            dd($form->getData());
-//            $data = $form->getData();
-//            $new = new User();
-
-//            $new->setDiscordName($data['discordName']);
-//            $new->setEmail($data['email']);
-//            $new->setPassword($data['password']);
-
             /** @var User $newUser */
             $newUser = $form->getData();
             $newUser->setPassword($passwordEncoder->encodePassword($newUser,$newUser->getPassword()));
@@ -85,9 +78,24 @@ class AccountController extends BaseController
      * @Route("/account/permissions",name="inc_account_permission")
      * @IsGranted("ROLE_ADMIN")
      */
-    public function adjustPermissions(){
-        return $this->render('account/permissions.html.twig',[
+    public function adjustPermissions(EntityManagerInterface $em, Request $request){
+        $form = $this->createForm(ChangePermissionsType::class);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            /** @var User $newUser */
+            $newUser = $form->getData();
+            $em->persist($newUser);
+            $em->flush();
+
+            $this->addFlash('success','Permissions Changed!');
+
+            return $this->redirectToRoute('app_login');
+        }
+
+        return $this->render('account/new.html.twig', [
             'genericParts'=>$this->genericParts,
+            'newAccountForm'=>$form->createView(),
         ]);
     }
 }

@@ -42,6 +42,11 @@ class User implements UserInterface
      */
     private $discordName;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $discordConfirmed;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -128,6 +133,18 @@ class User implements UserInterface
     public function setDiscordName(?string $discordName): self
     {
         $this->discordName = $discordName;
+
+        return $this;
+    }
+
+    public function getDiscordConfirmed(): ?string
+    {
+        return $this->discordConfirmed;
+    }
+
+    public function setDiscordConfirmed(?string $discordConfirmed): self
+    {
+        $this->discordConfirmed = $discordConfirmed;
 
         return $this;
     }
