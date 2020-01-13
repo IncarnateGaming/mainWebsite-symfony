@@ -15,6 +15,8 @@ class IncarnateOrientation{
     }
     static orientHorizontal(){
         incLogo.style.display='block';
+        htmlTop.classList.add('horizontal');
+        htmlTop.classList.remove('vertical');
         if(screen.orientation.angle === 90 || screen.orientation.angle === 270){
             // htmlTop.style.fontSize='3vh';
         }
@@ -25,6 +27,8 @@ class IncarnateOrientation{
     }
     static orientVertical(){
         htmlTop.classList.add('mobile');
+        htmlTop.classList.remove('horizontal');
+        htmlTop.classList.add('vertical');
         incLogo.style.display = 'none';
         if(screen.orientation.angle ===0 || screen.orientation.angle===180) {
             // htmlTop.style.fontSize = '1.7vh';
