@@ -7,7 +7,7 @@ class IncarnatePolicyReject{
          document.cookie = 'policyAccept; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
     }
     static async getCookieList(){
-        const rawFetch = await fetch('/packs/json/cookies.json');
+        const rawFetch = await fetch('https://incarnatesharedassets.s3.us-east-2.amazonaws.com/packs/json/cookies.json');
         const cookies = await rawFetch.json();
         return cookies;
     }

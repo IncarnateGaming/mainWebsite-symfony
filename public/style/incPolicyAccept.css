@@ -1,3 +1,29 @@
+:root {
+  --primary:#3E044D;
+  --secondary:#5d046e;
+  --dark:#000000;
+}
 
+.incarnate-policy-banner {
+  position: fixed;
+  padding-top: 0.2em;
+  padding-bottom: 0.2rem;
+  background-color: #3E044D;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}
+
+.incarnate-policy-banner p {
+  color: #feffe2;
+  padding-bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 1rem;
+}
+
+.incarnate-policy-banner button {
+  margin: 0.5rem;
+}
 
 /*# sourceMappingURL=incPolicyAccept.css.map */

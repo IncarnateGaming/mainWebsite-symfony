@@ -1,13 +1,13 @@
 var tempID = randomNumber(1000000,9999999);
 var tables = {};
 var templates = {};
-fetch('/packs/json/incarnateTables.json')
+fetch('https://incarnatesharedassets.s3.us-east-2.amazonaws.com/packs/json/incarnateTables.json')
     .then(tableRes=>{
         tableRes.json().then(result=>{
            tables = result;
         });
     });
-fetch('/packs/json/incarnateTemplates.json')
+fetch('https://incarnatesharedassets.s3.us-east-2.amazonaws.com/packs/json/incarnateTemplates.json')
     .then(tempRes=>{
         tempRes.json().then(result=>{
             templates = result;

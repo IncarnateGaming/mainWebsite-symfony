@@ -40,12 +40,17 @@ class IncarnateReference{
         return new Promise(resolve => setTimeout(resolve, ms));
     }
     static crossReference(event){
+        if (IncarnateCrossReferenceOveride !== undefined){
+            window.location.href = IncarnateCrossReferenceOveride;
+            return false;
+        }
         console.log(event);
         const parent = event.target.getAttribute('data-fidparent');
         const reference = event.target.getAttribute('data-fid');
         console.log(reference);
         const crossReference = (parent !== null && parent !== "") ? parent+'#' + reference : reference;
         window.location.href = '/content/fid/'+crossReference;
+        return true;
     }
 }
 window.addEventListener('scroll',NavFunctions.changeNavOnScroll);

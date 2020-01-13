@@ -132,6 +132,12 @@ div.dropdown-menu {
     max-width: 1140px;
   }
 }
+:root {
+  --primary:#3E044D;
+  --secondary:#5d046e;
+  --dark:#000000;
+}
+
 .incarnate-policy-banner {
   position: fixed;
   padding-top: 0.2em;
@@ -139,6 +145,7 @@ div.dropdown-menu {
   background-color: #3E044D;
   width: 100%;
   bottom: 0;
+  left: 0;
 }
 
 .incarnate-policy-banner p {

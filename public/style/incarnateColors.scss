@@ -1,0 +1,16 @@
+@use 'sass:map';
+$theme-colors: (
+        "primary": #3E044D,
+        "secondary":#5d046e,
+        "success":#094d0c,
+        "danger": #d90005,
+        "warning":#d93f34,
+        "info":#3E044D,
+        "light":#feffe2,
+        "dark":#000000
+);
+:root{
+  --primary:#3E044D;
+  --secondary:#5d046e;
+  --dark:#000000;
+}

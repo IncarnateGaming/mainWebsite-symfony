@@ -3,7 +3,7 @@ class IncarnateCookies{
         var d = new Date();
         d.setTime(d.getTime() + (exdays*24*60*60*1000));
         var expires = "expires="+ d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + '; path=/; Domain=.incarnategamingllc.com';
+        document.cookie = cname + "=" + cvalue + ";" + expires + '; path=/; Domain=' + incarnateDomain ;
     }
     static getCookie(cname) {
         var name = cname + "=";
