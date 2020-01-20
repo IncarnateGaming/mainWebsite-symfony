@@ -76,7 +76,7 @@ class ChapterIntroRepository extends ServiceEntityRepository
         $added = '';
         $result = array();
         foreach ($queryResult as $entry){
-            if(false === strpos($added,$entry['category']) && false === strpos($entry['category'],'Intro')){
+            if(false === strpos($added,$entry['category']) && false === strpos($entry['category'],' Intro') && false === strpos($entry['category'],'Legal')){
                 $added.=$entry['category'];
                 $entry['sanCat'] = str_replace(' ','-',$entry['category']);
                 $entry['sanCat'] = str_replace(['(',')'],'',$entry['sanCat']);

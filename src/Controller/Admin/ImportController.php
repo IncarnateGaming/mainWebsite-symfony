@@ -25,6 +25,9 @@ use App\Service\UGFImporter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @IsGranted("ROLE_ADMIN")
+ */
 class ImportController extends AbstractController
 {
     public function __construct()
