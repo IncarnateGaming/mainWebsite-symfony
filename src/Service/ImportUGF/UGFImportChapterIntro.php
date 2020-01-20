@@ -153,8 +153,8 @@ class UGFImportChapterIntro extends BaseUGFImporter
         $repository->deleteAll()->getQuery()->execute();
         $this->prepareChapterIntro($this->ugf->chapters->GMsBlind,'GMs Screen');
         $this->prepareChapterIntro($this->ugf->chapters->PlayerQuickSheet,'Player Quick Sheet');
-        $this->prepareChapterIntro($this->ugf->chapters->frontMatter->legal,'Legal');
-        $this->prepareChapterIntro($this->ugf->chapters->frontMatter->introduction,'Introduction');
+        $this->prepareChapterIntro($this->ugf->chapters->frontMatter->legal,'Legal',$this->ugf->chapters->frontMatter->legal['FID']);
+        $this->prepareChapterIntro($this->ugf->chapters->frontMatter->introduction,'Introduction',$this->ugf->chapters->frontMatter->indroduction['FID']);
         $this->prepareChapterIntro($this->ugf->chapters->backgroundChapter->backgroundsIntroduction,'Background Intro');
         $this->prepareChapterIntro($this->ugf->chapters->classChapter->classIntroduction,'Class Intro');
         $this->prepareChapterIntro($this->ugf->chapters->featChapter->featsIntroduction,'Feat Intro');
