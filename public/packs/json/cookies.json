@@ -4,5 +4,8 @@
   "PHPSESSID": "String",
   "_gat_gtag_UA_155417623_1": "Integer",
   "_gid": "String",
-  "_ga": "String"
+  "_ga": "String",
+  "wordpress_test_cookie":"String",
+  "wp-settings-time-1": "Integer",
+  "wp-settings-1": "String"
 }

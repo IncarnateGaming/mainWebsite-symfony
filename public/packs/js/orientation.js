@@ -43,4 +43,5 @@ class IncarnateOrientation{
     }
 }
 window.addEventListener('orientationchange',IncarnateOrientation.sequentialOreientationChange);
+window.addEventListener('resize',IncarnateOrientation.sequentialOreientationChange);
 IncarnateOrientation.orientationChange();
