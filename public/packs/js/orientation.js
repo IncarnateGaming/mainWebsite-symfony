@@ -1,5 +1,6 @@
 const htmlTop = document.getElementById('inc-top-html');
 const incLogo = document.getElementById('incarnate-logo');
+var incarnateVertical = true;
 class IncarnateOrientation{
     static sequentialOreientationChange(){
         htmlTop.classList.add('mobile');
@@ -14,6 +15,7 @@ class IncarnateOrientation{
         }
     }
     static orientHorizontal(){
+        incarnateVertical = false;
         incLogo.style.display='block';
         htmlTop.classList.add('horizontal');
         htmlTop.classList.remove('vertical');
@@ -26,6 +28,7 @@ class IncarnateOrientation{
         });
     }
     static orientVertical(){
+        incarnateVertical = true;
         htmlTop.classList.add('mobile');
         htmlTop.classList.remove('horizontal');
         htmlTop.classList.add('vertical');
