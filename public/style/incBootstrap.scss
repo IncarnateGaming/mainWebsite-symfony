@@ -70,6 +70,14 @@ div.dropdown-menu{
 .inc-body{
   padding-top:5.4rem;
 }
+#incarnate-logo{
+  display:none;
+}
+@media (orientation: landscape) {
+  #incarnate-logo{
+    display:block;
+  }
+}
 //Pointers
 .inc-pointer{
   cursor: pointer;

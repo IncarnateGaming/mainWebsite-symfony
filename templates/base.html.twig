@@ -46,7 +46,7 @@
                 <a class="text-light container p-2" href="https://www.youtube.com/channel/{{ youtube }}" target="_blank">YouTube</a>
             </div>
             <div class="bg-primary pb-2">
-                <span class="text-light inc-blockify-center">© 2019 <a class="text-light" href="mailto:{{ email }}">Incarnate Gaming LLC</a></span>
+                <span class="text-light inc-blockify-center">© 2019 <a class="text-light" href="{{ path('inc_hire')|index_stripper }}">Incarnate Gaming LLC</a></span>
             </div>
         </footer>
         <nav class="navbar navbar-expand-lg navbar-light bg-primary inc-sticky-header" id="navbar">
@@ -56,22 +56,45 @@
             </button>
             <div class="collapse navbar-collapse overflow-auto" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    {#<li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>#}
-                    {% for item in genericParts.nav  %}
-                        <li class="nav-item">
-                        <button class="btn btn-primary m-2"{% if item.subpages is defined %} id="{{ item.pageName }}DropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% else %} onclick="window.location.href='{{ path(item.pagePath)|index_stripper }}'"{% endif %}>{{ item.pageTitle }}</button>
-                        {% if item.subpages is defined %}
-                            <div class="dropdown-menu overflow-auto" aria-labelledby="{{ item.pageName }}Dropdown">
-                                {% for subitem in item.subpages %}
-                                    <a class="dropdown-item text-primary" href="{{ path(subitem.pagePath)|index_stripper }}">{{ subitem.pageTitle }}</a>
-                                {% endfor %}
-                                {# <div class="dropdown-divider"></div> #}
-                            </div>
-                        {% endif %}
-                        </li>
-                    {% endfor %}
+                    <li class="nav-item">
+                        <button class="btn btn-primary m-2" onclick="window.location.href='{{ path('inc_homepage')|index_stripper }}'">Home</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-primary m-2" onclick="window.location.href='{{ path('inc_demo')|index_stripper }}'">Demo</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-primary m-2" id="contentDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Content</button>
+                        <div class="dropdown-menu overflow-auto" aria-labelledby="contentDropdown">
+                            <a class="dropdown-item text-primary" href="{{ path('inc_backgrounds')|index_stripper }}">Backgrounds</a>
+                            <a class="dropdown-item text-primary" href="{{ path('inc_classes')|index_stripper }}">Classes</a>
+                            <a class="dropdown-item text-primary" href="{{ path('inc_equipments')|index_stripper }}">Equipment</a>
+                            <a class="dropdown-item text-primary" href="{{ path('inc_feats')|index_stripper }}">Feat</a>
+                            <a class="dropdown-item text-primary" href="{{ path('inc_lores')|index_stripper }}">Lore</a>
+                            <a class="dropdown-item text-primary" href="{{ path('inc_races')|index_stripper }}">Races</a>
+                            <a class="dropdown-item text-primary" href="{{ path('inc_riddles')|index_stripper }}">Riddles</a>
+                            <a class="dropdown-item text-primary" href="{{ path('inc_rules')|index_stripper }}">Rules</a>
+                            <a class="dropdown-item text-primary" href="{{ path('inc_skills')|index_stripper }}">Skills</a>
+                            <a class="dropdown-item text-primary" href="{{ path('inc_tables')|index_stripper }}">Tables</a>
+{#                            <a class="dropdown-item text-primary" href="{{ path('inc_spells')|index_stripper }}">Spells</a>#}
+{#                            <a class="dropdown-item text-primary" href="{{ path('inc_npcs')|index_stripper }}">NPCs</a>#}
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-primary m-2" onclick="window.location.href='{{ path('inc_about')|index_stripper }}'">About</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-primary m-2" onclick="window.location.href='{{ path('inc_join')|index_stripper }}'">Join</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-primary m-2" id="policyDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Policy</button>
+                        <div class="dropdown-menu overflow-auto" aria-labelledby="policyDropdown">
+                            <a class="dropdown-item text-primary" href="{{ path('inc_policy_reject')|index_stripper }}">Reject Policy</a>
+                            <a class="dropdown-item text-primary" href="{{ path('inc_policy')|index_stripper }}">Website Policy</a>
+                            <a class="dropdown-item text-primary" href="{{ path('inc_policy_general_license')|index_stripper }}">General License</a>
+                            <a class="dropdown-item text-primary" href="{{ path('inc_policy_stand_alone')|index_stripper }}">Stand Alone Content</a>
+                            <a class="dropdown-item text-primary" href="{{ path('inc_policy_embedded_content')|index_stripper }}">Embedded Content</a>
+                        </div>
+                    </li>
                     <button class="btn btn-secondary m-2" id="topButton" type="button" aria-label="Navigate to Top">Top</button>
                     {% block backButton %}{% endblock %}
                 </ul>

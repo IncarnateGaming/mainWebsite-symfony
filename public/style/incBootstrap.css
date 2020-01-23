@@ -85,6 +85,15 @@ div.dropdown-menu {
   padding-top: 5.4rem;
 }
 
+#incarnate-logo {
+  display: none;
+}
+
+@media (orientation: landscape) {
+  #incarnate-logo {
+    display: block;
+  }
+}
 .inc-pointer {
   cursor: pointer;
 }

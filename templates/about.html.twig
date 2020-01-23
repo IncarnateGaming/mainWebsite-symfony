@@ -9,5 +9,7 @@
         <p><strong>Email:</strong> {{ person.contact.email }}</p>{% endif %}{% if person.contact.discord %}
         <p><strong>Discord (<a href="{{ person.contact.discord.server.invite }}" target="_blank">{{ person.contact.discord.server.name }}</a>):</strong> {{ person.contact.discord.name }}</p>{% endif %}
         {% endif %}
+        <h3 id="familyfriendly">Family Friendly</h3>
+        <p>Incarnate Gaming is proudly family friendly. This means that we will not include any artwork or written content that would fall into the "Adult" category. We also avoid the use of profanity. We want everything we do to have a "professional" air and to be child friendly. Although kids are not our target audience, many of our target audience does have children and we don't want this any of our content to cause worry about a kid walking in at the wrong moment with the wrong thing on the screen or coming from the speakers.</p>
     {% endfor %}
 {% endblock %}
