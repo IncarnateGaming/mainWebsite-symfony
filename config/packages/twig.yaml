@@ -8,6 +8,7 @@ twig:
         discord: 'pqkeFYc'
         patreon: 'incarnategaming'
         gitlab: 'incarnate-foundry-mods/issue-tracking'
+        github: 'IncarnateGaming'
         youtube: 'UC4mUHQC49lUqAf1Uvekmx-w'
     paths:
         '%kernel.project_dir%/vendor/knplabs/knp-paginator-bundle/templates': KnpPaginator

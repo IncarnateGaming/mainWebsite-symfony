@@ -29,3 +29,4 @@ TRUNCATE incarnate_feat;
 TRUNCATE incarnate_table;
 TRUNCATE incarnate_item;
 TRUNCATE migration_versions;
+TRUNCATE user;
